@@ -1,6 +1,6 @@
 """Explicit synthetic seed, never an external import. Writes each owner's own database."""
 
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from uuid import NAMESPACE_URL, UUID, uuid5
 
 from radar_common.database import database_url
@@ -109,23 +109,34 @@ def seed_security() -> None:
                 ("fastapi", "2.0", "STALE"),
                 *[(name, "1.0", "SUCCESS") for name in BULK_NAMES],
             ]
+            now = datetime.now(UTC)
             for name, version, status in states:
                 target = str(release_id(name, version))
                 identity = stable_id("scan:" + target)
-                session.execute(
-                    insert(VersionScanRow)
-                    .values(
-                        id=identity,
-                        release_id=target,
-                        status=status,
-                        source="SYNTHETIC",
-                        checked_at=STAMP if status != "UNKNOWN" else None,
-                        last_success_at=STAMP if status in ("SUCCESS", "STALE") else None,
-                        error_code="FIXTURE_UNAVAILABLE" if status == "FAILED" else None,
-                    )
-                    .on_conflict_do_nothing()
+                observed = now - timedelta(days=2) if status == "STALE" else now
+                scan = insert(VersionScanRow).values(
+                    id=identity,
+                    release_id=target,
+                    status="SUCCESS" if status == "STALE" else status,
+                    source="SYNTHETIC",
+                    checked_at=observed if status != "UNKNOWN" else None,
+                    last_success_at=observed if status in ("SUCCESS", "STALE") else None,
+                    error_code="FIXTURE_UNAVAILABLE" if status == "FAILED" else None,
                 )
-                if name == "fastapi" and version == "1.0":
+                seeded_id = session.scalar(
+                    scan.on_conflict_do_update(
+                        index_elements=[VersionScanRow.release_id],
+                        set_={
+                            "status": scan.excluded.status,
+                            "checked_at": scan.excluded.checked_at,
+                            "last_success_at": scan.excluded.last_success_at,
+                            "error_code": scan.excluded.error_code,
+                        },
+                        where=(VersionScanRow.id == identity)
+                        & (VersionScanRow.source == "SYNTHETIC"),
+                    ).returning(VersionScanRow.id)
+                )
+                if seeded_id is not None and name == "fastapi" and version == "1.0":
                     session.execute(
                         insert(FindingRow)
                         .values(scan_id=identity, vulnerability_id=advisory)
