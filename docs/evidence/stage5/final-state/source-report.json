@@ -1,0 +1,3153 @@
+{
+  "captured_at": "2026-11-17T18:51:07.795806+00:00",
+  "campaign": {
+    "id": "ffc5ee06-16b6-47fe-829e-deec3f038b6e",
+    "status": "succeeded",
+    "processed": 10000,
+    "error_code": null,
+    "created_at": "2026-11-17 15:10:45.940968+00:00",
+    "completed_at": "2026-11-17 17:24:49.983531+00:00"
+  },
+  "failed_candidates": [
+    {
+      "name": "odoo13-addon-crm-location",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "simfpythongui",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "pymixxx",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "hplab-python-basics",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "how2write-cprat",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "arcgisfeaturecache",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "plugin-fandas",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "so-stacker",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "agents-md-oss",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "myfy-commands",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "hasta",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "fedcast",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "sciece-vli-trato",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "distcheck",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "pynotifier",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "engram-cloud",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "gripit-webcam",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "metamart-source-openlineage",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "pymbutils",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "ptyhno",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "changemac",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "hive-metasploit",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo12-addon-account-cash-basis-group-base-line",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo12-addon-stock-inventory-analytic",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "unrayf",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "raq",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "collective-ploneboard",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "glad-finance",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "cachelint",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "axmem",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "bcc2to",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "commcare-api",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "pabbly-django",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "enron",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "python-lmdb",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "reservoirflow",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "django-orm-unchained",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "spanway",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "havas-analysis-engine-validator",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "capddynsyspy",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "openenv-halluguard",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "qaqa2121q",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "unicef-hope-aurora",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "podman-py",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "regexamples",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "kedgeswap",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "odoo14-addon-ssi-service-quotation-project",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "byted-overpass-baike-kg-card-logic",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "products-metaweblogpasplugin",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "bycyclecore",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "portato",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "cdk-cloudformation-newrelic-observability-aiworkflows",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "swagger-client",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "seelmanquantumrandom",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "flexibletitle",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "ejabberd-diaspora-auth",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "agentsql",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "awsite",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "kittu-todo",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "fds",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "pyhashbench",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "mssqltoolsservice-windows-7-64",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "awesome-crawler",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "ootools",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo9-addon-account-invoice-refund-option",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "frontdesk",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "lora-receiver",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "odoo8-addon-l10n-es-aeat-mod340-type0",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "tba-provider-jose-swarmauri",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "philippecantrelle",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "django-recogito",
+      "error_code": "INVALID_SCHEMA"
+    },
+    {
+      "name": "django-finance-12bucks",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "fuchar",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "oapi-parser",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "sdc-testautomation-framework",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "villagewars",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "trojsdk",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "string-palavras",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "specinfer",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "python-prj",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "example-nester",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "newsletter",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "howso-synthesizer-data-services",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "skilltovector",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "pypredicate-temporal",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "jn11601160",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "ape-linea",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "pychemengg",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo14-addon-dms-action",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "coexecutor",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "pripack",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "odoo8-addon-hr-webcam",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "dafni-cli-dafn-facility",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "liger",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "myutility",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "reqsnaked",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "skysafe",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo13-addon-partner-identification-unique-by-category",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "jay-navadiya-stt",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "django-full-url",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "glewpy",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "akamaiossg",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "citycloud",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "validalatam-mcp",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "youran",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "isopod",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "sdxw",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "odoo14-addon-mrp-warehouse-calendar",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "zohan-mirha",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "parameter",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoc",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo8-addon-stock-move-backdating",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "xiangcai-bark-service",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "cythonrun",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "drago",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "odoo9-addon-mgmtsystem-hazard",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "rrpam-wds",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "image-vision",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "gro-aggregation",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "python-cognitiveclient",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "antaris-context",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "vslmetrics",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "file-sorter-by-pain",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "gb-probability",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "fedtoy",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "balderhub-ant",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "sopel-wikipedia",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "cellprofiler-library-nightly",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo14-addon-l10n-th-gov-work-acceptance",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "codon-teleboard",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "byted-overpass-overpass-idl-info",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "data-idr-access",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "marmelade",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "pysatl-core",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "grobots",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "basha-sentiment",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "cjs-fdc",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "cite-tools",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "laeka-rational",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "rs-server-osam",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "gramps-cli",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "datafusion-cli",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "ppds",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "universal-transfer-operator",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "tdwtoolkit",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "s4f-healthcheck",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "azure-mgmt-kubernetesconfiguration-kubernetesresources",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo12-addon-auth-user-case-insensitive",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo14-addon-event-phone",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "aws-cdk-aws-apigatewayv2-integrations-alpha",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo8-addon-document-page-approval",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "exacta",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "polyforge",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "password-manager89",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "promptflow-helpers",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "gramcheck-degeder",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "wheelmonger",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "hosts",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "zcrmsdk-2-1",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "odoo8-addon-product-price-history",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo11-addon-hr-expense-sequence",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "beendu",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "rnglib",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "librespeed",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "django3-oidc-provider",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "pytoradex",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "graphviagent",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "mathhplotlib",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "csuperfasthash",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "hypervisor-admin-tools",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "p1-oracles-client",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "lee789",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "spinw-python",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo8-addon-account-reconcile-prepare-account",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "pyliquibasecli",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "ipevo-python-diarization",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "iss",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "medici",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "infini-memory",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "carta-subscriptions-service-core",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "carrack",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "llm-ocr",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "motorx",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "imbue-core",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "depgraph",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "drqueue",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "s3fs-py36-backport",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "slapos-tool-builder",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "azure-mgmt-portalservicescopilot",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo8-addon-l10n-ro-siruta",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "pyhive-fix-sqlalchemy2-0",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "saqipy",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "benjieming",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "configuration-model-mcmc",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "4dfpy",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "light-ctr",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "qs-cs-common-helpers",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "rastrea2r",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "mabot",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "vesicash-python",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "krakenforwarder2",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "core-json-app",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "covopt",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "guitest",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "peek-doc-user",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "agentbox-py",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "openai-otel",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "gpgqr",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "dankey-two",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "pyalohabotanyframework",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "elizaos-plugin-twilio",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "mikoshi",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "iag-sdk",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "shared-beta-devoerjg",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "greap",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "magen-id-client",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "binterlude",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "metrika",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo11-addon-website-sale-product-reference-displayed",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "onthos",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "tal-cicd-utils",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "kaomojin",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo10-addon-website-sale-order-type",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "optimizely-opal-opal-tools-sdk",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "sprypack",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "archer-api-client",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "odoo12-addon-stock-production-lot-quantity-tree",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo14-addon-purchase-request-to-requisition-operating-unit",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "psa-og",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "moto-ext-s3kmspatch",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo14-addon-l10n-th-gov-purchase-agreement",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "truffle",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo11-addon-hr-employee-display-own-info",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo14-addon-mail-layout-force",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "promptcache",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "jarvis-project",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "aws-sdk-application-insights",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "schlog",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "raptus-article-randomcontent",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "asv-seo",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "boilergram",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "putty-session-manager",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "plone-hud",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo9-addon-stock-location-area-data",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "brickforge",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "asyncapi-contracts",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "usa",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "aions",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "octario",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "my-first-ml-project-99",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "brink-litellm-plugin",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "byted-overpass-douyin-creator-item",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "byted-overpass-tikcast-data-stats",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "layman-script",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "elefthpdf",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "odoo11-addon-website-legal-page",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "qalab",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "eth-vyper",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "ppno",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "cgnstk",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "djails",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "odoo10-addon-product-special-type",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "bazaar-contrib-starlink-conversation",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "chemnengg",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "c2-search-fuzzy",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "simi",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "contact-note-management-system",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "benchstore-client-library",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "common-img",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "justa",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "runai-model-streamer-gcs-hari",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "yandex-domain-mail",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "bcdp-agoodman",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "mashup-anureet-102003146",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "smcli",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "passgeneration-py",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "opentelemetry-exporter-cloud-monitoring",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "sqlean-stibs",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "l3mon",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "trafficops",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "choosealicense",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "simpleml-aaditya025",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "ewoksid01",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "nmdc-lakhouse",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "opcal",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "odoo14-addon-mail-contact-type",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "ral",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "anvil-web",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "mpfile",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "simtest-funnel",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "jakubpronobistesting",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "ag2-agentos",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "yammmmcalculator",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "mufem-studio",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "snowfinch",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "postincraft",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "nvidia-clara-sim",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "testgunal123",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "django-invoice-library",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "sqlite-vector",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "retico-respeakermic",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "stellar-contract-bindings",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "kahi",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "livekit-plugin-bland",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "dlktoy",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "etrafilatura",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "linear",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo12-addon-partner-contact-birthplace",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "pyolj",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "pudupy",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo14-addon-ssi-field-service",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "flask-user-05",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "3d-engine",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "dummy-repo",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "example-pkg-hai-yang",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "odoo14-addon-l10n-ch-pain-base",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "openbuffet-logger",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "hapi-vendor-totaluptime",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "dew",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "py-beta-common",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "mmikhail-sdk",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "specatwrap54",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "odoo9-addon-medical-pathology",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "pytest-iso",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "mbtapy",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "scikit-viz",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "compatible",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "armyofevilrobots",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "punoko-certbot-dns-infomaniak",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "ulipad",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "mssqltoolsservice-opensuse-13-2",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "auto-adk",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "arkaiv",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "overlay-parse",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "nepali-address-py",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "odoo12-addon-hotel-reservation",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "to-ico-amshinski",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "oceanwaves",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "debrisframe",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "spotkit",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "htmldeps",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "derico-blicca-promoblock",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "microbiome",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "battlepy",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "lymaster",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "python-manim",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "gituploader",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "asilo-core",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "bytedance-appflow-agent",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "incite",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "altris",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "rscmxnrltesig",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "jl2py",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "clea-vectordb",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "viruslinux",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "djagno",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "taurex-2d",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "blytz",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "odoo13-addon-purchase-invoicing-no-zero-line",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "takamol-einvoicer-test-kit5",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "zelda",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "hpp-exec",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "nginx-sso-dpaw",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "tamago",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "easyflow",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo14-addon-ssi-fixed-asset-disposal-operating-unit",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "comfora-scriptor",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "django-acquiring",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "ehsan-crawler",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "python-lynxlynx",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "wc-env-manager",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "harvestman",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "gobpersist",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "opensearchrec",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "dectrig",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "clustering-toolbox",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "decayange-rs",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "pyleptonica",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo14-addon-project-recalculate",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "aws-sdk-app-mesh",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "wut-ipython",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "mcp-f1analisys",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo13-addon-account-analytic-tag-default",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "egenix-mx-commercial",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "jarvis-md-nifti",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo12-addon-sms-ovh-http",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "multiwinner",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "aws-sdk-account",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "password-generator-sonia-ghongadi",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "mdapisp",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "seam-runtime",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "jsonrpc-netstrings",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "socyti",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "noticeslackline",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "megatron-core-release",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "nifty14",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "pysio-hermes-gui",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "crypto-price-notifier",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "amesa-core-test",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "moneybox-sdk",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "no-cap",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "python-ext",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "dj-graphene",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "gnnpcsaftcapeopen",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "hiemal",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "pruning-engine",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "byted-overpass-ies-kefu-knowledge-business-user",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "discord-sdk",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "django-bootstrap3-daterangepicker",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "funniest1234",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "tushare-strategy",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "multi-key-sort",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "collective-local-workspace",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "hibari",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "the-worst-queue",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "platocdp-newsportlet",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "peastb",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "visualrag",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "temop",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "webmail",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "twin",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "election-night-api",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "elizaos-plugin-experience",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "hygdas",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "tba-capability-account-self-service",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo13-addon-website-sale-vat-required",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "sinai-corpus",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "npasync",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "multirpc",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "trembolo",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "smoothie-framework",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "django-recurrences",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "atlassian-envscoreml",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "py3pysum",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "dc-jhub-jwtauthenticator",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "pch2csd",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "rio-rac-bus-subsidy",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "response-formatter-rakeshkhulbe",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "omegascript",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "odoo13-addon-survey-crm-sale-generation",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "axpyplumber",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "llambda",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "contrastiveir",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "ttt",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "byted-overpass-capcut-ie-effect-magic-tone-recommend",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "pylinking",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "example-pkg-seasong",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "soduco-geonetwork",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "ar-spellchecker",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "specit",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "test-dns-rules",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "example-package-dachai",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "duroxide-python",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "sparkplugb",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "healthcheck-cli",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "nodebox",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "pymadeline-proto",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "tdpoetry-op",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "volttron-dnp3-outstation",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "bulb-py",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "grillyinference",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "edgepy",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "cowtreedict",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "turboocr-engine-openvino",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "python-pix",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "ituscraper-py",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "nexus-insight-collector",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "git-json-tree",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "unstable-baselines",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "resolve-module-import",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "media-insights-engine-lambda-helper",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "openwearota",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "selenium-fetcher",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "weight-calc-interface",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "nfrapy",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "mkdocs-yaarg-plugin",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo12-addon-hr-expense-analytic-require",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "deomo-test-py",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "rational-activations-cu102",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "odoo13-addon-maintenance-equipment-scrap",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "py-dianoia",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "waila",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "web-py-ingi",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "pytagoratheorem",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "lightup-ai",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "kyuncli",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "numberlabs",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "srswti-universal-three",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "rng-lfg",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "elizaos-plugin-elizacloud",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "querygate",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "codinghyde-enigma",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "test-management-sync",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "drf-inspect",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "kisters-model-integration-model-adapter",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "concat",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "neocov",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo13-addon-account-invoice-line-sale-line-position",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "vodcsite-policy",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "monoid",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "soul-rajveer-stt",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "flash-db",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "github-search",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "my-functions-akshay",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "opentelemetry-instrumentation-psycopg2",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "yw2-hello",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "miniredis",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "mlutils",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo8-addon-partner-contact-department",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "carta-notifications-email-grpc-client",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "nameko-rethinkdb",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "lsgpu",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "outlier-detection-package",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "databunnystoragedriver",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "cavalete",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "dlpy",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "amauta",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "odoo12-addon-purchase-analytic",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "fitting2d",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "sse-shim",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "ziplag",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "luxq-wester",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "reliable-agent-runtime",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "pydoca",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "pytorch-transformers-pvt-nightly",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "allpipus",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "pythonspl",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "viktor-sdk",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "libbase",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "qcpy",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "hypereda",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "vonage-network",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "bambulab",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "dpk-tokenization-transform-ray",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "python-sonar-client",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "odoo13-addon-sale-cancel-reason",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "mac-add-changer",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "odoo8-addon-l10n-pt-account-asset",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "make-figures-great-again",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "aws-sdk-auditmanager",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "database-stein-watkins-huge",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "pydreamcheeky",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "photo-uploader",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "ai-llm-kernel-contracts",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "cattbl-iwbailey",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "odoo14-addon-attachment-db-by-checksum",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "multiprocesshandler",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "hypequery-serve",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "service-sms",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "whiskey",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "blobject",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo12-addon-hr-contract-multi-job",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "kedro-datasentinel",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "controlbridge-api",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "async-telethon",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "diffusionism",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "fastapi-rebac",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "iterium",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "demo-calculator-internship-2024",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "sprawl-cli",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "cooksafe-internal",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "django-vault-client",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "nnt",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "generalized-birkhoff-von-neumann",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "jsii-native-python",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "modulo-de-prueba",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "jupyter-lsp-flink-sql-language-server",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "pylottie-convert",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "balustuff",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo12-addon-mail-notification-custom-subject",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo13-addon-web-ir-actions-act-window-message",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "aijack",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "simplemodule",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "samath",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "precise-lite",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "ftp2ool",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "bastion-api",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "python-pallapay",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "tf-onnx",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "divi",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "ftw-poo",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "vozreader",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "sqlclient",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "create-holon-app",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "potato-peeling",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "tengying-tengying",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "odoo14-addon-stock-lot-product-qty-search",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "qconcurrency",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "mojtaba-first-test",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "demo-py",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "baked-brie",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "glad-kit",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "ctypeslib",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "sketchkit",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "novilabs-econml",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "strip",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "hop-top-xrr",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "rakka",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "tesdikin",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "whl-governance",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "fast-jl-binary",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "planetoid",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "pkg-shrink",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "expensecsvgenerator-pkg",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "mineru-app",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "pyspiderman",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "lpy",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "archertest",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "odoo10-addon-account-check-printing-report-sslm102",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "perlprocess",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo9-addon-website-form-recaptcha",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "intellivoid-spamprotection",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "hybrid-vector-model",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "pygdelt",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "mapnester1",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "gamulet",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "jtypes-javabridge",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "fb-re2-wheels",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "nyaa-cli",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "harvestmedia",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "dela-response-arief-prabowo",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "vantage6-client-lg",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "odoo13-addon-hr-recruitment-notification",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "dart-vm-client",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "storm-system",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "bytedbytegraph-gremlin-mv",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "dbbot-sqlalchemy-custom",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "arnes",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "pumpjack",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "gut",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "dropbear",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "ipay-consumer",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "itertools-chunks-slices",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "odoo12-addon-report-qweb-pdf-fixed-column",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "byted-overpass-security-flow-tee-gateway-rpc-pte",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "prismor-warden-langchain",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "temrinal-currency-converter",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "odoo12-addon-product-packaging-type-required",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "nonoservice",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "my-uiautomator2",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo12-addon-sale-report-country-state",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "tba-concrete-claim-cwt-confirmation",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "pyggnn",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "workiva-platform",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "potranslation",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "dungeo-ai",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "fslseven",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "odoo13-addon-connector-base-product",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo12-addon-account-invoice-pricelist-sale",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "retopy",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "era5-dl",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo8-addon-membership-prorrate-variable-period",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "gkmail",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "grootctl",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "ser-metric-bin",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "loko-client",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo8-addon-account-fiscal-position-rule",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "nvidia-cusolver-cu116",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "example-pkg-your-hanyanfei-zzu-test",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "arrowsmith",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "sajad-alkwaz",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "validbot",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "acra",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "aiballs-game",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "kirn",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "pyplines-test",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "sifty-3-1-0",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "pykmaze",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "contrive",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "scembedding-jax",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "ds100",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "delegate",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "flickrlib",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "datasette-sqlite-vector",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "handson-ml3",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "aquant",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "mlogger",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "uac-cli",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "fluidsurveys",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo14-addon-product-brand-tag-secondary",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "targets",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "duqo",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "certbot-glesys",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "black-configparser",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "sqlpython-my",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "primosphere",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "ipywidgetvar",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "mtn-payments-v1",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "jury-duty-checker",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "sheafsite",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "hgfs",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo11-addon-mass-mailing-unique",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "avalancha",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "sheet-music-recognition",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "optikit",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "fixed-width-int",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "tacen",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "concor",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "torrent-grab",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo10-addon-account-invoice-pro-forma-sequence",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "cdk-cloudformation-awscommunity-cloudfront-s3website-module",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo8-addon-mrp-production-raw-material-procurement-group",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "byted-pycapnp",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "dna-logger-3",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "odoo9-addon-l10n-be-apb-tax",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "datastructconvert",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "fastapi-lazyrouter",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "multidog",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "ff-client",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "easy-visualization",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "tw2-jqplugins-ui-spinner",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo12-addon-crm-phonecall-summary-predefined",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "papyrium-cli",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "dictool",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "zopyx-webpage",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "geniushub",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "python-xid",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "redscale",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "nike-sustainability-golden-footprint-etl",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "benzene-aws",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "eth-dev",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "tba-storage-tenancy",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "pytest-aux",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "odoo13-addon-account-e-invoice-generate",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "jarvis-runtime",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "social-share-lijo",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "odoo8-addon-partner-contact-gender",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "pippi-trigger",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "attention-smithyr",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "animask",
+      "error_code": "INVALID_SCHEMA"
+    },
+    {
+      "name": "jenkins-jobs-sauce-ondemand",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "py4track",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "landau-image-processing",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "sandloom-redis",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "ci-context",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "opendorslib",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "nautobot-app-bitwarden-password-manager-secrets",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "temporalrank",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "yoneda-sdk",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "crystal-cell-settler",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "thonny-exersys",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "nunens19",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo11-addon-purchase-invoicing-no-zero-line",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "qemud",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "odoo14-addon-sale-margin-sync",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "pytest-otelmark",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "mergecraft-action",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "behaverse",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "tessel",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "byted-overpass-ies-efficiency-byteval-content-tagging",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "avilla-onebot-v11",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "reactors",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "halflife",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "dirspec",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "bowa",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "eqcbor",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "actionkit-templates",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "cagri-durgut-dictionary",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "walkframe",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "keypipe",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "dawoud-lib",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "littelbitx0",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "automize-science",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "ignore-me-1-0",
+      "error_code": "NO_STABLE_RELEASE"
+    },
+    {
+      "name": "pangolin-windows-easy",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "ctrf-vscode",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "dnn-models",
+      "error_code": "NOT_FOUND"
+    },
+    {
+      "name": "os-sys-linux",
+      "error_code": "NO_STABLE_RELEASE"
+    }
+  ],
+  "cohort_unique_packages": 10000,
+  "cohort_unique_releases": 10000,
+  "catalog": {
+    "real_packages": 10002,
+    "real_unique_names": 10002,
+    "synthetic_packages": 107,
+    "real_releases": 10002,
+    "prereleases": 0,
+    "yanked": 0,
+    "real_requirements": 49904,
+    "dependency_names": 7828
+  },
+  "cohort_projection": {
+    "SUCCESS": 20,
+    "UNKNOWN": 9980
+  },
+  "github": {
+    "real_repositories": 13,
+    "cohort_matched_packages": 11,
+    "cohort_repositories": 11,
+    "selected_packages": 19,
+    "matching_fraction": 0.0011,
+    "cohort_jobs": {
+      "succeeded": 19
+    },
+    "cohort_expected_jobs": 19,
+    "cohort_missing_jobs": 0,
+    "cohort_errors": {}
+  },
+  "osv": {
+    "canonical_advisories": 5,
+    "identifiers_including_aliases": 15,
+    "cohort_statuses": {
+      "SUCCESS": 10000
+    },
+    "cohort_unchecked": 0,
+    "cohort_releases_with_findings": 2,
+    "cohort_advisories": 2,
+    "cohort_findings": 2,
+    "cohort_jobs": {
+      "succeeded": 10000
+    },
+    "cohort_expected_jobs": 10000,
+    "cohort_missing_jobs": 0,
+    "cohort_errors": {}
+  },
+  "database": {
+    "catalog": {
+      "name": "catalog",
+      "bytes": 44332735,
+      "version": "PostgreSQL 18.7 (Debian 18.7-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit"
+    },
+    "repositories": {
+      "name": "repositories",
+      "bytes": 8427199,
+      "version": "PostgreSQL 18.7 (Debian 18.7-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit"
+    },
+    "security": {
+      "name": "security",
+      "bytes": 16496319,
+      "version": "PostgreSQL 18.7 (Debian 18.7-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit"
+    },
+    "workspace": {
+      "name": "workspace",
+      "bytes": 8173247,
+      "version": "PostgreSQL 18.7 (Debian 18.7-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit"
+    }
+  }
+}

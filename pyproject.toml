@@ -1,0 +1,51 @@
+[project]
+name = "open-source-radar"
+version = "0.0.1"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "fastapi==0.163.1",
+  "strawberry-graphql[fastapi]==0.341.2",
+  "uvicorn[standard]==0.54.0",
+  "radar-common",
+  "sqlalchemy==2.1.9",
+  "psycopg[binary]==3.3.9",
+  "alembic==1.20.1",
+  "celery==5.7.0",
+  "redis==8.1.0",
+  "packaging==26.3",
+  "httpx==0.28.1",
+  "tenacity==9.1.2",
+  "pydantic==2.14.3",
+  "pwdlib[argon2]==0.3.0",
+]
+
+[dependency-groups]
+dev = ["pytest==9.2.0", "ruff==0.17.5", "httpx==0.28.1", "mypy==2.4.1"]
+
+[tool.uv.sources]
+radar-common = { workspace = true }
+
+[tool.uv.workspace]
+members = ["packages/python-common"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "ASYNC"]
+
+[tool.pytest.ini_options]
+testpaths = ["services"]
+
+[tool.mypy]
+python_version = "3.12"
+files = ["packages/python-common/src", "services", "scripts"]
+check_untyped_defs = true
+disallow_untyped_defs = true
+plugins = ["strawberry.ext.mypy_plugin"]
+
+[[tool.mypy.overrides]]
+module = ["celery.*", "kombu.*"]
+ignore_missing_imports = true
+

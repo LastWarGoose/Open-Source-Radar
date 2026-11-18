@@ -1,0 +1,102 @@
+schema @link(url: "https://specs.apollo.dev/federation/v2.7", import: ["@external", "@key", "@shareable"]) {
+  query: Query
+  mutation: Mutation
+}
+
+"""Date with time (isoformat)"""
+scalar DateTime
+
+extend type DemoPackage @key(fields: "id") {
+  id: ID! @external
+  repository: DemoRepository
+}
+
+type DemoRepository {
+  id: ID!
+  fullName: String!
+  url: String!
+  stars: Int!
+}
+
+type Mutation {
+  requestRepositoryImport(requestKey: UUID!, packageId: ID!, urls: [String!]!, observedAt: DateTime!, maxRepositories: Int! = 5): SourceImportJob!
+}
+
+extend type Package @key(fields: "id") {
+  id: ID! @external
+  githubFreshness: SourceFreshness
+  repositories(first: Int! = 20, after: String = null): RepositoryLinkConnection
+}
+
+type PageInfo @shareable {
+  hasNextPage: Boolean!
+  endCursor: String
+}
+
+type Query {
+  _entities(representations: [_Any!]!): [_Entity]!
+  _service: _Service!
+  repository(id: ID!): Repository
+  repositorySnapshots(packageIds: [ID!]!): [RepositorySnapshot!]!
+  repositoryImportJob(id: UUID!): SourceImportJob
+  repositoryService: String!
+}
+
+type Repository @key(fields: "id") {
+  id: ID!
+  fullName: String!
+  description: String
+  url: String!
+  stars: Int!
+  source: String!
+  sourceId: String!
+  fetchedAt: DateTime!
+}
+
+type RepositoryLink {
+  status: RepositoryLinkStatus!
+  repository: Repository
+}
+
+type RepositoryLinkConnection {
+  nodes: [RepositoryLink!]!
+  pageInfo: PageInfo!
+}
+
+enum RepositoryLinkStatus {
+  UNVERIFIED
+  VERIFIED
+  INVALID
+}
+
+type RepositorySnapshot {
+  packageId: ID!
+  stars: Int
+  checkedAt: DateTime!
+  status: String!
+}
+
+type SourceFreshness @shareable {
+  status: String!
+  checkedAt: DateTime
+  lastSuccessAt: DateTime
+  errorCode: String
+}
+
+type SourceImportJob @shareable {
+  id: UUID!
+  status: String!
+  attempts: Int!
+  errorCode: String
+  nextAttemptAt: DateTime!
+}
+
+scalar UUID
+
+scalar _Any
+
+union _Entity = DemoPackage | Package | Repository
+
+type _Service {
+  sdl: String!
+}

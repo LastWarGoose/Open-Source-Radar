@@ -1,0 +1,16 @@
+{
+  "mode": "stress",
+  "started_at": "2026-11-17T18:26:20.683858+00:00",
+  "completed_at": "2026-11-17T18:35:25.156781+00:00",
+  "exit_code": 0,
+  "image": "grafana/k6:1.0.0@sha256:f21270290d702cbf0a7d6ba5d7ed100b63bcb233b558b885ed787547b3488279",
+  "generator_cpu_limit": 2,
+  "generator_memory_bytes": 536870912,
+  "shared_host": true,
+  "test_actors": 2,
+  "private_operations": "read-only",
+  "cohort_packages": 10000,
+  "cohort_sha256": "65bed731ad928d2ad475404635619cd473065fe967de8b93072f04ce7a0bfd0b",
+  "script_sha256": "35445f11c597891a38921f9f20634efadcf953caf8b0c296e5e7f336c8d0a12d",
+  "idle_sleep_prevention": true
+}

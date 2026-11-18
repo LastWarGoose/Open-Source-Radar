@@ -1,0 +1,222 @@
+fragment FreshnessFields on SourceFreshness {
+  status
+  checkedAt
+  lastSuccessAt
+  errorCode
+}
+fragment CatalogItem on Package {
+  id
+  name
+  summary
+  license
+  requiresPython
+  source
+  fetchedAt
+  pypiFreshness {
+    ...FreshnessFields
+  }
+  starProjection {
+    stars
+    status
+    checkedAt
+    projectedAt
+    lagSeconds
+  }
+  releases(first: 1, source: "PYPI") {
+    nodes {
+      id
+      version
+      yanked
+      isPrerelease
+    }
+  }
+}
+fragment RepositoryDetails on RepositoryLink {
+  status
+  repository {
+    id
+    fullName
+    description
+    url
+    stars
+  }
+}
+fragment Overview on Package {
+  ...CatalogItem
+  githubFreshness {
+    ...FreshnessFields
+  }
+  repositories(first: 5) {
+    nodes {
+      ...RepositoryDetails
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+  }
+}
+fragment ScanFields on VersionScan {
+  status
+  checkedAt
+  lastSuccessAt
+  errorCode
+  source
+  findings(first: 100) {
+    nodes {
+      id
+      summary
+      source
+      aliases(first: 100) {
+        nodes {
+          name
+        }
+      }
+    }
+    pageInfo {
+      hasNextPage
+    }
+  }
+}
+fragment ReleaseInspection on Release {
+  id
+  version
+  source
+  yanked
+  isPrerelease
+  fetchedAt
+  dependencies(first: 20, after: $dependencyAfter) {
+    nodes {
+      id
+      raw
+      name
+      specifier
+      extras
+      marker
+      url
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+  }
+  scan {
+    ...ScanFields
+  }
+}
+query PublicCatalog(
+  $first: Int!
+  $after: String
+  $search: String
+  $filter: PackageFilter
+  $sort: PackageSort!
+) {
+  packages(first: $first, after: $after, search: $search, filter: $filter, sort: $sort) {
+    nodes {
+      ...CatalogItem
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+  }
+}
+query PublicPackage(
+  $id: ID!
+  $version: String!
+  $hasVersion: Boolean!
+  $releaseAfter: String
+  $dependencyAfter: String
+) {
+  package(id: $id) {
+    ...Overview
+    versions: releases(first: 20, after: $releaseAfter, source: "PYPI") {
+      nodes {
+        id
+        version
+        yanked
+        isPrerelease
+      }
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+    }
+    latest: releases(first: 1, source: "PYPI") @skip(if: $hasVersion) {
+      nodes {
+        ...ReleaseInspection
+      }
+    }
+    selected: release(version: $version, source: "PYPI") @include(if: $hasVersion) {
+      ...ReleaseInspection
+    }
+  }
+}
+fragment CompareItem on Package {
+  id
+  source
+  summary
+  requiresPython
+  license
+  githubFreshness {
+    status
+  }
+  pypiFreshness {
+    ...FreshnessFields
+  }
+  starProjection {
+    stars
+    status
+    checkedAt
+    projectedAt
+    lagSeconds
+  }
+  repositories(first: 5) {
+    nodes {
+      ...RepositoryDetails
+    }
+    pageInfo {
+      hasNextPage
+    }
+  }
+  current: releases(first: 1, source: "PYPI") {
+    nodes {
+      id
+      version
+      scan {
+        status
+        lastSuccessAt
+        findings(first: 100) {
+          nodes {
+            id
+          }
+          pageInfo {
+            hasNextPage
+          }
+        }
+      }
+    }
+  }
+}
+query ComparePackages(
+  $a: ID!
+  $b: ID!
+  $c: ID!
+  $d: ID!
+  $hasB: Boolean!
+  $hasC: Boolean!
+  $hasD: Boolean!
+) {
+  a: package(id: $a) {
+    ...CompareItem
+  }
+  b: package(id: $b) @include(if: $hasB) {
+    ...CompareItem
+  }
+  c: package(id: $c) @include(if: $hasC) {
+    ...CompareItem
+  }
+  d: package(id: $d) @include(if: $hasD) {
+    ...CompareItem
+  }
+}

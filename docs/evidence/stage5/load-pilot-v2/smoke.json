@@ -1,0 +1,797 @@
+{
+  "mode": "smoke",
+  "metrics": {
+    "http_reqs": {
+      "type": "counter",
+      "contains": "default",
+      "values": {
+        "rate": 2.5840800200372875,
+        "count": 30
+      }
+    },
+    "data_sent": {
+      "type": "counter",
+      "contains": "data",
+      "values": {
+        "count": 16363,
+        "rate": 1409.4433789290044
+      }
+    },
+    "checks": {
+      "type": "rate",
+      "contains": "default",
+      "values": {
+        "rate": 1,
+        "passes": 20,
+        "fails": 0
+      }
+    },
+    "operation_duration{operation:search}": {
+      "contains": "time",
+      "values": {
+        "avg": 26.519915,
+        "min": 17.172243,
+        "med": 26.519915,
+        "max": 35.867587,
+        "p(90)": 33.9980526,
+        "p(95)": 34.932819800000004,
+        "p(99)": 35.680633560000004
+      },
+      "thresholds": {
+        "p(95)>=0": {
+          "ok": true
+        }
+      },
+      "type": "trend"
+    },
+    "http_req_waiting": {
+      "values": {
+        "med": 69.37660650000001,
+        "max": 249.553952,
+        "p(90)": 141.90556710000004,
+        "p(95)": 212.45256554999978,
+        "p(99)": 248.84763844000003,
+        "avg": 83.53601623333334,
+        "min": 16.991831
+      },
+      "type": "trend",
+      "contains": "time"
+    },
+    "vus_max": {
+      "values": {
+        "min": 2,
+        "max": 2,
+        "value": 2
+      },
+      "type": "gauge",
+      "contains": "default"
+    },
+    "operation_errors": {
+      "thresholds": {
+        "rate<0.10": {
+          "ok": true
+        }
+      },
+      "type": "rate",
+      "contains": "default",
+      "values": {
+        "rate": 0,
+        "passes": 0,
+        "fails": 20
+      }
+    },
+    "http_req_connecting": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "p(90)": 0.02596180000000037,
+        "p(95)": 0.27083854999999996,
+        "p(99)": 0.29244471000000005,
+        "avg": 0.027905233333333335,
+        "min": 0,
+        "med": 0,
+        "max": 0.29752
+      }
+    },
+    "http_req_tls_handshaking": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "max": 0,
+        "p(90)": 0,
+        "p(95)": 0,
+        "p(99)": 0,
+        "avg": 0,
+        "min": 0,
+        "med": 0
+      }
+    },
+    "http_req_duration": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "avg": 83.78779306666668,
+        "min": 17.172243,
+        "med": 69.643175,
+        "max": 249.774867,
+        "p(90)": 142.08922880000003,
+        "p(95)": 212.61968119999977,
+        "p(99)": 249.05831557
+      }
+    },
+    "data_received": {
+      "type": "counter",
+      "contains": "data",
+      "values": {
+        "count": 131659,
+        "rate": 11340.579711936307
+      }
+    },
+    "http_req_blocked": {
+      "contains": "time",
+      "values": {
+        "min": 0.005501,
+        "med": 0.0076005,
+        "max": 1.106274,
+        "p(90)": 0.04864310000000045,
+        "p(95)": 0.3509180999999999,
+        "p(99)": 0.8907315000000007,
+        "avg": 0.06764450000000002
+      },
+      "type": "trend"
+    },
+    "operation_errors{operation:private}": {
+      "type": "rate",
+      "contains": "default",
+      "values": {
+        "passes": 0,
+        "fails": 1,
+        "rate": 0
+      },
+      "thresholds": {
+        "rate<=1": {
+          "ok": true
+        }
+      }
+    },
+    "http_req_sending": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "p(99)": 0.15237742,
+        "avg": 0.07144143333333333,
+        "min": 0.042003,
+        "med": 0.056804,
+        "max": 0.160411,
+        "p(90)": 0.118748,
+        "p(95)": 0.12699354999999996
+      }
+    },
+    "operation_duration": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "p(90)": 149.79685520000015,
+        "p(95)": 247.42754335,
+        "p(99)": 249.30540227,
+        "avg": 95.8101561,
+        "min": 17.172243,
+        "med": 87.344513,
+        "max": 249.774867
+      }
+    },
+    "operation_duration{operation:private}": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "p(99)": 41.812483,
+        "avg": 41.812483,
+        "min": 41.812483,
+        "med": 41.812483,
+        "max": 41.812483,
+        "p(90)": 41.812483,
+        "p(95)": 41.812483
+      },
+      "thresholds": {
+        "p(95)>=0": {
+          "ok": true
+        }
+      }
+    },
+    "http_req_duration{expected_response:true}": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "p(90)": 142.08922880000003,
+        "p(95)": 212.61968119999977,
+        "p(99)": 249.05831557,
+        "avg": 83.78779306666668,
+        "min": 17.172243,
+        "med": 69.643175,
+        "max": 249.774867
+      }
+    },
+    "vus": {
+      "type": "gauge",
+      "contains": "default",
+      "values": {
+        "min": 2,
+        "max": 2,
+        "value": 2
+      }
+    },
+    "iterations": {
+      "type": "counter",
+      "contains": "default",
+      "values": {
+        "count": 20,
+        "rate": 1.7227200133581917
+      }
+    },
+    "operation_errors{operation:search}": {
+      "contains": "default",
+      "values": {
+        "fails": 2,
+        "rate": 0,
+        "passes": 0
+      },
+      "thresholds": {
+        "rate<=1": {
+          "ok": true
+        }
+      },
+      "type": "rate"
+    },
+    "operation_duration{operation:detail}": {
+      "thresholds": {
+        "p(95)>=0": {
+          "ok": true
+        }
+      },
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "min": 92.173835,
+        "med": 138.962728,
+        "max": 249.774867,
+        "p(90)": 248.7865202,
+        "p(95)": 249.2806936,
+        "p(99)": 249.67603232,
+        "avg": 170.5286166
+      }
+    },
+    "http_req_failed": {
+      "type": "rate",
+      "contains": "default",
+      "values": {
+        "fails": 30,
+        "rate": 0,
+        "passes": 0
+      }
+    },
+    "iteration_duration": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "avg": 1097.14622175,
+        "min": 1018.190979,
+        "med": 1088.8408905000001,
+        "max": 1251.617917,
+        "p(90)": 1150.9087758000003,
+        "p(95)": 1248.30979565,
+        "p(99)": 1250.95629273
+      }
+    },
+    "operation_errors{operation:detail}": {
+      "values": {
+        "rate": 0,
+        "passes": 0,
+        "fails": 5
+      },
+      "thresholds": {
+        "rate<=1": {
+          "ok": true
+        }
+      },
+      "type": "rate",
+      "contains": "default"
+    },
+    "http_req_receiving": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "avg": 0.18033540000000003,
+        "min": 0.094306,
+        "med": 0.163461,
+        "max": 0.287219,
+        "p(90)": 0.245426,
+        "p(95)": 0.26256764999999993,
+        "p(99)": 0.28411600000000004
+      }
+    },
+    "operation_errors{operation:catalog}": {
+      "type": "rate",
+      "contains": "default",
+      "values": {
+        "fails": 12,
+        "rate": 0,
+        "passes": 0
+      },
+      "thresholds": {
+        "rate<=1": {
+          "ok": true
+        }
+      }
+    },
+    "operation_duration{operation:catalog}": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "avg": 80.72564383333334,
+        "min": 65.453194,
+        "med": 79.2466195,
+        "max": 96.151554,
+        "p(90)": 95.687133,
+        "p(95)": 95.9209786,
+        "p(99)": 96.10543892
+      },
+      "thresholds": {
+        "p(95)>=0": {
+          "ok": true
+        }
+      }
+    }
+  },
+  "setup_data": {
+    "cursors": [
+      null,
+      "WyI0ZGIyNWIxMDU4NDEzYWU0NDIwN2MyYzYiLCAiYW50Y2hhaW4tYW50ZGlnaXRhbC1hZ2VudGNyZXciLCAicHlwaTphbnRjaGFpbi1hbnRkaWdpdGFsLWFnZW50Y3JldyJd",
+      "WyI0ZGIyNWIxMDU4NDEzYWU0NDIwN2MyYzYiLCAiYmx1ZWFscGhhLW1tbS1idWlsZGVyLW1jcCIsICJweXBpOmJsdWVhbHBoYS1tbW0tYnVpbGRlci1tY3AiXQ==",
+      "WyI0ZGIyNWIxMDU4NDEzYWU0NDIwN2MyYzYiLCAiY2llcnZvIiwgInB5cGk6Y2llcnZvIl0=",
+      "WyI0ZGIyNWIxMDU4NDEzYWU0NDIwN2MyYzYiLCAiY3JwLWNvbXBseS1zZGsiLCAicHlwaTpjcnAtY29tcGx5LXNkayJd",
+      "WyI0ZGIyNWIxMDU4NDEzYWU0NDIwN2MyYzYiLCAiZGlvbWluZG1hcCIsICJweXBpOmRpb21pbmRtYXAiXQ==",
+      "WyI0ZGIyNWIxMDU4NDEzYWU0NDIwN2MyYzYiLCAiZG93bmN0bCIsICJweXBpOmRvd25jdGwiXQ==",
+      "WyI0ZGIyNWIxMDU4NDEzYWU0NDIwN2MyYzYiLCAiZXhvdHJhbnNpdCIsICJweXBpOmV4b3RyYW5zaXQiXQ==",
+      "WyI0ZGIyNWIxMDU4NDEzYWU0NDIwN2MyYzYiLCAiZnJlZXNpbXBsZWd1aXF0IiwgInB5cGk6ZnJlZXNpbXBsZWd1aXF0Il0=",
+      "WyI0ZGIyNWIxMDU4NDEzYWU0NDIwN2MyYzYiLCAiZ3VvaWQiLCAicHlwaTpndW9pZCJd",
+      "WyI0ZGIyNWIxMDU4NDEzYWU0NDIwN2MyYzYiLCAiaXRhLWxvZ2dlciIsICJweXBpOml0YS1sb2dnZXIiXQ=="
+    ],
+    "ids": [
+      "pypi:a2p",
+      "pypi:abirqu",
+      "pypi:abrconnection",
+      "pypi:addereq-dm",
+      "pypi:agas",
+      "pypi:agent-inbox",
+      "pypi:agentlighthouse-verify",
+      "pypi:agent-receipt",
+      "pypi:agm",
+      "pypi:aihp-protocol",
+      "pypi:aiopixel",
+      "pypi:airduct",
+      "pypi:airflow-xtended-api",
+      "pypi:aisquare-pipe-docusign",
+      "pypi:akhaleel338package",
+      "pypi:alarm-events-client",
+      "pypi:alhena",
+      "pypi:alibabacloud-cloudapi20160201-py2",
+      "pypi:andrewtools",
+      "pypi:antchain-antdigital-agentcrew",
+      "pypi:antchain-ebc",
+      "pypi:arc56-generated-compx-021f310a",
+      "pypi:area-fig",
+      "pypi:ashr-manifold",
+      "pypi:askxml",
+      "pypi:astar-mcp-demo2",
+      "pypi:astro-aleph",
+      "pypi:auto-ehrmonize-flowsheet",
+      "pypi:awk-plus-plus",
+      "pypi:axdscfg",
+      "pypi:bds",
+      "pypi:beeai-acgs",
+      "pypi:better-test-preview",
+      "pypi:bibmeded",
+      "pypi:bigquerytest",
+      "pypi:bingapi",
+      "pypi:biodiviz",
+      "pypi:bleu-api-client-v2",
+      "pypi:bloqade-analog",
+      "pypi:bluealpha-mmm-builder-mcp",
+      "pypi:bohr",
+      "pypi:botocore-a-la-carte-ecr-public",
+      "pypi:bppynndescent",
+      "pypi:brainlambda",
+      "pypi:bric-analysis-libraries",
+      "pypi:browserget",
+      "pypi:bugger-scanner",
+      "pypi:buildahscript",
+      "pypi:bundle-parser",
+      "pypi:buvis-pybase",
+      "pypi:byteblowerll",
+      "pypi:caasi",
+      "pypi:calibrated-similarity",
+      "pypi:caneta",
+      "pypi:cellist",
+      "pypi:chaikin-smoothing-jean-lucas",
+      "pypi:chatbot-rag",
+      "pypi:chatclicks",
+      "pypi:chkw",
+      "pypi:ciervo",
+      "pypi:clinicedc-utils",
+      "pypi:cloudconnect",
+      "pypi:cloudshell-cp-openstack",
+      "pypi:coben",
+      "pypi:cocaine",
+      "pypi:codefetch-cli",
+      "pypi:cognition-engine",
+      "pypi:coinrailz",
+      "pypi:collabutils",
+      "pypi:collective-edm-listing",
+      "pypi:collective-ptg-allnewest",
+      "pypi:commitor",
+      "pypi:complete-stdlib",
+      "pypi:config-diff-soso",
+      "pypi:confy",
+      "pypi:convertorio-sdk",
+      "pypi:coreforecast",
+      "pypi:cprints",
+      "pypi:crowact",
+      "pypi:crp-comply-sdk",
+      "pypi:cspark-python",
+      "pypi:ctao-qualpipe-webapp",
+      "pypi:ctid-programmer",
+      "pypi:cvprac",
+      "pypi:daraja-sdk-py",
+      "pypi:databudgie",
+      "pypi:datadiff",
+      "pypi:data-diff-customize",
+      "pypi:decoration",
+      "pypi:deep-search-agent",
+      "pypi:deezeridu",
+      "pypi:deeznutz",
+      "pypi:deltafq-crixus",
+      "pypi:deltakit-compile",
+      "pypi:dhoeppe-alpha-vantage",
+      "pypi:dhvani",
+      "pypi:didi-eda",
+      "pypi:digilab-beam-client",
+      "pypi:dinkum-bio",
+      "pypi:diomindmap",
+      "pypi:dir2prompt",
+      "pypi:discrete-ndtree",
+      "pypi:discurses",
+      "pypi:diskcache-decorator",
+      "pypi:django-ajax-forms-mega",
+      "pypi:django-amazon-translate",
+      "pypi:django-aparnik",
+      "pypi:django-cacheback-pozytywnie",
+      "pypi:django-ddm",
+      "pypi:django-mercadopago-simple",
+      "pypi:django-siteajax",
+      "pypi:django-tinymce-4",
+      "pypi:django-umeboshi",
+      "pypi:dj-corekit",
+      "pypi:dkdbutils",
+      "pypi:dockerfactory",
+      "pypi:dollarfmt",
+      "pypi:dotagent-macos",
+      "pypi:dotgit",
+      "pypi:downctl",
+      "pypi:drf-groups",
+      "pypi:drozer",
+      "pypi:dsw-config",
+      "pypi:dt-authentication-ente",
+      "pypi:dynantic",
+      "pypi:eai-configgy",
+      "pypi:easy-edge",
+      "pypi:easy-menu",
+      "pypi:echowuhao",
+      "pypi:eclip-peak",
+      "pypi:ecz-id-api",
+      "pypi:edf-plasma-cli",
+      "pypi:elpio",
+      "pypi:energy-counters",
+      "pypi:esa-sdk",
+      "pypi:ess-streaming-data-types",
+      "pypi:evalseg",
+      "pypi:ewatercycle-experiment-launcher",
+      "pypi:exec-excel",
+      "pypi:exotransit",
+      "pypi:facemask",
+      "pypi:fancybot",
+      "pypi:fantree",
+      "pypi:fastapi",
+      "pypi:fbpca",
+      "pypi:fderiv",
+      "pypi:ffe",
+      "pypi:fieldconfig",
+      "pypi:finagentvn",
+      "pypi:fire-code-inquiry-for-building-design",
+      "pypi:flask-logfile",
+      "pypi:flasks",
+      "pypi:flask-templates",
+      "pypi:flatland",
+      "pypi:flyrl",
+      "pypi:foercasting-models",
+      "pypi:fontpreview",
+      "pypi:fotonower",
+      "pypi:frameless-dialog",
+      "pypi:freesimpleguiqt",
+      "pypi:frozenleaves",
+      "pypi:fullautomation-logging",
+      "pypi:functionize-notebook",
+      "pypi:funfedi-connect",
+      "pypi:futeamigos",
+      "pypi:gatehouse-crunchtools",
+      "pypi:gc-game-account-aggregator",
+      "pypi:geat",
+      "pypi:gen-dedup",
+      "pypi:geo4bolivia",
+      "pypi:geode-simplexremeshgeosciences",
+      "pypi:giskard-client",
+      "pypi:gp-recipe-node",
+      "pypi:gptchangelog",
+      "pypi:gpxrecords",
+      "pypi:graphforge-neo4j",
+      "pypi:graphs-ssimon",
+      "pypi:graypy",
+      "pypi:greencache",
+      "pypi:guoid",
+      "pypi:halotools",
+      "pypi:hamb",
+      "pypi:harmonyai",
+      "pypi:haunted-mansion",
+      "pypi:heiman-connect",
+      "pypi:heliokit-viz3d-qfactor-coronal",
+      "pypi:hello-world-deshiitha",
+      "pypi:hestiaos",
+      "pypi:hitsave",
+      "pypi:hive-13-api-client",
+      "pypi:httpc",
+      "pypi:iflow-mcp-automateyournetwork-geminicli-packet-buddy-extension",
+      "pypi:iflow-mcp-r-brink-polars-mcp",
+      "pypi:ifly-atp",
+      "pypi:insight-reloaded",
+      "pypi:interest",
+      "pypi:intrieri1997",
+      "pypi:ipbulucu",
+      "pypi:itacart",
+      "pypi:ita-logger"
+    ],
+    "names": [
+      "a2p",
+      "abirqu",
+      "abrconnection",
+      "addereq-dm",
+      "agas",
+      "agent-inbox",
+      "agentlighthouse-verify",
+      "agent-receipt",
+      "agm",
+      "aihp-protocol",
+      "aiopixel",
+      "airduct",
+      "airflow-xtended-api",
+      "aisquare-pipe-docusign",
+      "akhaleel338package",
+      "alarm-events-client",
+      "alhena",
+      "alibabacloud-cloudapi20160201-py2",
+      "andrewtools",
+      "antchain-antdigital-agentcrew",
+      "antchain-ebc",
+      "arc56-generated-compx-021f310a",
+      "area-fig",
+      "ashr-manifold",
+      "askxml",
+      "astar-mcp-demo2",
+      "astro-aleph",
+      "auto-ehrmonize-flowsheet",
+      "awk-plus-plus",
+      "axdscfg",
+      "bds",
+      "beeai-acgs",
+      "better-test-preview",
+      "bibmeded",
+      "bigquerytest",
+      "bingapi",
+      "biodiviz",
+      "bleu-api-client-v2",
+      "bloqade-analog",
+      "bluealpha-mmm-builder-mcp",
+      "bohr",
+      "botocore-a-la-carte-ecr-public",
+      "bppynndescent",
+      "brainlambda",
+      "bric-analysis-libraries",
+      "browserget",
+      "bugger-scanner",
+      "buildahscript",
+      "bundle-parser",
+      "buvis-pybase",
+      "byteblowerll",
+      "caasi",
+      "calibrated-similarity",
+      "caneta",
+      "cellist",
+      "chaikin-smoothing-jean-lucas",
+      "chatbot-rag",
+      "chatclicks",
+      "chkw",
+      "ciervo",
+      "clinicedc-utils",
+      "cloudconnect",
+      "cloudshell-cp-openstack",
+      "coben",
+      "cocaine",
+      "codefetch-cli",
+      "cognition-engine",
+      "coinrailz",
+      "collabutils",
+      "collective-edm-listing",
+      "collective-ptg-allnewest",
+      "commitor",
+      "complete-stdlib",
+      "config-diff-soso",
+      "confy",
+      "convertorio-sdk",
+      "coreforecast",
+      "cprints",
+      "crowact",
+      "crp-comply-sdk",
+      "cspark-python",
+      "ctao-qualpipe-webapp",
+      "ctid-programmer",
+      "cvprac",
+      "daraja-sdk-py",
+      "databudgie",
+      "datadiff",
+      "data-diff-customize",
+      "decoration",
+      "deep-search-agent",
+      "deezeridu",
+      "deeznutz",
+      "deltafq-crixus",
+      "deltakit-compile",
+      "dhoeppe-alpha-vantage",
+      "dhvani",
+      "didi-eda",
+      "digilab-beam-client",
+      "dinkum-bio",
+      "diomindmap",
+      "dir2prompt",
+      "discrete-ndtree",
+      "discurses",
+      "diskcache-decorator",
+      "django-ajax-forms-mega",
+      "django-amazon-translate",
+      "django-aparnik",
+      "django-cacheback-pozytywnie",
+      "django-ddm",
+      "django-mercadopago-simple",
+      "django-siteajax",
+      "django-tinymce-4",
+      "django-umeboshi",
+      "dj-corekit",
+      "dkdbutils",
+      "dockerfactory",
+      "dollarfmt",
+      "dotagent-macos",
+      "dotgit",
+      "downctl",
+      "drf-groups",
+      "drozer",
+      "dsw-config",
+      "dt-authentication-ente",
+      "dynantic",
+      "eai-configgy",
+      "easy-edge",
+      "easy-menu",
+      "echowuhao",
+      "eclip-peak",
+      "ecz-id-api",
+      "edf-plasma-cli",
+      "elpio",
+      "energy-counters",
+      "esa-sdk",
+      "ess-streaming-data-types",
+      "evalseg",
+      "ewatercycle-experiment-launcher",
+      "exec-excel",
+      "exotransit",
+      "facemask",
+      "fancybot",
+      "fantree",
+      "fastapi",
+      "fbpca",
+      "fderiv",
+      "ffe",
+      "fieldconfig",
+      "finagentvn",
+      "fire-code-inquiry-for-building-design",
+      "flask-logfile",
+      "flasks",
+      "flask-templates",
+      "flatland",
+      "flyrl",
+      "foercasting-models",
+      "fontpreview",
+      "fotonower",
+      "frameless-dialog",
+      "freesimpleguiqt",
+      "frozenleaves",
+      "fullautomation-logging",
+      "functionize-notebook",
+      "funfedi-connect",
+      "futeamigos",
+      "gatehouse-crunchtools",
+      "gc-game-account-aggregator",
+      "geat",
+      "gen-dedup",
+      "geo4bolivia",
+      "geode-simplexremeshgeosciences",
+      "giskard-client",
+      "gp-recipe-node",
+      "gptchangelog",
+      "gpxrecords",
+      "graphforge-neo4j",
+      "graphs-ssimon",
+      "graypy",
+      "greencache",
+      "guoid",
+      "halotools",
+      "hamb",
+      "harmonyai",
+      "haunted-mansion",
+      "heiman-connect",
+      "heliokit-viz3d-qfactor-coronal",
+      "hello-world-deshiitha",
+      "hestiaos",
+      "hitsave",
+      "hive-13-api-client",
+      "httpc",
+      "iflow-mcp-automateyournetwork-geminicli-packet-buddy-extension",
+      "iflow-mcp-r-brink-polars-mcp",
+      "ifly-atp",
+      "insight-reloaded",
+      "interest",
+      "intrieri1997",
+      "ipbulucu",
+      "itacart",
+      "ita-logger"
+    ]
+  },
+  "root_group": {
+    "checks": [
+      {
+        "name": "HTTP and GraphQL succeed",
+        "path": "::HTTP and GraphQL succeed",
+        "id": "119cff8bac4dbe32492407ba8db9adda",
+        "passes": 20,
+        "fails": 0
+      }
+    ],
+    "name": "",
+    "path": "",
+    "id": "d41d8cd98f00b204e9800998ecf8427e",
+    "groups": []
+  },
+  "options": {
+    "summaryTrendStats": [
+      "avg",
+      "min",
+      "med",
+      "max",
+      "p(90)",
+      "p(95)",
+      "p(99)"
+    ],
+    "summaryTimeUnit": "",
+    "noColor": false
+  },
+  "state": {
+    "isStdErrTTY": false,
+    "testRunDurationMs": 11609.547602,
+    "isStdOutTTY": false
+  }
+}

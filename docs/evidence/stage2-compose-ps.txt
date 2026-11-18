@@ -1,0 +1,13 @@
+NAME                               IMAGE                            COMMAND                  SERVICE        CREATED         STATUS                     PORTS
+open-source-radar-catalog-1        open-source-radar-catalog        ".venv/bin/uvicorn s…"   catalog        4 minutes ago   Up 4 minutes (healthy)     
+open-source-radar-dispatcher-1     open-source-radar-dispatcher     ".venv/bin/python -m…"   dispatcher     7 minutes ago   Up 7 minutes (healthy)     
+open-source-radar-gateway-1        open-source-radar-gateway        "docker-entrypoint.s…"   gateway        7 minutes ago   Up 6 minutes (healthy)     127.0.0.1:4000->4000/tcp
+open-source-radar-migrate-1        open-source-radar-migrate        ".venv/bin/python -m…"   migrate        7 minutes ago   Exited (0) 3 minutes ago   
+open-source-radar-postgres-1       postgres:18.7-bookworm           "docker-entrypoint.s…"   postgres       7 minutes ago   Up 7 minutes (healthy)     5432/tcp
+open-source-radar-rabbitmq-1       rabbitmq:4.4.0-management        "docker-entrypoint.s…"   rabbitmq       7 minutes ago   Up 7 minutes (healthy)     4369/tcp, 5671-5672/tcp, 15671-15672/tcp, 15691-15692/tcp, 25672/tcp
+open-source-radar-redis-1          redis:7.4.12-alpine              "docker-entrypoint.s…"   redis          7 minutes ago   Up 7 minutes (healthy)     6379/tcp
+open-source-radar-repositories-1   open-source-radar-repositories   ".venv/bin/uvicorn s…"   repositories   7 minutes ago   Up 7 minutes (healthy)     
+open-source-radar-security-1       open-source-radar-security       ".venv/bin/uvicorn s…"   security       7 minutes ago   Up 3 minutes (healthy)     
+open-source-radar-web-1            open-source-radar-web            "docker-entrypoint.s…"   web            7 minutes ago   Up 7 minutes (healthy)     127.0.0.1:3000->3000/tcp
+open-source-radar-worker-1         open-source-radar-worker         ".venv/bin/celery -A…"   worker         7 minutes ago   Up 7 minutes (healthy)     
+open-source-radar-workspace-1      open-source-radar-workspace      ".venv/bin/uvicorn s…"   workspace      7 minutes ago   Up 6 minutes (healthy)     

@@ -1,0 +1,157 @@
+{
+  "date": "2026-11-18",
+  "host": "Windows, Docker Desktop/WSL2, generator on the same host",
+  "virtual_users": 20,
+  "warmup_seconds": 120,
+  "duration_seconds": 600,
+  "docker_cpus": 12,
+  "docker_memory_bytes": 7990951936,
+  "package_cohort": 10000,
+  "runs": {
+    "diagnostic": {
+      "operations": 8596,
+      "ops_per_s": 14.27,
+      "error_responses": 1,
+      "error_percent": 0.01163,
+      "by_operation": {
+        "catalog": {
+          "p95_ms": 1273.34,
+          "count": 5148
+        },
+        "detail": {
+          "p95_ms": 1558.82,
+          "count": 2144
+        },
+        "search": {
+          "p95_ms": 611.96,
+          "count": 856
+        },
+        "private": {
+          "p95_ms": 50.49,
+          "count": 428
+        }
+      }
+    },
+    "interrupted_subscription": {
+      "operations": 10801,
+      "ops_per_s": 17.97,
+      "error_responses": 1,
+      "error_percent": 0.00926,
+      "by_operation": {
+        "catalog": {
+          "p95_ms": 300.96,
+          "count": 6469
+        },
+        "detail": {
+          "p95_ms": 449.04,
+          "count": 2695
+        },
+        "search": {
+          "p95_ms": 186.85,
+          "count": 1078
+        },
+        "private": {
+          "p95_ms": 43.31,
+          "count": 539
+        }
+      }
+    },
+    "accepted": {
+      "operations": 10445,
+      "ops_per_s": 17.37,
+      "error_responses": 0,
+      "error_percent": 0,
+      "by_operation": {
+        "catalog": {
+          "p95_ms": 434.71,
+          "count": 6257
+        },
+        "detail": {
+          "p95_ms": 568.03,
+          "count": 2605
+        },
+        "search": {
+          "p95_ms": 251.1,
+          "count": 1042
+        },
+        "private": {
+          "p95_ms": 43.89,
+          "count": 521
+        }
+      }
+    }
+  },
+  "subscription": {
+    "elapsed_seconds_including_update": 1.328,
+    "k6_exit_codes": {
+      "warm": 0,
+      "baseline": 0
+    },
+    "progress_events": 27,
+    "p95_progress_seconds": 1.153
+  },
+  "restore": {
+    "dump_seconds": 4.5,
+    "restore_seconds": 4.1,
+    "matched_tables": {
+      "catalog.packages": [
+        "10109",
+        true
+      ],
+      "catalog.releases": [
+        "10116",
+        true
+      ],
+      "catalog.dependency_requirements": [
+        "50017",
+        true
+      ],
+      "repositories.repositories": [
+        "15",
+        true
+      ],
+      "repositories.package_repositories": [
+        "225",
+        true
+      ],
+      "security.vulnerabilities": [
+        "6",
+        true
+      ],
+      "security.scan_findings": [
+        "6",
+        true
+      ],
+      "workspace.collections": [
+        "2",
+        true
+      ],
+      "workspace.collection_items": [
+        "5",
+        true
+      ]
+    }
+  },
+  "sha256": {
+    "tests/load/stage5.js": "8f25517965f660fd096de6bae342051473705ca420962440befb3734bc68698b",
+    "scripts/load_stage7.py": "9b0ccaaa48c7fa0cf8e8c67fe0e8abb4740f6a5ad9f720101a4bdbe41201c267",
+    "packages/graphql/supergraph.graphql": "3b3184bfca66a88810cb480a20bbf056aec26c2b28b49abd689c149ac075c003",
+    "docs/evidence/stage5/cohort.json": "65bed731ad928d2ad475404635619cd473065fe967de8b93072f04ce7a0bfd0b"
+  },
+  "login_gateway_histogram": {
+    "scope": "warm plus baseline, 2 bursts of 20 logins",
+    "buckets_seconds": {
+      "0.025": 0,
+      "0.05": 0,
+      "0.1": 0,
+      "0.25": 0,
+      "0.5": 8,
+      "1.0": 28,
+      "2.0": 40,
+      "5.0": 40,
+      "10.0": 40,
+      "+Inf": 40
+    },
+    "estimated_p95_seconds": 1.833
+  }
+}

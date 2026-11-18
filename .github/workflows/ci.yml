@@ -1,0 +1,76 @@
+name: Local-stack checks
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+concurrency:
+  group: checks-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: .python-version
+      - name: Install pinned tools and dependencies
+        run: |
+          python -m pip install uv==0.13.7
+          npm install --global pnpm@12.21.0
+          uv sync --frozen
+          pnpm install --frozen-lockfile
+          uv run python scripts/bootstrap.py
+      - name: Static checks and unit tests
+        run: |
+          uv run ruff check services scripts packages/python-common/src
+          uv run ruff format --check services scripts packages/python-common/src
+          uv run mypy
+          uv run pytest -q
+          pnpm peers check
+          pnpm lint
+          pnpm format:check
+          pnpm typecheck
+          pnpm build
+      - name: Start isolated local stack
+        run: docker compose up --build -d --wait --wait-timeout 180
+      - name: Schema composition and generated-client drift
+        run: |
+          uv run python -m scripts.export_schema
+          pnpm compose:schema
+          pnpm codegen
+          git diff --exit-code -- packages/graphql apps/web/src/gql
+      - name: Database, queue and recovery checks
+        run: |
+          docker compose build checks
+          uv run python scripts/verify_infrastructure.py
+      - name: Domain contracts, pagination, batching and partial failure
+        run: uv run python -m scripts.verify_stage2
+      - name: Source imports, checkpoints and retries (no live APIs)
+        run: uv run python -m scripts.verify_stage3
+      - name: Bounded campaigns and recovery (no live APIs)
+        run: uv run python -m scripts.verify_campaign
+      - name: Contract and browser checks
+        run: |
+          pnpm test:contract
+          pnpm exec playwright install --with-deps chromium
+          uv run python -m scripts.verify_stage4
+      - name: Accounts, ownership, recovery and personal UI
+        run: uv run python -m scripts.verify_stage6
+      - name: Check generated credentials stay private after account tests
+        run: uv run python scripts/check_secrets.py --logs
+      - name: Preserve test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-results
+          path: test-results/
+          if-no-files-found: ignore
+      - name: Teardown containers
+        if: always()
+        run: docker compose down

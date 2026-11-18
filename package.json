@@ -1,0 +1,31 @@
+{
+  "name": "open-source-radar",
+  "private": true,
+  "packageManager": "pnpm@12.21.0",
+  "engines": {
+    "node": "24.x"
+  },
+  "scripts": {
+    "lint": "eslint apps/web gateway tests/e2e tests/fault tests/load codegen.ts playwright.config.ts playwright.partial.config.ts",
+    "format:check": "prettier --check .",
+    "format": "prettier --write .",
+    "compose:schema": "node gateway/compose.mjs",
+    "codegen": "graphql-codegen --config codegen.ts",
+    "typecheck": "pnpm --filter @radar/web typecheck",
+    "build": "pnpm --filter @radar/web build",
+    "test:contract": "node --test tests/contract/*.test.mjs",
+    "test:e2e": "playwright test"
+  },
+  "devDependencies": {
+    "eslint": "9.39.5",
+    "eslint-config-next": "16.4.6",
+    "prettier": "3.10.1",
+    "@apollo/composition": "2.14.4",
+    "@graphql-codegen/cli": "8.0.0",
+    "@graphql-codegen/client-preset": "7.0.0",
+    "@playwright/test": "1.65.1",
+    "graphql": "16.15.0",
+    "graphql-ws": "6.4.2",
+    "typescript": "5.9.3"
+  }
+}

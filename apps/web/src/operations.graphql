@@ -1,0 +1,36 @@
+fragment PackageDetails on DemoPackage {
+  id
+  name
+  summary
+  demoRevision
+  repository {
+    id
+    fullName
+    url
+    stars
+  }
+}
+
+query DemoCatalog {
+  packages: demoPackages {
+    ...PackageDetails
+  }
+}
+
+query DemoPackage($id: ID!) {
+  package: demoPackage(id: $id) {
+    ...PackageDetails
+  }
+}
+
+mutation AdvanceDemo($id: ID!) {
+  advanceDemo(id: $id) {
+    ...PackageDetails
+  }
+}
+
+subscription PackageUpdated($id: ID!) {
+  packageUpdated(id: $id) {
+    ...PackageDetails
+  }
+}

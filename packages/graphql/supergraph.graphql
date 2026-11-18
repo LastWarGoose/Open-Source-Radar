@@ -1,0 +1,508 @@
+schema
+  @link(url: "https://specs.apollo.dev/link/v1.0")
+  @link(url: "https://specs.apollo.dev/join/v0.4", for: EXECUTION)
+{
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
+
+directive @join__directive(graphs: [join__Graph!], name: String!, args: join__DirectiveArguments) repeatable on SCHEMA | OBJECT | INTERFACE | FIELD_DEFINITION
+
+directive @join__enumValue(graph: join__Graph!) repeatable on ENUM_VALUE
+
+directive @join__field(graph: join__Graph, requires: join__FieldSet, provides: join__FieldSet, type: String, external: Boolean, override: String, usedOverridden: Boolean, overrideLabel: String) repeatable on FIELD_DEFINITION | INPUT_FIELD_DEFINITION
+
+directive @join__graph(name: String!, url: String!) on ENUM_VALUE
+
+directive @join__implements(graph: join__Graph!, interface: String!) repeatable on OBJECT | INTERFACE
+
+directive @join__type(graph: join__Graph!, key: join__FieldSet, extension: Boolean! = false, resolvable: Boolean! = true, isInterfaceObject: Boolean! = false) repeatable on OBJECT | INTERFACE | UNION | ENUM | INPUT_OBJECT | SCALAR
+
+directive @join__unionMember(graph: join__Graph!, member: String!) repeatable on UNION
+
+directive @link(url: String, as: String, for: link__Purpose, import: [link__Import]) repeatable on SCHEMA
+
+type Account
+  @join__type(graph: WORKSPACE)
+{
+  id: ID!
+  username: String!
+  role: String!
+}
+
+type AdvisoryAlias
+  @join__type(graph: SECURITY)
+{
+  name: String!
+}
+
+type AdvisoryAliasConnection
+  @join__type(graph: SECURITY)
+{
+  nodes: [AdvisoryAlias!]!
+  pageInfo: PageInfo!
+}
+
+type Collection
+  @join__type(graph: WORKSPACE)
+{
+  id: ID!
+  name: String!
+  createdAt: DateTime!
+  items(first: Int! = 20, after: String = null): CollectionItemConnection!
+}
+
+type CollectionConnection
+  @join__type(graph: WORKSPACE)
+{
+  nodes: [Collection!]!
+  pageInfo: PageInfo!
+}
+
+type CollectionItem
+  @join__type(graph: WORKSPACE)
+{
+  package: Package
+}
+
+type CollectionItemConnection
+  @join__type(graph: WORKSPACE)
+{
+  nodes: [CollectionItem!]!
+  pageInfo: PageInfo!
+}
+
+"""Date with time (isoformat)"""
+scalar DateTime
+  @join__type(graph: CATALOG)
+  @join__type(graph: REPOSITORIES)
+  @join__type(graph: SECURITY)
+  @join__type(graph: WORKSPACE)
+
+type DemoPackage
+  @join__type(graph: CATALOG, key: "id")
+  @join__type(graph: REPOSITORIES, key: "id", extension: true)
+{
+  id: ID!
+  name: String! @join__field(graph: CATALOG)
+  summary: String! @join__field(graph: CATALOG)
+  demoRevision: Int! @join__field(graph: CATALOG)
+  repository: DemoRepository @join__field(graph: REPOSITORIES)
+}
+
+type DemoRepository
+  @join__type(graph: REPOSITORIES)
+{
+  id: ID!
+  fullName: String!
+  url: String!
+  stars: Int!
+}
+
+type DependencyRequirement
+  @join__type(graph: CATALOG)
+{
+  id: ID!
+  raw: String!
+  name: String!
+  specifier: String!
+  extras: [String!]!
+  marker: String
+  url: String
+  package: Package
+}
+
+type DependencyRequirementConnection
+  @join__type(graph: CATALOG)
+{
+  nodes: [DependencyRequirement!]!
+  pageInfo: PageInfo!
+}
+
+type Follow
+  @join__type(graph: WORKSPACE)
+{
+  version: String
+  package: Package
+}
+
+type FollowConnection
+  @join__type(graph: WORKSPACE)
+{
+  nodes: [Follow!]!
+  pageInfo: PageInfo!
+}
+
+type ImportCampaign
+  @join__type(graph: CATALOG)
+{
+  id: UUID!
+  status: String!
+  target: Int!
+  succeeded: Int!
+  failed: Int!
+  pending: Int!
+  candidatesConsumed: Int!
+  candidatesTotal: Int!
+  manifestHash: String!
+  createdAt: DateTime!
+  completedAt: DateTime
+}
+
+type ImportJob
+  @join__type(graph: CATALOG)
+{
+  id: ID!
+  status: String!
+  source: String!
+  processed: Int!
+  errorCode: String
+  createdAt: DateTime!
+  completedAt: DateTime
+  canResume: Boolean!
+}
+
+type ImportJobConnection
+  @join__type(graph: CATALOG)
+{
+  nodes: [ImportJob!]!
+  pageInfo: PageInfo!
+}
+
+input ImportTarget
+  @join__type(graph: CATALOG)
+{
+  name: String!
+  version: String = null
+}
+
+scalar join__DirectiveArguments
+
+scalar join__FieldSet
+
+enum join__Graph {
+  CATALOG @join__graph(name: "catalog", url: "http://catalog:8000/graphql")
+  REPOSITORIES @join__graph(name: "repositories", url: "http://repositories:8000/graphql")
+  SECURITY @join__graph(name: "security", url: "http://security:8000/graphql")
+  WORKSPACE @join__graph(name: "workspace", url: "http://workspace:8000/graphql")
+}
+
+scalar link__Import
+
+enum link__Purpose {
+  """
+  `SECURITY` features provide metadata necessary to securely resolve fields.
+  """
+  SECURITY
+
+  """
+  `EXECUTION` features provide metadata necessary for operation execution.
+  """
+  EXECUTION
+}
+
+type Mutation
+  @join__type(graph: CATALOG)
+  @join__type(graph: REPOSITORIES)
+  @join__type(graph: SECURITY)
+  @join__type(graph: WORKSPACE)
+{
+  requestCampaign(requestKey: UUID!, names: [String!]!, target: Int! = 10000): ImportCampaign! @join__field(graph: CATALOG)
+  updateRepositoryProjection(snapshot: RepositoryProjectionInput!): Boolean! @join__field(graph: CATALOG)
+  requestProbeJob(requestKey: UUID!): ProbeJob! @join__field(graph: CATALOG)
+  requestImport(requestKey: UUID!, targets: [ImportTarget!]!): ImportJob! @join__field(graph: CATALOG)
+  resumeImport(id: UUID!): ImportJob! @join__field(graph: CATALOG)
+  advanceDemo(id: ID!): DemoPackage! @join__field(graph: CATALOG)
+  requestRepositoryImport(requestKey: UUID!, packageId: ID!, urls: [String!]!, observedAt: DateTime!, maxRepositories: Int! = 5): SourceImportJob! @join__field(graph: REPOSITORIES)
+  requestSecurityImport(requestKey: UUID!, releaseId: ID!, name: String!, version: String!, observedAt: DateTime!): SourceImportJob! @join__field(graph: SECURITY)
+  register(username: String!, password: String!): Registration! @join__field(graph: WORKSPACE)
+  login(username: String!, password: String!): Account! @join__field(graph: WORKSPACE)
+  logout: Boolean! @join__field(graph: WORKSPACE)
+  recoverAccount(username: String!, recoveryCode: String!, password: String!): String! @join__field(graph: WORKSPACE)
+  createCollection(name: String!): Collection! @join__field(graph: WORKSPACE)
+  deleteCollection(id: ID!): Boolean! @join__field(graph: WORKSPACE)
+  addPackageToCollection(id: ID!, packageId: ID!): Collection! @join__field(graph: WORKSPACE)
+  removePackageFromCollection(id: ID!, packageId: ID!): Collection! @join__field(graph: WORKSPACE)
+  followPackage(packageId: ID!): Boolean! @join__field(graph: WORKSPACE)
+  unfollowPackage(packageId: ID!): Boolean! @join__field(graph: WORKSPACE)
+  markNotificationRead(id: ID!): Boolean! @join__field(graph: WORKSPACE)
+  recordPackageUpdate(packageId: ID!, version: String!, observedAt: DateTime!): Boolean! @join__field(graph: WORKSPACE)
+}
+
+type Notification
+  @join__type(graph: WORKSPACE)
+{
+  id: ID!
+  message: String!
+  createdAt: DateTime!
+  readAt: DateTime
+  package: Package
+}
+
+type NotificationConnection
+  @join__type(graph: WORKSPACE)
+{
+  nodes: [Notification!]!
+  pageInfo: PageInfo!
+}
+
+type Package
+  @join__type(graph: CATALOG, key: "id")
+  @join__type(graph: REPOSITORIES, key: "id", extension: true)
+  @join__type(graph: WORKSPACE, key: "id", resolvable: false)
+{
+  id: ID!
+  name: String! @join__field(graph: CATALOG)
+  displayName: String! @join__field(graph: CATALOG)
+  summary: String! @join__field(graph: CATALOG)
+  license: String @join__field(graph: CATALOG)
+  requiresPython: String @join__field(graph: CATALOG)
+  source: String! @join__field(graph: CATALOG)
+  sourceId: String! @join__field(graph: CATALOG)
+  fetchedAt: DateTime! @join__field(graph: CATALOG)
+  updatedAt: DateTime! @join__field(graph: CATALOG)
+  starProjection: StarProjection! @join__field(graph: CATALOG)
+  pypiFreshness: SourceFreshness! @join__field(graph: CATALOG)
+  releases(first: Int! = 20, after: String = null, source: String = null): ReleaseConnection! @join__field(graph: CATALOG)
+  release(version: String!, source: String! = "PYPI"): Release @join__field(graph: CATALOG)
+  githubFreshness: SourceFreshness @join__field(graph: REPOSITORIES)
+  repositories(first: Int! = 20, after: String = null): RepositoryLinkConnection @join__field(graph: REPOSITORIES)
+}
+
+type PackageConnection
+  @join__type(graph: CATALOG)
+{
+  nodes: [Package!]!
+  pageInfo: PageInfo!
+}
+
+input PackageFilter
+  @join__type(graph: CATALOG)
+{
+  license: String = null
+  hasReleases: Boolean = null
+  source: String = null
+}
+
+enum PackageSort
+  @join__type(graph: CATALOG)
+{
+  RELEVANCE @join__enumValue(graph: CATALOG)
+  NAME_ASC @join__enumValue(graph: CATALOG)
+  UPDATED_DESC @join__enumValue(graph: CATALOG)
+  STARS_DESC @join__enumValue(graph: CATALOG)
+}
+
+type PageInfo
+  @join__type(graph: CATALOG)
+  @join__type(graph: REPOSITORIES)
+  @join__type(graph: SECURITY)
+  @join__type(graph: WORKSPACE)
+{
+  hasNextPage: Boolean!
+  endCursor: String
+}
+
+type ProbeJob
+  @join__type(graph: CATALOG)
+{
+  id: UUID!
+  status: String!
+  createdAt: DateTime!
+  completedAt: DateTime
+  correlationId: String!
+}
+
+type Query
+  @join__type(graph: CATALOG)
+  @join__type(graph: REPOSITORIES)
+  @join__type(graph: SECURITY)
+  @join__type(graph: WORKSPACE)
+{
+  package(id: ID!): Package @join__field(graph: CATALOG)
+  release(id: ID!): Release @join__field(graph: CATALOG)
+  packages(first: Int! = 20, after: String = null, search: String = null, filter: PackageFilter = null, sort: PackageSort! = NAME_ASC): PackageConnection! @join__field(graph: CATALOG)
+  importJobs(first: Int! = 20, after: String = null): ImportJobConnection! @join__field(graph: CATALOG)
+  importCampaign(id: UUID!): ImportCampaign @join__field(graph: CATALOG)
+  probeJob(id: UUID!): ProbeJob @join__field(graph: CATALOG)
+  importJob(id: UUID!): ImportJob @join__field(graph: CATALOG)
+  demoPackages: [DemoPackage!]! @join__field(graph: CATALOG)
+  demoPackage(id: ID!): DemoPackage @join__field(graph: CATALOG)
+  repository(id: ID!): Repository @join__field(graph: REPOSITORIES)
+  repositorySnapshots(packageIds: [ID!]!): [RepositorySnapshot!]! @join__field(graph: REPOSITORIES)
+  repositoryImportJob(id: UUID!): SourceImportJob @join__field(graph: REPOSITORIES)
+  repositoryService: String! @join__field(graph: REPOSITORIES)
+  securityImportJob(id: UUID!): SourceImportJob @join__field(graph: SECURITY)
+  vulnerability(id: ID!): Vulnerability @join__field(graph: SECURITY)
+  collection(id: ID!): Collection @join__field(graph: WORKSPACE)
+  myCollections(first: Int! = 20, after: String = null): CollectionConnection! @join__field(graph: WORKSPACE)
+  myNotifications(first: Int! = 20, after: String = null): NotificationConnection! @join__field(graph: WORKSPACE)
+  me: Account @join__field(graph: WORKSPACE)
+  followedPackageBatch(afterId: String! = "", first: Int! = 2): [String!]! @join__field(graph: WORKSPACE)
+  myFollows(first: Int! = 20, after: String = null): FollowConnection! @join__field(graph: WORKSPACE)
+}
+
+type Registration
+  @join__type(graph: WORKSPACE)
+{
+  account: Account!
+  recoveryCode: String!
+}
+
+type Release
+  @join__type(graph: CATALOG, key: "id")
+  @join__type(graph: SECURITY, key: "id", extension: true)
+{
+  id: ID!
+  version: String! @join__field(graph: CATALOG)
+  normalizedVersion: String! @join__field(graph: CATALOG)
+  isPrerelease: Boolean! @join__field(graph: CATALOG)
+  yanked: Boolean! @join__field(graph: CATALOG)
+  source: String! @join__field(graph: CATALOG)
+  fetchedAt: DateTime! @join__field(graph: CATALOG)
+  package: Package @join__field(graph: CATALOG)
+  dependencies(first: Int! = 20, after: String = null): DependencyRequirementConnection! @join__field(graph: CATALOG)
+  scan: VersionScan @join__field(graph: SECURITY)
+}
+
+type ReleaseConnection
+  @join__type(graph: CATALOG)
+{
+  nodes: [Release!]!
+  pageInfo: PageInfo!
+}
+
+type Repository
+  @join__type(graph: REPOSITORIES, key: "id")
+{
+  id: ID!
+  fullName: String!
+  description: String
+  url: String!
+  stars: Int!
+  source: String!
+  sourceId: String!
+  fetchedAt: DateTime!
+}
+
+type RepositoryLink
+  @join__type(graph: REPOSITORIES)
+{
+  status: RepositoryLinkStatus!
+  repository: Repository
+}
+
+type RepositoryLinkConnection
+  @join__type(graph: REPOSITORIES)
+{
+  nodes: [RepositoryLink!]!
+  pageInfo: PageInfo!
+}
+
+enum RepositoryLinkStatus
+  @join__type(graph: REPOSITORIES)
+{
+  UNVERIFIED @join__enumValue(graph: REPOSITORIES)
+  VERIFIED @join__enumValue(graph: REPOSITORIES)
+  INVALID @join__enumValue(graph: REPOSITORIES)
+}
+
+input RepositoryProjectionInput
+  @join__type(graph: CATALOG)
+{
+  packageId: ID!
+  stars: Int
+  checkedAt: DateTime!
+  status: String!
+}
+
+type RepositorySnapshot
+  @join__type(graph: REPOSITORIES)
+{
+  packageId: ID!
+  stars: Int
+  checkedAt: DateTime!
+  status: String!
+}
+
+enum ScanStatus
+  @join__type(graph: SECURITY)
+{
+  UNKNOWN @join__enumValue(graph: SECURITY)
+  SUCCESS @join__enumValue(graph: SECURITY)
+  STALE @join__enumValue(graph: SECURITY)
+  FAILED @join__enumValue(graph: SECURITY)
+}
+
+type SourceFreshness
+  @join__type(graph: CATALOG)
+  @join__type(graph: REPOSITORIES)
+{
+  status: String!
+  checkedAt: DateTime
+  lastSuccessAt: DateTime
+  errorCode: String
+}
+
+type SourceImportJob
+  @join__type(graph: REPOSITORIES)
+  @join__type(graph: SECURITY)
+{
+  id: UUID!
+  status: String!
+  attempts: Int!
+  errorCode: String
+  nextAttemptAt: DateTime!
+}
+
+type StarProjection
+  @join__type(graph: CATALOG)
+{
+  stars: Int
+  checkedAt: DateTime
+  projectedAt: DateTime
+  status: String!
+  lagSeconds: Int
+}
+
+type Subscription
+  @join__type(graph: CATALOG)
+{
+  importProgress(jobId: UUID!): ImportJob!
+  packageUpdated(id: ID!): DemoPackage!
+}
+
+scalar UUID
+  @join__type(graph: CATALOG)
+  @join__type(graph: REPOSITORIES)
+  @join__type(graph: SECURITY)
+
+type VersionScan
+  @join__type(graph: SECURITY)
+{
+  id: ID!
+  status: ScanStatus!
+  source: String!
+  checkedAt: DateTime
+  lastSuccessAt: DateTime
+  errorCode: String
+  findings(first: Int! = 20, after: String = null): VulnerabilityConnection!
+}
+
+type Vulnerability
+  @join__type(graph: SECURITY, key: "id")
+{
+  id: ID!
+  summary: String!
+  source: String!
+  fetchedAt: DateTime!
+  aliases(first: Int! = 20, after: String = null): AdvisoryAliasConnection!
+}
+
+type VulnerabilityConnection
+  @join__type(graph: SECURITY)
+{
+  nodes: [Vulnerability!]!
+  pageInfo: PageInfo!
+}

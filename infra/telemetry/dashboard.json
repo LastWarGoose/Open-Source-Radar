@@ -1,0 +1,352 @@
+{
+  "uid": "open-source-radar",
+  "title": "Open Source Radar",
+  "schemaVersion": 39,
+  "timezone": "browser",
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "refresh": "15s",
+  "panels": [
+    {
+      "id": 1,
+      "type": "timeseries",
+      "title": "Задержка p95 по операциям",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "histogram_quantile(0.95, sum by (le,operation) (rate(radar_graphql_seconds_bucket[5m])))",
+          "legendFormat": "{{operation}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s"
+        }
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "h": 7,
+        "w": 12
+      }
+    },
+    {
+      "id": 2,
+      "type": "timeseries",
+      "title": "Ответы GraphQL с ошибками",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "sum by (operation) (increase(radar_graphql_errors_total[5m]))",
+          "legendFormat": "{{operation}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        }
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 0,
+        "h": 7,
+        "w": 12
+      }
+    },
+    {
+      "id": 3,
+      "type": "timeseries",
+      "title": "Возраст старейшего задания",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "radar_oldest_job_seconds",
+          "legendFormat": "{{source}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s"
+        }
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 7,
+        "h": 7,
+        "w": 12
+      }
+    },
+    {
+      "id": 4,
+      "type": "timeseries",
+      "title": "Задания в очереди",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "radar_queued_jobs",
+          "legendFormat": "{{source}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        }
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 7,
+        "h": 7,
+        "w": 12
+      }
+    },
+    {
+      "id": 5,
+      "type": "timeseries",
+      "title": "Время с последней успешной проверки",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "time() - radar_last_source_success_timestamp_seconds",
+          "legendFormat": "{{source}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s"
+        }
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 14,
+        "h": 7,
+        "w": 12
+      }
+    },
+    {
+      "id": 6,
+      "type": "timeseries",
+      "title": "Проверено за сутки",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "radar_fresh_entities",
+          "legendFormat": "{{source}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        }
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 14,
+        "h": 7,
+        "w": 12
+      }
+    },
+    {
+      "id": 7,
+      "type": "timeseries",
+      "title": "Повторные попытки",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "radar_retry_attempts",
+          "legendFormat": "{{source}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        }
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 21,
+        "h": 7,
+        "w": 12
+      }
+    },
+    {
+      "id": 8,
+      "type": "timeseries",
+      "title": "Запросы в текущем окне квоты",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "radar_quota_requests",
+          "legendFormat": "{{source}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        }
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 21,
+        "h": 7,
+        "w": 12
+      }
+    },
+    {
+      "id": 9,
+      "type": "timeseries",
+      "title": "Активные подписки",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "radar_subscriptions",
+          "legendFormat": "Подписки"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        }
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 28,
+        "h": 7,
+        "w": 12
+      }
+    },
+    {
+      "id": 10,
+      "type": "timeseries",
+      "title": "Ограниченные операции",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "sum by(reason) (increase(radar_graphql_rejected_total[5m]))",
+          "legendFormat": "{{reason}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        }
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 28,
+        "h": 7,
+        "w": 12
+      }
+    },
+    {
+      "id": 11,
+      "type": "timeseries",
+      "title": "Объекты с успешной проверкой",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "radar_checked_entities",
+          "legendFormat": "{{source}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        }
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 35,
+        "h": 7,
+        "w": 12
+      }
+    },
+    {
+      "id": 12,
+      "type": "timeseries",
+      "title": "Активные предупреждения",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "count by(alertname) (ALERTS{alertstate=\"firing\"})",
+          "legendFormat": "{{alertname}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        }
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 35,
+        "h": 7,
+        "w": 12
+      }
+    },
+    {
+      "id": 13,
+      "type": "timeseries",
+      "title": "Доля реальных пакетов PyPI с подтверждённым GitHub в каталоге",
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "sum(radar_packages_with_github) / sum(radar_real_packages)",
+          "legendFormat": "Покрытие GitHub"
+        }
+      ],
+      "fieldConfig": { "defaults": { "unit": "percentunit" } },
+      "gridPos": { "x": 0, "y": 42, "h": 7, "w": 12 }
+    }
+  ]
+}

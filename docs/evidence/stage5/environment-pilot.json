@@ -1,0 +1,179 @@
+{
+  "captured_at": "2026-11-17T15:24:13.240603+00:00",
+  "host_os": "Windows-10-10.0.19045-SP0",
+  "docker": {
+    "NCPU": 12,
+    "MemTotal": 7990951936,
+    "OperatingSystem": "Docker Desktop",
+    "KernelVersion": "6.18.58.1-microsoft-standard-WSL2",
+    "Architecture": "x86_64",
+    "ServerVersion": "29.9.2",
+    "Driver": "overlayfs"
+  },
+  "images": [
+    {
+      "ID": "sha256:b695653c4b2e4c51ed540810959d1c9d2c9d5b7486c72133946b4555700fc225",
+      "ContainerName": "open-source-radar-beat-1",
+      "Repository": "open-source-radar-beat",
+      "Tag": "latest",
+      "Platform": "linux/amd64",
+      "Size": 526474547,
+      "Created": "2026-11-17T15:04:24.043607123Z",
+      "LastTagTime": "2026-11-17T15:04:37.191736041Z"
+    },
+    {
+      "ID": "sha256:fa26cf79e7bb4e5856f9ae85e6a8eaa69c4b47db1f3024261937f22a8dbb23b1",
+      "ContainerName": "open-source-radar-worker-1",
+      "Repository": "open-source-radar-worker",
+      "Tag": "latest",
+      "Platform": "linux/amd64",
+      "Size": 526474549,
+      "Created": "2026-11-17T15:04:24.043607123Z",
+      "LastTagTime": "2026-11-17T15:04:37.205925045Z"
+    },
+    {
+      "ID": "sha256:458b4189c0e30301f369b1b33986747ff02de06baba71a52717a572d3e04f136",
+      "ContainerName": "open-source-radar-dispatcher-1",
+      "Repository": "open-source-radar-dispatcher",
+      "Tag": "latest",
+      "Platform": "linux/amd64",
+      "Size": 526474553,
+      "Created": "2026-11-17T15:04:24.043607123Z",
+      "LastTagTime": "2026-11-17T15:04:37.203657701Z"
+    },
+    {
+      "ID": "sha256:753099a19b577c322117f793f864b3129cbba96d40317221a69d73976e3c843c",
+      "ContainerName": "open-source-radar-rabbitmq-1",
+      "Repository": "rabbitmq",
+      "Tag": "4.4.0-management",
+      "Platform": "linux/amd64",
+      "Size": 443834265,
+      "Created": "2026-11-12T00:29:15.637849769Z",
+      "LastTagTime": "2026-11-17T10:15:17.614618612Z"
+    },
+    {
+      "ID": "sha256:7f7d30b7fdd09467bac58198a1f166dd69789d348d4fe859cccb20e0cf287fbe",
+      "ContainerName": "open-source-radar-redis-1",
+      "Repository": "redis",
+      "Tag": "7.4.12-alpine",
+      "Platform": "linux/amd64",
+      "Size": 57976413,
+      "Created": "2026-11-09T20:09:32.419853068Z",
+      "LastTagTime": "2026-11-17T10:11:35.47915141Z"
+    },
+    {
+      "ID": "sha256:6ba4806de0f51804be753c268cbe39ec7f07ccc48c401ec3162340b22688c73c",
+      "ContainerName": "open-source-radar-workspace-1",
+      "Repository": "open-source-radar-workspace",
+      "Tag": "latest",
+      "Platform": "linux/amd64",
+      "Size": 526474552,
+      "Created": "2026-11-17T15:04:24.043607123Z",
+      "LastTagTime": "2026-11-17T15:04:37.208745025Z"
+    },
+    {
+      "ID": "sha256:cf8eb08e3dd9ac99cd080179546421c0307d89c5dd24bba0071b2e091d0b851b",
+      "ContainerName": "open-source-radar-migrate-1",
+      "Repository": "open-source-radar-migrate",
+      "Tag": "latest",
+      "Platform": "linux/amd64",
+      "Size": 526433725,
+      "Created": "2026-11-17T12:26:56.531324887Z",
+      "LastTagTime": "2026-11-17T12:26:57.981500233Z"
+    },
+    {
+      "ID": "sha256:ece55f7868da684e400f82f1030a050718adbdd65c23aa500c486f6e2950dc0f",
+      "ContainerName": "open-source-radar-postgres-1",
+      "Repository": "postgres",
+      "Tag": "18.7-bookworm",
+      "Platform": "linux/amd64",
+      "Size": 649601735,
+      "Created": "2026-11-12T20:53:30.610568907Z",
+      "LastTagTime": "2026-11-17T10:11:27.669691468Z"
+    },
+    {
+      "ID": "sha256:95013356c9ef9ae138c8549eb226f529fe8baa05ea0f2707a5f6d271c850a1df",
+      "ContainerName": "open-source-radar-security-1",
+      "Repository": "open-source-radar-security",
+      "Tag": "latest",
+      "Platform": "linux/amd64",
+      "Size": 526474551,
+      "Created": "2026-11-17T15:04:24.043607123Z",
+      "LastTagTime": "2026-11-17T15:04:37.199001704Z"
+    },
+    {
+      "ID": "sha256:40d0e57d011a4b05ff6f28a95fbc60ad397901c4b32ae6a10c8667cc71d1b368",
+      "ContainerName": "open-source-radar-web-1",
+      "Repository": "open-source-radar-web",
+      "Tag": "latest",
+      "Platform": "linux/amd64",
+      "Size": 2562417704,
+      "Created": "2026-11-17T12:57:46.978554419Z",
+      "LastTagTime": "2026-11-17T12:57:47.209986193Z"
+    },
+    {
+      "ID": "sha256:9cbae334d4ceac5f6da6628bfd42058544c65a0d5febea836e41b6c7e37c90d3",
+      "ContainerName": "open-source-radar-catalog-1",
+      "Repository": "open-source-radar-catalog",
+      "Tag": "latest",
+      "Platform": "linux/amd64",
+      "Size": 526508480,
+      "Created": "2026-11-17T15:17:32.138616901Z",
+      "LastTagTime": "2026-11-17T15:17:32.756730127Z"
+    },
+    {
+      "ID": "sha256:0600adedd8898af9e629804047026cb91e338349730770d2b7c396a182fd1274",
+      "ContainerName": "open-source-radar-repositories-1",
+      "Repository": "open-source-radar-repositories",
+      "Tag": "latest",
+      "Platform": "linux/amd64",
+      "Size": 526474555,
+      "Created": "2026-11-17T15:04:24.043607123Z",
+      "LastTagTime": "2026-11-17T15:04:37.196285231Z"
+    },
+    {
+      "ID": "sha256:17f21dbdbee6ad391e62f95756bd1035ff0865869a69f0ff66b318c15421ad1d",
+      "ContainerName": "open-source-radar-security-importer-1",
+      "Repository": "open-source-radar-security-importer",
+      "Tag": "latest",
+      "Platform": "linux/amd64",
+      "Size": 526474560,
+      "Created": "2026-11-17T15:04:24.043607123Z",
+      "LastTagTime": "2026-11-17T15:04:37.216209701Z"
+    },
+    {
+      "ID": "sha256:ce202ecc8547207e97e104c5350ef0b28821043d76a4b39b3c050ebbf4e9ceae",
+      "ContainerName": "open-source-radar-catalog-importer-1",
+      "Repository": "open-source-radar-catalog-importer",
+      "Tag": "latest",
+      "Platform": "linux/amd64",
+      "Size": 526508489,
+      "Created": "2026-11-17T15:17:32.138616901Z",
+      "LastTagTime": "2026-11-17T15:17:32.739985784Z"
+    },
+    {
+      "ID": "sha256:d0e46c40c70e767cc10627817d4847fb315673d55f9c258081257893a5c1ac8c",
+      "ContainerName": "open-source-radar-repositories-importer-1",
+      "Repository": "open-source-radar-repositories-importer",
+      "Tag": "latest",
+      "Platform": "linux/amd64",
+      "Size": 526474564,
+      "Created": "2026-11-17T15:04:24.043607123Z",
+      "LastTagTime": "2026-11-17T15:04:37.193908479Z"
+    },
+    {
+      "ID": "sha256:a0d51e127c1c61910b015135bbc767acd2536a828acd9951bf168e5fbac02ce2",
+      "ContainerName": "open-source-radar-gateway-1",
+      "Repository": "open-source-radar-gateway",
+      "Tag": "latest",
+      "Platform": "linux/amd64",
+      "Size": 2562418078,
+      "Created": "2026-11-17T15:02:00.783444528Z",
+      "LastTagTime": "2026-11-17T15:02:01.28284887Z"
+    }
+  ],
+  "commit": null,
+  "source_state": "uncommitted workspace; see source-hashes.json",
+  "replicas_per_service": 1,
+  "shared_generator_host": true
+}

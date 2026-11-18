@@ -1,0 +1,12 @@
+packages:
+  - apps/*
+  - gateway
+allowBuilds:
+  "@apollo/protobufjs@1.2.8": true
+  "protobufjs@7.6.6": true
+# Keep Hive's Envelop 5 stack within its declared dependency ranges.
+overrides:
+  "@graphql-hive/gateway-runtime": 2.12.2
+  "@graphql-hive/plugin-opentelemetry": 1.5.4
+  "@graphql-mesh/plugin-prometheus": 2.2.4
+  "@opentelemetry/api": 1.9.1

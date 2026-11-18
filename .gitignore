@@ -1,0 +1,17 @@
+.env
+.env.*
+!.env.example
+.tools/
+.venv/
+node_modules/
+.next/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.tsbuildinfo
+test-results/
+playwright-report/
+.runtime/
+compose.override.yaml
+

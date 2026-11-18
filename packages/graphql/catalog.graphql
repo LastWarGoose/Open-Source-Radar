@@ -1,0 +1,191 @@
+schema @link(url: "https://specs.apollo.dev/federation/v2.7", import: ["@key", "@shareable"]) {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
+
+"""Date with time (isoformat)"""
+scalar DateTime
+
+type DemoPackage @key(fields: "id") {
+  id: ID!
+  name: String!
+  summary: String!
+  demoRevision: Int!
+}
+
+type DependencyRequirement {
+  id: ID!
+  raw: String!
+  name: String!
+  specifier: String!
+  extras: [String!]!
+  marker: String
+  url: String
+  package: Package
+}
+
+type DependencyRequirementConnection {
+  nodes: [DependencyRequirement!]!
+  pageInfo: PageInfo!
+}
+
+type ImportCampaign {
+  id: UUID!
+  status: String!
+  target: Int!
+  succeeded: Int!
+  failed: Int!
+  pending: Int!
+  candidatesConsumed: Int!
+  candidatesTotal: Int!
+  manifestHash: String!
+  createdAt: DateTime!
+  completedAt: DateTime
+}
+
+type ImportJob {
+  id: ID!
+  status: String!
+  source: String!
+  processed: Int!
+  errorCode: String
+  createdAt: DateTime!
+  completedAt: DateTime
+  canResume: Boolean!
+}
+
+type ImportJobConnection {
+  nodes: [ImportJob!]!
+  pageInfo: PageInfo!
+}
+
+input ImportTarget {
+  name: String!
+  version: String = null
+}
+
+type Mutation {
+  requestCampaign(requestKey: UUID!, names: [String!]!, target: Int! = 10000): ImportCampaign!
+  updateRepositoryProjection(snapshot: RepositoryProjectionInput!): Boolean!
+  requestProbeJob(requestKey: UUID!): ProbeJob!
+  requestImport(requestKey: UUID!, targets: [ImportTarget!]!): ImportJob!
+  resumeImport(id: UUID!): ImportJob!
+  advanceDemo(id: ID!): DemoPackage!
+}
+
+type Package @key(fields: "id") {
+  id: ID!
+  name: String!
+  displayName: String!
+  summary: String!
+  license: String
+  requiresPython: String
+  source: String!
+  sourceId: String!
+  fetchedAt: DateTime!
+  updatedAt: DateTime!
+  starProjection: StarProjection!
+  pypiFreshness: SourceFreshness!
+  releases(first: Int! = 20, after: String = null, source: String = null): ReleaseConnection!
+  release(version: String!, source: String! = "PYPI"): Release
+}
+
+type PackageConnection {
+  nodes: [Package!]!
+  pageInfo: PageInfo!
+}
+
+input PackageFilter {
+  license: String = null
+  hasReleases: Boolean = null
+  source: String = null
+}
+
+enum PackageSort {
+  RELEVANCE
+  NAME_ASC
+  UPDATED_DESC
+  STARS_DESC
+}
+
+type PageInfo @shareable {
+  hasNextPage: Boolean!
+  endCursor: String
+}
+
+type ProbeJob {
+  id: UUID!
+  status: String!
+  createdAt: DateTime!
+  completedAt: DateTime
+  correlationId: String!
+}
+
+type Query {
+  _entities(representations: [_Any!]!): [_Entity]!
+  _service: _Service!
+  package(id: ID!): Package
+  release(id: ID!): Release
+  packages(first: Int! = 20, after: String = null, search: String = null, filter: PackageFilter = null, sort: PackageSort! = NAME_ASC): PackageConnection!
+  importJobs(first: Int! = 20, after: String = null): ImportJobConnection!
+  importCampaign(id: UUID!): ImportCampaign
+  probeJob(id: UUID!): ProbeJob
+  importJob(id: UUID!): ImportJob
+  demoPackages: [DemoPackage!]!
+  demoPackage(id: ID!): DemoPackage
+}
+
+type Release @key(fields: "id") {
+  id: ID!
+  version: String!
+  normalizedVersion: String!
+  isPrerelease: Boolean!
+  yanked: Boolean!
+  source: String!
+  fetchedAt: DateTime!
+  package: Package
+  dependencies(first: Int! = 20, after: String = null): DependencyRequirementConnection!
+}
+
+type ReleaseConnection {
+  nodes: [Release!]!
+  pageInfo: PageInfo!
+}
+
+input RepositoryProjectionInput {
+  packageId: ID!
+  stars: Int
+  checkedAt: DateTime!
+  status: String!
+}
+
+type SourceFreshness @shareable {
+  status: String!
+  checkedAt: DateTime
+  lastSuccessAt: DateTime
+  errorCode: String
+}
+
+type StarProjection {
+  stars: Int
+  checkedAt: DateTime
+  projectedAt: DateTime
+  status: String!
+  lagSeconds: Int
+}
+
+type Subscription {
+  importProgress(jobId: UUID!): ImportJob!
+  packageUpdated(id: ID!): DemoPackage!
+}
+
+scalar UUID
+
+scalar _Any
+
+union _Entity = DemoPackage | Package | Release
+
+type _Service {
+  sdl: String!
+}

@@ -1,0 +1,12 @@
+{
+  "pypi_packages": 2,
+  "pypi_releases": 2,
+  "pypi_requirements": 51,
+  "synthetic_packages": 107,
+  "github_repositories": 2,
+  "osv_advisories": 3,
+  "osv_identifiers_including_aliases": 9,
+  "osv_scans": {
+    "SUCCESS": 2
+  }
+}

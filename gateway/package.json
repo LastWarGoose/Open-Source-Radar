@@ -1,0 +1,14 @@
+{
+  "name": "@radar/gateway",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "hive-gateway supergraph"
+  },
+  "dependencies": {
+    "@graphql-hive/gateway": "2.15.2",
+    "@opentelemetry/exporter-trace-otlp-http": "0.221.0",
+    "graphql": "16.15.0",
+    "prom-client": "15.1.3"
+  }
+}

@@ -1,0 +1,10 @@
+﻿NAME                                      IMAGE                                   COMMAND                  SERVICE        CREATED         STATUS                   PORTS
+open-source-radar-stage0-catalog-1        open-source-radar-stage0-catalog        ".venv/bin/uvicorn s…"   catalog        2 minutes ago   Up 2 minutes (healthy)   
+open-source-radar-stage0-gateway-1        open-source-radar-stage0-gateway        "docker-entrypoint.s…"   gateway        2 minutes ago   Up 2 minutes (healthy)   127.0.0.1:4000->4000/tcp
+open-source-radar-stage0-repositories-1   open-source-radar-stage0-repositories   ".venv/bin/uvicorn s…"   repositories   2 minutes ago   Up 2 minutes (healthy)   
+open-source-radar-stage0-web-1            open-source-radar-stage0-web            "docker-entrypoint.s…"   web            2 minutes ago   Up 2 minutes (healthy)   127.0.0.1:3000->3000/tcp
+CONTAINER                                 REPOSITORY                              TAG                 PLATFORM            IMAGE ID            SIZE                CREATED
+open-source-radar-stage0-catalog-1        open-source-radar-stage0-catalog        latest              linux/amd64         00c7c372d5a0        378MB               11 minutes ago
+open-source-radar-stage0-gateway-1        open-source-radar-stage0-gateway        latest              linux/amd64         a98068b34ae9        2.36GB              5 minutes ago
+open-source-radar-stage0-repositories-1   open-source-radar-stage0-repositories   latest              linux/amd64         48b19f99fca7        378MB               11 minutes ago
+open-source-radar-stage0-web-1            open-source-radar-stage0-web            latest              linux/amd64         1509212da73c        2.36GB              5 minutes ago

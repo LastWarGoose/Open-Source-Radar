@@ -1,0 +1,164 @@
+import { expect, test } from "@playwright/test";
+
+const names = ["alpha", "beta", "gamma", "delta", "epsilon"].map((name) => "radar-stage4-" + name);
+
+test("catalog links reach search after the landing page streams", async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 800 });
+  await page.goto("/");
+  await expect(page.getByRole("heading", { name: "Каталог библиотек Python" })).toBeInViewport();
+  const search = page.getByRole("searchbox", { name: "Поиск", exact: true });
+  await page.getByRole("link", { name: "Перейти к поиску" }).click();
+  await expect(search).toBeInViewport();
+  await page.reload();
+  await expect(search).toBeInViewport();
+  await page.goto("/compare");
+  await page.getByRole("link", { name: "Открыть каталог" }).click();
+  await expect(page).toHaveURL(/#catalog$/);
+  await expect(search).toBeInViewport();
+  await search.fill("fastapi");
+  await search.press("Enter");
+  await expect(page).toHaveURL(/q=fastapi/);
+  await expect(search).toBeInViewport();
+  await expect(page.getByRole("heading", { name: "Каталог библиотек Python" })).toHaveCount(0);
+});
+
+test("catalog SSR, filters, global sort, cursor and browser history", async ({ page, request }) => {
+  const html = await (await request.get("/?q=radar-stage4-")).text();
+  expect(html).toContain(names[0]);
+  expect(html).toContain('rel="canonical"');
+  await page.goto("/?q=radar-stage4-&size=1&sort=STARS_DESC");
+  await expect(page.locator('[data-testid="catalog-package"]:visible')).toHaveCount(1);
+  await expect(page.locator('[data-testid="catalog-package"]:visible')).toContainText(names[1]);
+  await page.getByRole("link", { name: "Далее →", exact: true }).click();
+  await expect(page).toHaveURL(/after=/);
+  await expect(page.locator('[data-testid="catalog-package"]:visible')).toContainText(names[0]);
+  await page.reload();
+  await expect(page.getByLabel("Сортировка")).toHaveValue("STARS_DESC");
+  await expect(page.locator('[data-testid="catalog-package"]:visible')).toContainText(names[0]);
+  await page.goBack();
+  await expect(page.locator('[data-testid="catalog-package"]:visible')).toContainText(names[1]);
+  await page.getByLabel("Лицензия", { exact: true }).fill("MIT");
+  await page.getByRole("button", { name: "Найти", exact: true }).click();
+  await expect(page).toHaveURL(/license=MIT/);
+  await expect(page).not.toHaveURL(/after=/);
+  await expect(page.locator('[data-testid="catalog-package"]:visible')).toContainText(names[0]);
+  await page.getByRole("combobox", { name: "Версии", exact: true }).selectOption("no");
+  await page.getByRole("button", { name: "Найти", exact: true }).click();
+  await expect(page.locator('[data-testid="catalog-package"]:visible')).toContainText(names[4]);
+  await page.getByLabel("Поиск", { exact: true }).fill("no-such-stage4-package");
+  await page.getByRole("button", { name: "Найти", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Пакеты не найдены" })).toBeVisible();
+  await page.goto("/?after=invalid");
+  await expect(page.getByRole("heading", { name: "Страница устарела" })).toBeVisible();
+});
+
+test("package versions, requirements, OSV states, metadata and missing package", async ({
+  page,
+}) => {
+  await page.goto(`/packages/${names[0]}`);
+  await expect(page).toHaveTitle(new RegExp(names[0]));
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+    "href",
+    `http://localhost:3000/packages/${names[0]}`,
+  );
+  await expect(page.getByRole("heading", { name: "Версия 21.0", exact: true })).toBeVisible();
+  await expect(page.locator(".repo-summary")).toContainText(`Source repository for ${names[0]}.`);
+  await expect(page.locator(".version-list")).not.toContainText("99.0");
+  await expect(page.locator(".dependency-list li")).toHaveCount(20);
+  await expect(page.locator(".dependency-list")).toContainText('python_version < "3.13"');
+  await expect(
+    page.getByText("Совпадений не найдено. Это не гарантия безопасности."),
+  ).toBeVisible();
+  await page.getByRole("link", { name: "Ещё зависимости →" }).click();
+  await expect(page.locator(".dependency-list li")).toHaveCount(5);
+  await expect(page).toHaveURL(/version=21.0/);
+  await page.getByRole("link", { name: "Ещё версии →" }).click();
+  await page.getByRole("link", { name: "1.0", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Версия 1.0", exact: true })).toBeVisible();
+  await expect(page.getByText("Показан последний сохранённый результат.")).toBeVisible();
+  await page.goto(`/packages/${names[1]}`);
+  await expect(page.locator(".findings")).toContainText("TEST-RADAR-STAGE4-ALIAS");
+  await expect(page.getByText(/PyPI: Устарело/)).toBeVisible();
+  await page.goto(`/packages/${names[2]}`);
+  await expect(page.getByText("Проверка не завершена.")).toBeVisible();
+  await page.goto(`/packages/${names[3]}`);
+  await expect(page.getByText("Эта версия ещё не проверена.")).toBeVisible();
+  await page.goto(`/packages/${names[4]}`);
+  await expect(page.getByRole("heading", { name: "Версии пока не загружены" })).toBeVisible();
+  await page.goto(`/packages/${names[0]}?version=99.0`);
+  await expect(page.getByRole("heading", { name: "Версия не найдена в каталоге" })).toBeVisible();
+  await page.goto("/packages/radar-stage4-hidden");
+  await expect(page.getByRole("heading", { name: "Пакет или страница не найдены" })).toBeVisible();
+});
+
+test("comparison cap, persistence, shared URL, removal and invalid input", async ({
+  page,
+  context,
+}) => {
+  await page.goto("/?q=radar-stage4-");
+  for (const name of names.slice(0, 4))
+    await page.getByRole("button", { name: `Сравнить ${name}`, exact: true }).click();
+  await page.getByRole("button", { name: `Сравнить ${names[4]}`, exact: true }).click();
+  await expect(page.getByRole("alert").filter({ hasText: "Не более 4 пакетов" })).toBeVisible();
+  await page.reload();
+  await expect(
+    page.getByRole("button", { name: `Сравнить ${names[0]}`, exact: true }),
+  ).toHaveAttribute("aria-pressed", "true");
+  await page.getByRole("link", { name: "Сравнить →", exact: true }).click();
+  await expect(page.locator("thead th")).toHaveCount(5);
+  await expect(page.getByRole("table")).toContainText(`Source repository for ${names[0]}.`);
+  const shared = await context.newPage();
+  await shared.goto(page.url());
+  await expect(shared.locator("thead th")).toHaveCount(5);
+  await expect(shared.getByRole("table")).toContainText("Найдено: 1");
+  await page.getByRole("link", { name: `Удалить ${names[0]} из сравнения` }).click();
+  await expect(page.locator("thead th")).toHaveCount(4);
+  await page.goto("/compare?packages=" + names.join(","));
+  await expect(page.getByRole("heading", { name: "Можно сравнить до 4 пакетов" })).toBeVisible();
+  await page.goto("/compare?packages=radar-does-not-exist");
+  await expect(page.getByRole("table")).toContainText("Пакет не найден");
+});
+
+test("responsive layout, keyboard focus and browser console", async ({ page }, testInfo) => {
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  for (const width of [1440, 768, 360]) {
+    await page.setViewportSize({ width, height: 1000 });
+    for (const [label, url] of [
+      ["catalog", "/?q=radar-stage4-"],
+      ["package", `/packages/${names[0]}`],
+      ["compare", "/compare?packages=" + names.slice(0, 4).join(",")],
+    ]) {
+      await page.goto(url);
+      await expect(page.locator("h1")).toBeVisible();
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+        true,
+      );
+      await page.screenshot({ path: testInfo.outputPath(`${label}-${width}.png`), fullPage: true });
+    }
+  }
+  await page.goto("/?q=radar-stage4-");
+  // The shared layout streams before the form; exercise keyboard input once it is ready.
+  await expect(page.getByRole("searchbox", { name: "Поиск", exact: true })).toBeVisible();
+  await page.keyboard.press("Tab");
+  await expect(page.getByRole("link", { name: "К содержимому" })).toBeFocused();
+  const outline = await page
+    .locator(":focus")
+    .evaluate((element) => getComputedStyle(element).outlineStyle);
+  expect(outline).not.toBe("none");
+  await page.keyboard.press("Enter");
+  await expect(page).toHaveURL(/#content$/);
+  await expect(page.locator("#content")).toBeFocused();
+  await page.keyboard.press("Tab");
+  await expect(page.getByRole("searchbox", { name: "Поиск", exact: true })).toBeFocused();
+  await page.keyboard.press("Control+A");
+  await page.keyboard.type(names[0]);
+  await expect(page.getByRole("searchbox", { name: "Поиск", exact: true })).toHaveValue(names[0]);
+  await page.keyboard.press("Enter");
+  await expect(page.locator('[data-testid="catalog-package"]:visible')).toHaveCount(1);
+  // Reflow equivalent of 200% browser zoom at a 1440px window.
+  await page.setViewportSize({ width: 720, height: 450 });
+  await page.screenshot({ path: testInfo.outputPath("catalog-reflow-200.png"), fullPage: true });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  expect(errors).toEqual([]);
+});

@@ -1,0 +1,18 @@
+﻿{
+    "cpu":  {
+                "Name":  "AMD Ryzen 5 4600H with Radeon Graphics         ",
+                "NumberOfCores":  6,
+                "NumberOfLogicalProcessors":  12
+            },
+    "ram_bytes":  16497397760,
+    "workspace_disk":  {
+                           "FileSystem":  "NTFS",
+                           "Size":  297360420864,
+                           "FreeSpace":  223206993920
+                       },
+    "disk_media":  {
+                       "MediaType":  "SSD",
+                       "BusType":  "NVMe",
+                       "Size":  512110190592
+                   }
+}

@@ -1,0 +1,66 @@
+query WorkspaceGraph {
+  myCollections {
+    nodes {
+      id
+      items {
+        nodes {
+          package {
+            id
+            name
+            repositories {
+              nodes {
+                status
+                repository {
+                  id
+                  fullName
+                  source
+                }
+              }
+            }
+            releases(first: 20) {
+              nodes {
+                id
+                version
+                isPrerelease
+                yanked
+                dependencies {
+                  nodes {
+                    raw
+                    extras
+                    marker
+                    package {
+                      name
+                    }
+                  }
+                }
+                scan {
+                  status
+                  source
+                  checkedAt
+                  findings {
+                    nodes {
+                      id
+                      aliases {
+                        nodes {
+                          name
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  myNotifications {
+    nodes {
+      message
+      package {
+        name
+      }
+    }
+  }
+}

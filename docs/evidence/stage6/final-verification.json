@@ -1,0 +1,106 @@
+{
+  "captured_at": "2026-11-17T21:38:17.117520+00:00",
+  "stage": 6,
+  "pytest_passed": 50,
+  "new_browser_tests_passed": 2,
+  "public_browser_tests_passed": 5,
+  "contract_tests_passed": 2,
+  "api_accounts_and_subscription": "PASS",
+  "migration_clean_and_upgrade": "PASS",
+  "source_import_regression": "PASS",
+  "source_count": {
+    "real_packages": 10002,
+    "real_unique_names": 10002,
+    "synthetic_packages": 107,
+    "real_releases": 10002,
+    "prereleases": 0,
+    "yanked": 0,
+    "real_requirements": 49904,
+    "dependency_names": 7828
+  },
+  "source_osv_campaign_success": 10000,
+  "test_accounts_remaining": 0,
+  "credentials_scan_files_and_logs": "PASS",
+  "public_and_private_pages_http": 200,
+  "anonymous_session": null,
+  "private_pages_noindex": true,
+  "graphql_cache_control": "no-store, private, no-store, private",
+  "progress_delivery_sample_seconds": 1.023,
+  "services": [
+    {
+      "name": "beat",
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "name": "catalog",
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "name": "catalog-importer",
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "name": "dispatcher",
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "name": "gateway",
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "name": "postgres",
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "name": "rabbitmq",
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "name": "redis",
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "name": "repositories",
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "name": "repositories-importer",
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "name": "security",
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "name": "security-importer",
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "name": "web",
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "name": "worker",
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "name": "workspace",
+      "state": "running",
+      "health": "healthy"
+    }
+  ]
+}

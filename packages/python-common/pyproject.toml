@@ -1,0 +1,17 @@
+[project]
+name = "radar-common"
+version = "0.1.0"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "sqlalchemy==2.1.9",
+    "psycopg[binary]==3.3.9",
+    "starlette==1.10.0",
+    "strawberry-graphql[fastapi]==0.341.2",
+    "opentelemetry-sdk>=1.45.2",
+    "opentelemetry-exporter-otlp-proto-http>=1.45.2",
+    "prometheus-client>=0.26.0",
+]
+
+[build-system]
+requires = ["uv_build==0.13.7"]
+build-backend = "uv_build"

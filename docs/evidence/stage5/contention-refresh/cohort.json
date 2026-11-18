@@ -1,0 +1,902 @@
+[
+  {
+    "work_id": "008e0143-6d9b-57ed-a7cf-e60506c0c9d1",
+    "package_id": "pypi:adil-boudida-ai",
+    "release_id": "5a3c9ccf-c194-5492-aad8-9c1803a11404",
+    "name": "adil-boudida-ai",
+    "version": "0.1",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "078511e6-6dfa-57fb-aef4-3946f87e6dbf",
+    "package_id": "pypi:actuarialib",
+    "release_id": "af214d72-8819-5e3c-90f0-8d95b634b59b",
+    "name": "actuarialib",
+    "version": "0.1.1",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "0a33f792-d13c-574f-8264-33ce58f7b84b",
+    "package_id": "pypi:agentflow-client",
+    "release_id": "0d2619a9-6fdb-513b-b05c-822a958d9d08",
+    "name": "agentflow-client",
+    "version": "2.0.0",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "0c81daf1-dae3-5d89-9902-7c0bb1be3d94",
+    "package_id": "pypi:additional-functions",
+    "release_id": "e076dfea-572a-5bbf-81c1-3fff968ac2b0",
+    "name": "additional-functions",
+    "version": "0.16.1",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "0f17c5e8-8ccf-5a3b-a307-e60ec7ea4f66",
+    "package_id": "pypi:acltldr",
+    "release_id": "91c39750-63cf-5f76-a78a-55665c6608bc",
+    "name": "acltldr",
+    "version": "0.1.1",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "1a2e5c54-a969-57d0-b737-5b2bfedcf4ed",
+    "package_id": "pypi:ahmed-tuple",
+    "release_id": "f5462e8b-8cfd-534f-aa02-1f39c85150a0",
+    "name": "ahmed-tuple",
+    "version": "1.0.0",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "1c8c5860-965d-51a9-ac04-98fde2ca7fa1",
+    "package_id": "pypi:acx",
+    "release_id": "f1cece89-21e2-517f-8ebd-ff4d575e00cd",
+    "name": "acx",
+    "version": "0.0.1.post1",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "2283da94-b2c5-5401-8070-e6d3a02c9618",
+    "package_id": "pypi:ae-telemetry",
+    "release_id": "cefedc95-84a8-5160-9689-cb32d9f526cf",
+    "name": "ae-telemetry",
+    "version": "1.0.0",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "27fd86d8-5a5f-5c21-9714-992197056afa",
+    "package_id": "pypi:add-staves",
+    "release_id": "06648102-b393-5893-999c-98265344aa2d",
+    "name": "add-staves",
+    "version": "0.2.10",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "28ae6f4b-a72b-5b90-81e9-cb01b68f9383",
+    "package_id": "pypi:agentic-terminal-mcp-toolkit",
+    "release_id": "2e2f35bb-cdde-562e-a801-50784ed71a81",
+    "name": "agentic-terminal-mcp-toolkit",
+    "version": "0.1.0",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "2baf4dcb-6419-599e-a2e9-d3960f47e25d",
+    "package_id": "pypi:aegis-platform-sdk",
+    "release_id": "77470696-737d-5de5-b0b4-f839b6c6ed71",
+    "name": "aegis-platform-sdk",
+    "version": "0.11.0",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "2f65864f-2aef-5fe4-a0dc-2d9923e46c08",
+    "package_id": "pypi:acace-coherence-checker",
+    "release_id": "a8350167-2bb1-5d6b-b7b5-367456b20077",
+    "name": "acace-coherence-checker",
+    "version": "0.1.0",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "351aea66-6e5f-5dcb-98f8-bac437ed52e8",
+    "package_id": "pypi:agentup-sys-tools",
+    "release_id": "109cd785-d159-570e-8605-d3e74479a089",
+    "name": "agentup-sys-tools",
+    "version": "0.1.0",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "3b803dc3-7bfb-537e-93c5-d53d58665de3",
+    "package_id": "pypi:a4ui-agent",
+    "release_id": "e5ff967c-6697-5818-b644-db974c66f1d1",
+    "name": "a4ui-agent",
+    "version": "0.2.0",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "3ee6a7c5-9bf3-5886-bcae-36c988d9d31e",
+    "package_id": "pypi:agentgpt",
+    "release_id": "1b2ddc66-11fb-55c6-8f2d-5cf55247d0ac",
+    "name": "agentgpt",
+    "version": "0.0.2",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "4bd4ce83-88f9-5681-9898-4bcf7a1a7124",
+    "package_id": "pypi:affine-rs",
+    "release_id": "3bb6f3d0-3b22-511f-9f7a-5e6b9170b056",
+    "name": "affine-rs",
+    "version": "0.2.0",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "4db1ca87-cdc8-5d1e-836d-8e0634034e61",
+    "package_id": "pypi:agentdeck-sdk",
+    "release_id": "8a59e750-0f84-5f72-ab3d-3907458e910e",
+    "name": "agentdeck-sdk",
+    "version": "6.0.6",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "63eb4c17-c2ea-5b40-86ac-7a043fb14204",
+    "package_id": "pypi:abepdf",
+    "release_id": "54aed4b2-a9e2-5db3-81cb-33ad13002206",
+    "name": "abepdf",
+    "version": "1.0",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "640db253-9d56-57c2-827e-b65679a1d750",
+    "package_id": "pypi:ai302",
+    "release_id": "96fa784b-87ae-5796-a76b-5e859087ec61",
+    "name": "ai302",
+    "version": "1.0.0",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "69775790-0b00-5be0-ac3b-190c92f2d590",
+    "package_id": "pypi:acla-agentic-context-runtime",
+    "release_id": "9e21cbb9-daac-5d24-b129-022c1c4de677",
+    "name": "acla-agentic-context-runtime",
+    "version": "4.0.0",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "6ea38152-78b8-53b8-b02a-9ac9f375ac3c",
+    "package_id": "pypi:abstract-filepaths",
+    "release_id": "524c40a4-8b78-5c30-a389-6286c58731d3",
+    "name": "abstract-filepaths",
+    "version": "0.0.0.5",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "83f39729-e2cd-55b3-8afb-b8c275ed07e4",
+    "package_id": "pypi:agentservice",
+    "release_id": "7de696a6-8dcd-5781-9c31-5bb7ccf05f9e",
+    "name": "agentservice",
+    "version": "0.0.144",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "92982396-edb7-5d73-8cb9-10ecf0880c6e",
+    "package_id": "pypi:aes-encrypt",
+    "release_id": "f157108f-e2cc-5d89-9cab-27780bf5188b",
+    "name": "aes-encrypt",
+    "version": "1.0.0",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "9502180c-ceae-54e5-b1db-d8f29d288330",
+    "package_id": "pypi:agencode",
+    "release_id": "ee6afc27-24ec-5c20-ac54-794d3ff4b07e",
+    "name": "agencode",
+    "version": "0.1.2",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "9577c5b0-3477-5254-a503-096b0f9b579e",
+    "package_id": "pypi:agentorch-core",
+    "release_id": "893f8d5d-b541-514a-82a0-cb1af3f9eb00",
+    "name": "agentorch-core",
+    "version": "1.0.1",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "9d40af8f-a2b0-575a-9a40-364190f64efe",
+    "package_id": "pypi:agentz-engine",
+    "release_id": "3d0a288c-6e47-5196-aca7-41b77a0f5bdf",
+    "name": "agentz-engine",
+    "version": "0.0.1",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "a267c383-10ff-57e1-83f7-e13fc76c0756",
+    "package_id": "pypi:29mortarcycle",
+    "release_id": "e372673e-c034-5b36-b604-504fa22a4be7",
+    "name": "29mortarcycle",
+    "version": "5.7.9",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "a27e3554-f7ca-591d-a953-d10a1c2301dd",
+    "package_id": "pypi:aft-code",
+    "release_id": "9a8e9a78-40cc-571f-b686-6ab5602fa2c9",
+    "name": "aft-code",
+    "version": "1.0.0",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "b7a17f70-96d7-53e0-8242-75cd4e28f6e1",
+    "package_id": "pypi:acronym-finder",
+    "release_id": "513bfe22-c8d2-5000-afc6-ec71fd753619",
+    "name": "acronym-finder",
+    "version": "0.1.0",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "c2f05713-311e-5780-88e1-5985867cf50b",
+    "package_id": "pypi:afzewwvfxjxu2h86cgkbz2axvliwjunqrhs5tpbf1cta9zwgxvv2ow",
+    "release_id": "2a107924-4b87-5a17-bb25-45fa52c74d20",
+    "name": "afzewwvfxjxu2h86cgkbz2axvliwjunqrhs5tpbf1cta9zwgxvv2ow",
+    "version": "0.0.1",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "cbdad5fb-0a51-567f-a5a9-b5e13f8c0481",
+    "package_id": "pypi:abcpkg",
+    "release_id": "1226d66f-0c08-52ff-9507-f50a7da6b6c2",
+    "name": "abcpkg",
+    "version": "0.1.0",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "d54ad3a1-9f35-5a17-8cca-b2b2755fa16c",
+    "package_id": "pypi:2023-assignment-devops",
+    "release_id": "4d64ddee-59d6-593a-ac9d-d95a29da23c1",
+    "name": "2023-assignment-devops",
+    "version": "1.0.1",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": true
+  },
+  {
+    "work_id": "d7d13d49-876e-512e-85d4-cdf0a992fe57",
+    "package_id": "pypi:ai-code-engineer",
+    "release_id": "1de9c9a0-8369-51fe-8fe8-acb03a43b10d",
+    "name": "ai-code-engineer",
+    "version": "0.1.0",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "de682376-1173-59be-9c82-9b9d3d46f611",
+    "package_id": "pypi:agentnode-mcp",
+    "release_id": "96a9ddf8-58cd-5038-ab2e-38224ecbbbb8",
+    "name": "agentnode-mcp",
+    "version": "0.1.0",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "eb88522a-e762-5b67-a3e9-c2626e12dcbf",
+    "package_id": "pypi:agentmessage",
+    "release_id": "99dce8b1-da76-531a-80a7-a782a217bd24",
+    "name": "agentmessage",
+    "version": "0.1.4",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "f1c42737-5436-5f16-910d-8e7b01042b2d",
+    "package_id": "pypi:ada-pip-styleguide",
+    "release_id": "1962f6fa-5b7d-5140-ab12-369aef5cefb6",
+    "name": "ada-pip-styleguide",
+    "version": "0.0.0",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "f1fc3909-ee6f-55b9-833c-6f5b6caee5e6",
+    "package_id": "pypi:accountlens-mcp",
+    "release_id": "12950b60-823a-54b7-b6ce-5880889c5970",
+    "name": "accountlens-mcp",
+    "version": "0.5.0",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "f28936b5-7cb8-5865-90d6-4aa649425827",
+    "package_id": "pypi:a-data-source",
+    "release_id": "e11e4a36-bf3c-53a9-a19e-fa9b1d135305",
+    "name": "a-data-source",
+    "version": "0.1.0",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "f3ce2ab9-0f19-5e87-97ff-e6207fe3e469",
+    "package_id": "pypi:ai-code-stats",
+    "release_id": "13b18c6e-c2b9-5ad2-be0d-d7f9292d0239",
+    "name": "ai-code-stats",
+    "version": "0.1.1",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "fdc5674a-d0f6-5f03-b746-6bb254707783",
+    "package_id": "pypi:ada-pip-knowledge",
+    "release_id": "d519c5ec-4498-5467-9638-a728724a563e",
+    "name": "ada-pip-knowledge",
+    "version": "0.0.0",
+    "observed_at": "2026-11-17T18:36:30.890143+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "2031e3d1-c3da-5dc7-aa44-23de85708a60",
+    "package_id": "pypi:ai-coustics-livekit-plugin",
+    "release_id": "57498dea-123b-5ad8-a4f8-fea9c03957c8",
+    "name": "ai-coustics-livekit-plugin",
+    "version": "0.3.0",
+    "observed_at": "2026-11-17T18:36:36.902505+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "b943fcf2-b6f6-5c4c-821f-7e2a9568bee3",
+    "package_id": "pypi:ai-cytx",
+    "release_id": "ec2d338f-fa38-5e60-8e8d-fd8f4acfa0d6",
+    "name": "ai-cytx",
+    "version": "0.1.0",
+    "observed_at": "2026-11-17T18:36:37.427289+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "f7fbe28e-7d09-50e3-b951-baccec01358b",
+    "package_id": "pypi:ai-db",
+    "release_id": "9bd08fcc-3c89-59ef-ae27-9090a6858676",
+    "name": "ai-db",
+    "version": "0.0.2",
+    "observed_at": "2026-11-17T18:36:38.257825+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "059e9455-eb27-5cb0-8a7e-a86be033b0f8",
+    "package_id": "pypi:aihp-protocol",
+    "release_id": "4c4dd6b3-74ed-51c3-82ed-e0e527c08293",
+    "name": "aihp-protocol",
+    "version": "0.0.1",
+    "observed_at": "2026-11-17T18:36:39.802212+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "61f1dc2c-47db-5cea-b045-f27d97bcdf5f",
+    "package_id": "pypi:ailecs-nightwatch",
+    "release_id": "082cce26-4ffa-552e-a032-1a001f6f5a0b",
+    "name": "ailecs-nightwatch",
+    "version": "0.1.0",
+    "observed_at": "2026-11-17T18:36:40.356163+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "cde70fd8-d1e6-59de-8e6f-c674ab04c886",
+    "package_id": "pypi:aimlogpy",
+    "release_id": "98d7a3fa-3770-55c0-a1a1-bacdab346e53",
+    "name": "aimlogpy",
+    "version": "1.0.2",
+    "observed_at": "2026-11-17T18:36:40.819232+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "c1a501be-81d7-5f15-8dd3-7db0919c68c0",
+    "package_id": "pypi:aimon-llamaindex",
+    "release_id": "9ea49871-584f-513e-bc32-d13045cca102",
+    "name": "aimon-llamaindex",
+    "version": "0.0.9",
+    "observed_at": "2026-11-17T18:36:41.569218+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "1da60f2e-ca5a-582a-96f6-5f5dedd98390",
+    "package_id": "pypi:aim-stack",
+    "release_id": "35e0ee96-a1b5-5dec-b5e9-a6cf5e2d12cd",
+    "name": "aim-stack",
+    "version": "2.0.0",
+    "observed_at": "2026-11-17T18:36:42.082710+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "e816fdd0-8089-5c65-8bca-2ccffd14a943",
+    "package_id": "pypi:aind-dynamic-foraging-database",
+    "release_id": "25ae6e04-25ae-51de-8224-ac0fab3f33aa",
+    "name": "aind-dynamic-foraging-database",
+    "version": "0.2.2",
+    "observed_at": "2026-11-17T18:36:42.641987+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "19c62575-d600-5cce-93b7-1aa551994674",
+    "package_id": "pypi:aind-labtracks-service-async-client",
+    "release_id": "53cddf1d-2470-5972-b19e-5a7f2d758481",
+    "name": "aind-labtracks-service-async-client",
+    "version": "0.5.0",
+    "observed_at": "2026-11-17T18:36:43.166653+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "ede3d858-d1f8-5804-a26c-edede53f407f",
+    "package_id": "pypi:aiocapsolver",
+    "release_id": "48f129e6-fca3-5818-a4bd-82e4f954fefd",
+    "name": "aiocapsolver",
+    "version": "0.0.6",
+    "observed_at": "2026-11-17T18:36:43.977206+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "78a8e3ab-8e1f-5e21-83b6-2755509d13b7",
+    "package_id": "pypi:aioh",
+    "release_id": "84f2282c-ba1d-568d-9705-6453bf6e315d",
+    "name": "aioh",
+    "version": "0.0.0",
+    "observed_at": "2026-11-17T18:36:44.505394+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "035d82a9-7cb9-5d6a-9986-19b118bbd423",
+    "package_id": "pypi:aiomatter",
+    "release_id": "d8251484-1466-515d-9210-f18285827ac2",
+    "name": "aiomatter",
+    "version": "0.2.0",
+    "observed_at": "2026-11-17T18:36:45.342404+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "eef8aefd-ef54-5a1f-b190-a658139e344f",
+    "package_id": "pypi:aiowebparser",
+    "release_id": "5267b7b4-31a5-5b31-9235-25e0d97e303d",
+    "name": "aiowebparser",
+    "version": "1.1.1",
+    "observed_at": "2026-11-17T18:36:45.857519+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "8435fcb3-51d1-5863-b2b8-8f4ccb4da1c8",
+    "package_id": "pypi:airconditioner-webthing",
+    "release_id": "3e07961a-905b-54c9-885e-3c6fb9086421",
+    "name": "airconditioner-webthing",
+    "version": "0.1.5",
+    "observed_at": "2026-11-17T18:36:46.557833+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "67a237aa-4cc5-5e00-9d9d-016bbd4292b9",
+    "package_id": "pypi:airo-camera-toolkit",
+    "release_id": "cd493fa7-9819-5b6d-a638-a92b6bf96e3a",
+    "name": "airo-camera-toolkit",
+    "version": "2026.10.1",
+    "observed_at": "2026-11-17T18:36:47.077268+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "37d19571-7b8e-5b90-a99a-987484bd4fe8",
+    "package_id": "pypi:airspot-dev-support",
+    "release_id": "ae178d7b-870f-5160-af81-8b2f6174bdba",
+    "name": "airspot-dev-support",
+    "version": "0.10.1",
+    "observed_at": "2026-11-17T18:36:47.630613+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "a1e81c42-32b9-5efb-80ab-53bef60b09c1",
+    "package_id": "pypi:air-stt",
+    "release_id": "3d63a6ba-987b-5dd9-a0bc-fecfcd7703b4",
+    "name": "air-stt",
+    "version": "0.1.3",
+    "observed_at": "2026-11-17T18:36:48.162414+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "69749061-e811-5086-80af-ec37dde26be2",
+    "package_id": "pypi:aiscript",
+    "release_id": "34d466ff-8746-5b67-bcf2-4dcffcac0d68",
+    "name": "aiscript",
+    "version": "1.5.0",
+    "observed_at": "2026-11-17T18:36:48.663166+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "7ac78ff3-c859-5eeb-b669-c0352d2411cf",
+    "package_id": "pypi:aisquare-pipe-docusign",
+    "release_id": "f381ebf8-b84f-5a54-9fbb-14ed8f87e587",
+    "name": "aisquare-pipe-docusign",
+    "version": "0.1.0",
+    "observed_at": "2026-11-17T18:36:49.126732+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "775e3b14-b344-59a1-a61d-9b69fb6a3fd1",
+    "package_id": "pypi:aiub-notes-dl",
+    "release_id": "b5145bbe-10dc-505d-aafb-561f942a72f3",
+    "name": "aiub-notes-dl",
+    "version": "1.0.0.post2",
+    "observed_at": "2026-11-17T18:36:49.727300+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "aa4cd61a-da41-56ea-ab8f-6e92b1e3cc44",
+    "package_id": "pypi:akhaleel338package",
+    "release_id": "22f5b92b-23d2-5a87-9944-a8c8d85c18a7",
+    "name": "akhaleel338package",
+    "version": "0.1",
+    "observed_at": "2026-11-17T18:36:50.260358+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "e701ef29-6322-57ff-b86b-566c60467b56",
+    "package_id": "pypi:akshare-mcp-client",
+    "release_id": "ff30329d-faea-59d0-b7ed-87f3f8cd566c",
+    "name": "akshare-mcp-client",
+    "version": "0.1.0",
+    "observed_at": "2026-11-17T18:36:50.803322+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "ddaf66db-e954-5c70-acd1-f03a991f926a",
+    "package_id": "pypi:akshare-stock-mcp",
+    "release_id": "4fc30d03-48aa-5ebb-bd41-ea24482f7c3d",
+    "name": "akshare-stock-mcp",
+    "version": "0.1.0",
+    "observed_at": "2026-11-17T18:36:51.935493+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "ae3bb75e-ee0c-56e4-98cb-3dc438869a85",
+    "package_id": "pypi:alabi-probability",
+    "release_id": "c48809d4-a13f-5064-84c1-b94a8cf82a74",
+    "name": "alabi-probability",
+    "version": "1.0",
+    "observed_at": "2026-11-17T18:36:52.439630+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "432653a4-5cad-50d8-bfa4-5d47b65c72a7",
+    "package_id": "pypi:alamoalg",
+    "release_id": "ad367499-26b1-50e8-8162-7ed169b0669c",
+    "name": "alamoalg",
+    "version": "0.0.1",
+    "observed_at": "2026-11-17T18:36:53.002120+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "ad6dc54c-f6b2-5b13-b3d1-0d6043b795e2",
+    "package_id": "pypi:alenia-fuse",
+    "release_id": "a005d4e2-0020-5e81-933a-4a7d2a9837e4",
+    "name": "alenia-fuse",
+    "version": "2.0.7",
+    "observed_at": "2026-11-17T18:36:53.580265+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "e4a19193-f1e9-50c6-ad13-67bea3c4abe0",
+    "package_id": "pypi:algovoi-keystone-sqlalchemy",
+    "release_id": "ae8e0668-df54-5d25-8213-68440e763bae",
+    "name": "algovoi-keystone-sqlalchemy",
+    "version": "0.2.0",
+    "observed_at": "2026-11-17T18:36:54.092615+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "1b1cbc33-cc41-543b-af2d-353c7594caf0",
+    "package_id": "pypi:aliengame",
+    "release_id": "a1546657-1b45-5d14-8b4f-48341e2d87e4",
+    "name": "aliengame",
+    "version": "1.1.0",
+    "observed_at": "2026-11-17T18:36:54.593288+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "ae254774-6ff4-5e65-a956-f342973b20c1",
+    "package_id": "pypi:ali-gaussbinom-distributions",
+    "release_id": "d00b3470-2b70-5dea-afaa-2bef50600989",
+    "name": "ali-gaussbinom-distributions",
+    "version": "1.0",
+    "observed_at": "2026-11-17T18:36:55.484139+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "15e1b6e8-4103-53f1-860a-ea85906922b7",
+    "package_id": "pypi:align-browser",
+    "release_id": "01633b23-5eaf-58c1-99d7-a73e119f7cff",
+    "name": "align-browser",
+    "version": "0.8.0",
+    "observed_at": "2026-11-17T18:36:56.262021+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "98299ea2-94b8-5ffc-a9b2-8abe085ff071",
+    "package_id": "pypi:alignment-risk",
+    "release_id": "0d473307-4b48-5221-9fb0-6ddce0967e68",
+    "name": "alignment-risk",
+    "version": "1.14.1",
+    "observed_at": "2026-11-17T18:36:56.983633+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "7e956041-5a4c-5b71-8734-0c6d778fc096",
+    "package_id": "pypi:alively",
+    "release_id": "76c007cc-ebdf-578e-9c5d-646a291a4135",
+    "name": "alively",
+    "version": "0.0.1",
+    "observed_at": "2026-11-17T18:36:57.499663+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "4b4f9a4e-9df5-5a89-9a85-8f69789643de",
+    "package_id": "pypi:alix-graphql-mcp-read-tool",
+    "release_id": "5b2de913-e766-5acd-8fde-304c61df6ea6",
+    "name": "alix-graphql-mcp-read-tool",
+    "version": "0.3.8",
+    "observed_at": "2026-11-17T18:36:58.183952+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "0289f5e2-1ed1-5c62-825e-9ccdf20dedb0",
+    "package_id": "pypi:alou-example",
+    "release_id": "4ea67939-6ea7-5ae1-b284-4fa76a180448",
+    "name": "alou-example",
+    "version": "0.0.1",
+    "observed_at": "2026-11-17T18:36:58.715692+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "7c0ef0a2-5e73-5fd1-a922-12d38a9de936",
+    "package_id": "pypi:alphaui",
+    "release_id": "ce04c6ef-dd31-5004-9e8c-fe8aa4b03336",
+    "name": "alphaui",
+    "version": "3.1.4.2",
+    "observed_at": "2026-11-17T18:37:00.292691+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "db551c65-3ea6-5f9e-aeee-63fd0e0cc746",
+    "package_id": "pypi:alpha-wordle",
+    "release_id": "cd589478-9a30-558c-9106-091640bacb23",
+    "name": "alpha-wordle",
+    "version": "0.1.0",
+    "observed_at": "2026-11-17T18:37:00.844107+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "441710fe-bf4d-562b-b3e7-56f1c19b5123",
+    "package_id": "pypi:alwinpdf",
+    "release_id": "7002b06e-32a9-5e94-9f10-1e1720825dcd",
+    "name": "alwinpdf",
+    "version": "1.0",
+    "observed_at": "2026-11-17T18:37:01.605974+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "f94a8e98-d72b-5866-a68f-ae0cb05be519",
+    "package_id": "pypi:ambix",
+    "release_id": "4811de75-a8d7-57f5-bfda-bada6fc1b431",
+    "name": "ambix",
+    "version": "1.0.0",
+    "observed_at": "2026-11-17T18:37:02.136563+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "90649171-e963-5eba-9e97-2a37f3a18795",
+    "package_id": "pypi:amboseli",
+    "release_id": "dac41bec-4ede-5502-953c-e1c80846160c",
+    "name": "amboseli",
+    "version": "0.0.1",
+    "observed_at": "2026-11-17T18:37:03.660865+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "f2d9d746-82fb-5e61-b28c-6fffc3e1a670",
+    "package_id": "pypi:amey-ml",
+    "release_id": "0d6f09cc-6a80-5bd1-8058-77b93af3bb89",
+    "name": "amey-ml",
+    "version": "0.1.10",
+    "observed_at": "2026-11-17T18:37:04.587023+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "1a031319-cba9-5c1f-8d73-846cd05f87ed",
+    "package_id": "pypi:amortize",
+    "release_id": "cd5899f9-de1b-5866-ad9b-7a91a32335de",
+    "name": "amortize",
+    "version": "0.0.9",
+    "observed_at": "2026-11-17T18:37:07.230557+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "6daa68b1-b58a-52ff-bc78-b3282265e8ad",
+    "package_id": "pypi:a-move-files-by-excel",
+    "release_id": "71b9be3a-884f-583e-a4f1-60894e1ad617",
+    "name": "a-move-files-by-excel",
+    "version": "0.1.1",
+    "observed_at": "2026-11-17T18:37:08.034405+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "e0de6281-3944-51df-b537-13a63e907385",
+    "package_id": "pypi:ampel-photometry",
+    "release_id": "7c725059-841d-56c1-8db0-297bbc0480db",
+    "name": "ampel-photometry",
+    "version": "0.10.1",
+    "observed_at": "2026-11-17T18:37:08.539872+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "bd2fadf7-bdbb-5fa4-94fb-fdd9be3f7e00",
+    "package_id": "pypi:analytics-agent-connector-hive",
+    "release_id": "fbda1c42-e8b4-5d75-b898-6ebba1097ec3",
+    "name": "analytics-agent-connector-hive",
+    "version": "0.4.0",
+    "observed_at": "2026-11-17T18:37:09.531456+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "d37c07ad-190f-53b1-9922-a16c901e6011",
+    "package_id": "pypi:anbor-types",
+    "release_id": "483553fb-26b4-5414-83cd-a610467a433c",
+    "name": "anbor-types",
+    "version": "0.0.273",
+    "observed_at": "2026-11-17T18:37:10.084814+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "2123ca9e-e424-5548-b8df-2aa8e4c883ab",
+    "package_id": "pypi:and-eggs",
+    "release_id": "7b62d287-eb91-5335-b918-c553d3149543",
+    "name": "and-eggs",
+    "version": "0.0.7",
+    "observed_at": "2026-11-17T18:37:11.545342+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "052c4229-a592-5014-a45a-2fce6f9b1e2d",
+    "package_id": "pypi:andreani-qa-functions",
+    "release_id": "8ee71fc4-bd9b-5163-990e-6bcf8802088d",
+    "name": "andreani-qa-functions",
+    "version": "0.0.48",
+    "observed_at": "2026-11-17T18:37:12.111062+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "6b9f9522-b4f7-54fc-8276-f222091cfbee",
+    "package_id": "pypi:angel-recall",
+    "release_id": "a5df69dc-0aed-59e9-a447-e0edba886127",
+    "name": "angel-recall",
+    "version": "0.5.0",
+    "observed_at": "2026-11-17T18:37:12.896613+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "c3fc5499-374f-5dd2-9bdf-2195c8783cfd",
+    "package_id": "pypi:anima-chess",
+    "release_id": "8a06b64f-ca01-5700-8620-04e2f3731fa2",
+    "name": "anima-chess",
+    "version": "0.1.0",
+    "observed_at": "2026-11-17T18:37:13.424441+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "f460a627-d307-5482-91b0-469768979a21",
+    "package_id": "pypi:anima-python",
+    "release_id": "10fc2a70-90da-57eb-9a18-768216249a6e",
+    "name": "anima-python",
+    "version": "0.20.245",
+    "observed_at": "2026-11-17T18:37:13.963970+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "fb658b1b-326a-52f0-9c80-3d96a6ff89ae",
+    "package_id": "pypi:ankisiyuan",
+    "release_id": "5fba0a7c-ae54-51bf-8b57-5a47778620ff",
+    "name": "ankisiyuan",
+    "version": "0.1.1",
+    "observed_at": "2026-11-17T18:37:14.478789+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "5723284e-c7d8-560c-8ecc-14e829b14103",
+    "package_id": "pypi:annoimg",
+    "release_id": "0dc88e9b-7450-5a22-90d9-e5e5fb0d1443",
+    "name": "annoimg",
+    "version": "0.0.1",
+    "observed_at": "2026-11-17T18:37:15.030940+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "f8a4a048-807a-51d5-a8fe-4b299d1b51e9",
+    "package_id": "pypi:annotationbear",
+    "release_id": "496c131c-566b-5425-bcce-d67d2c4f2249",
+    "name": "annotationbear",
+    "version": "0.10.0",
+    "observed_at": "2026-11-17T18:37:15.556515+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "ab19737c-8964-52c7-a23f-147bb91cc664",
+    "package_id": "pypi:anomalytda-client",
+    "release_id": "0be44aa0-76c5-52b2-a071-0629cb5a4fd8",
+    "name": "anomalytda-client",
+    "version": "0.2.1",
+    "observed_at": "2026-11-17T18:37:16.113192+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "47fff4ff-623b-5a46-89fa-f57fe30c2cc9",
+    "package_id": "pypi:ansi-terminal",
+    "release_id": "400b49ec-9cc0-584e-8dd4-1e975e9f1488",
+    "name": "ansi-terminal",
+    "version": "0.2.0",
+    "observed_at": "2026-11-17T18:37:16.766732+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "4fd349ed-d545-5a5a-ad69-ec6755f13eda",
+    "package_id": "pypi:anvil-testcontainer",
+    "release_id": "b3f3f725-77e2-5c87-bc0b-e665eae2cdde",
+    "name": "anvil-testcontainer",
+    "version": "0.1.6",
+    "observed_at": "2026-11-17T18:37:18.611530+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "99c0963a-c628-5108-9e4f-876d2b1c7408",
+    "package_id": "pypi:aoa-vis",
+    "release_id": "d1a15450-a946-5bdd-9c59-581ee9d91edf",
+    "name": "aoa-vis",
+    "version": "0.1.0",
+    "observed_at": "2026-11-17T18:37:19.118377+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "053b3fe1-f3dd-5455-95be-62a157eabd00",
+    "package_id": "pypi:aoe",
+    "release_id": "d9ee5db7-da30-53c3-92ba-fa5282c9f940",
+    "name": "aoe",
+    "version": "0.0.1",
+    "observed_at": "2026-11-17T18:37:19.861510+00:00",
+    "github_selected": false
+  },
+  {
+    "work_id": "ec0755bf-a21c-5520-804b-f35e1fe759c3",
+    "package_id": "pypi:aos-keys",
+    "release_id": "8c59c392-4439-5cde-8c99-c71340c082f9",
+    "name": "aos-keys",
+    "version": "1.10.1",
+    "observed_at": "2026-11-17T18:37:20.457075+00:00",
+    "github_selected": false
+  }
+]

@@ -1,0 +1,105 @@
+schema @link(url: "https://specs.apollo.dev/federation/v2.7", import: ["@key", "@shareable"]) {
+  query: Query
+  mutation: Mutation
+}
+
+type Account {
+  id: ID!
+  username: String!
+  role: String!
+}
+
+type Collection {
+  id: ID!
+  name: String!
+  createdAt: DateTime!
+  items(first: Int! = 20, after: String = null): CollectionItemConnection!
+}
+
+type CollectionConnection {
+  nodes: [Collection!]!
+  pageInfo: PageInfo!
+}
+
+type CollectionItem {
+  package: Package
+}
+
+type CollectionItemConnection {
+  nodes: [CollectionItem!]!
+  pageInfo: PageInfo!
+}
+
+"""Date with time (isoformat)"""
+scalar DateTime
+
+type Follow {
+  version: String
+  package: Package
+}
+
+type FollowConnection {
+  nodes: [Follow!]!
+  pageInfo: PageInfo!
+}
+
+type Mutation {
+  register(username: String!, password: String!): Registration!
+  login(username: String!, password: String!): Account!
+  logout: Boolean!
+  recoverAccount(username: String!, recoveryCode: String!, password: String!): String!
+  createCollection(name: String!): Collection!
+  deleteCollection(id: ID!): Boolean!
+  addPackageToCollection(id: ID!, packageId: ID!): Collection!
+  removePackageFromCollection(id: ID!, packageId: ID!): Collection!
+  followPackage(packageId: ID!): Boolean!
+  unfollowPackage(packageId: ID!): Boolean!
+  markNotificationRead(id: ID!): Boolean!
+  recordPackageUpdate(packageId: ID!, version: String!, observedAt: DateTime!): Boolean!
+}
+
+type Notification {
+  id: ID!
+  message: String!
+  createdAt: DateTime!
+  readAt: DateTime
+  package: Package
+}
+
+type NotificationConnection {
+  nodes: [Notification!]!
+  pageInfo: PageInfo!
+}
+
+type Package @key(fields: "id", resolvable: false) {
+  id: ID!
+}
+
+type PageInfo @shareable {
+  hasNextPage: Boolean!
+  endCursor: String
+}
+
+type Query {
+  _entities(representations: [_Any!]!): [_Entity]!
+  _service: _Service!
+  collection(id: ID!): Collection
+  myCollections(first: Int! = 20, after: String = null): CollectionConnection!
+  myNotifications(first: Int! = 20, after: String = null): NotificationConnection!
+  me: Account
+  followedPackageBatch(afterId: String! = "", first: Int! = 2): [String!]!
+  myFollows(first: Int! = 20, after: String = null): FollowConnection!
+}
+
+type Registration {
+  account: Account!
+  recoveryCode: String!
+}
+
+scalar _Any
+
+union _Entity = Package
+
+type _Service {
+  sdl: String!
+}

@@ -1,0 +1,77 @@
+[
+    {
+        "Service":  "beat",
+        "State":  "running",
+        "Health":  "healthy"
+    },
+    {
+        "Service":  "catalog",
+        "State":  "running",
+        "Health":  "healthy"
+    },
+    {
+        "Service":  "catalog-importer",
+        "State":  "running",
+        "Health":  "healthy"
+    },
+    {
+        "Service":  "dispatcher",
+        "State":  "running",
+        "Health":  "healthy"
+    },
+    {
+        "Service":  "gateway",
+        "State":  "running",
+        "Health":  "healthy"
+    },
+    {
+        "Service":  "postgres",
+        "State":  "running",
+        "Health":  "healthy"
+    },
+    {
+        "Service":  "rabbitmq",
+        "State":  "running",
+        "Health":  "healthy"
+    },
+    {
+        "Service":  "redis",
+        "State":  "running",
+        "Health":  "healthy"
+    },
+    {
+        "Service":  "repositories",
+        "State":  "running",
+        "Health":  "healthy"
+    },
+    {
+        "Service":  "repositories-importer",
+        "State":  "running",
+        "Health":  "healthy"
+    },
+    {
+        "Service":  "security",
+        "State":  "running",
+        "Health":  "healthy"
+    },
+    {
+        "Service":  "security-importer",
+        "State":  "running",
+        "Health":  "healthy"
+    },
+    {
+        "Service":  "web",
+        "State":  "running",
+        "Health":  "healthy"
+    },
+    {
+        "Service":  "worker",
+        "State":  "running",
+        "Health":  "healthy"
+    },
+    {
+        "Service":  "workspace",
+        "State":  "running",
+        "Health":  "healthy"
+    }
+]

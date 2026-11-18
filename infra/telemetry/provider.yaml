@@ -1,0 +1,5 @@
+apiVersion: 1
+providers:
+  - name: Open Source Radar
+    type: file
+    options: { path: /otel-lgtm/radar-dashboard.json }

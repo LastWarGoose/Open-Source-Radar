@@ -1,0 +1,63 @@
+{
+  "capturedAt": "2026-11-17T13:01:42.690Z",
+  "browserErrors": [],
+  "browserRequestHosts": [
+    "localhost"
+  ],
+  "data": {
+    "packages": {
+      "nodes": [
+        {
+          "name": "fastapi",
+          "source": "PYPI",
+          "starProjection": {
+            "stars": 104848,
+            "checkedAt": "2026-11-17T12:08:24.954241+00:00",
+            "projectedAt": "2026-11-17T12:28:50.032439+00:00",
+            "lagSeconds": 1225,
+            "status": "SUCCESS"
+          },
+          "releases": {
+            "nodes": [
+              {
+                "version": "0.163.1",
+                "source": "PYPI",
+                "scan": {
+                  "status": "SUCCESS"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "requests",
+          "source": "PYPI",
+          "starProjection": {
+            "stars": 54715,
+            "checkedAt": "2026-11-17T12:08:25.668804+00:00",
+            "projectedAt": "2026-11-17T12:28:50.040645+00:00",
+            "lagSeconds": 1224,
+            "status": "SUCCESS"
+          },
+          "releases": {
+            "nodes": [
+              {
+                "version": "2.31.0",
+                "source": "PYPI",
+                "scan": {
+                  "status": "SUCCESS"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "pageInfo": {
+        "hasNextPage": false
+      }
+    },
+    "fixtures": {
+      "nodes": []
+    }
+  }
+}

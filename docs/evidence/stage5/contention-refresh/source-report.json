@@ -1,0 +1,80 @@
+{
+  "captured_at": "2026-11-17T18:38:28.495211+00:00",
+  "campaign": {
+    "id": "35111d1a-fd7e-49e4-b431-0b04a2f2d022",
+    "status": "succeeded",
+    "processed": 100,
+    "error_code": null,
+    "created_at": "2026-11-17 18:36:30.890143+00:00",
+    "completed_at": "2026-11-17 18:38:00.934386+00:00"
+  },
+  "failed_candidates": [],
+  "cohort_unique_packages": 100,
+  "cohort_unique_releases": 100,
+  "catalog": {
+    "real_packages": 10002,
+    "real_unique_names": 10002,
+    "synthetic_packages": 107,
+    "real_releases": 10002,
+    "prereleases": 0,
+    "yanked": 0,
+    "real_requirements": 49904,
+    "dependency_names": 7828
+  },
+  "cohort_projection": {
+    "UNKNOWN": 99,
+    "SUCCESS": 1
+  },
+  "github": {
+    "real_repositories": 13,
+    "cohort_matched_packages": 0,
+    "cohort_repositories": 0,
+    "selected_packages": 1,
+    "matching_fraction": 0.0,
+    "cohort_jobs": {
+      "succeeded": 1
+    },
+    "cohort_expected_jobs": 1,
+    "cohort_missing_jobs": 0,
+    "cohort_errors": {}
+  },
+  "osv": {
+    "canonical_advisories": 5,
+    "identifiers_including_aliases": 15,
+    "cohort_statuses": {
+      "SUCCESS": 100
+    },
+    "cohort_unchecked": 0,
+    "cohort_releases_with_findings": 0,
+    "cohort_advisories": 0,
+    "cohort_findings": 0,
+    "cohort_jobs": {
+      "succeeded": 100
+    },
+    "cohort_expected_jobs": 100,
+    "cohort_missing_jobs": 0,
+    "cohort_errors": {}
+  },
+  "database": {
+    "catalog": {
+      "name": "catalog",
+      "bytes": 44308159,
+      "version": "PostgreSQL 18.7 (Debian 18.7-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit"
+    },
+    "repositories": {
+      "name": "repositories",
+      "bytes": 8427199,
+      "version": "PostgreSQL 18.7 (Debian 18.7-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit"
+    },
+    "security": {
+      "name": "security",
+      "bytes": 16496319,
+      "version": "PostgreSQL 18.7 (Debian 18.7-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit"
+    },
+    "workspace": {
+      "name": "workspace",
+      "bytes": 8173247,
+      "version": "PostgreSQL 18.7 (Debian 18.7-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit"
+    }
+  }
+}

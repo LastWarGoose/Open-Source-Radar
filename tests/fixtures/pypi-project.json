@@ -1,0 +1,10 @@
+{
+  "info": {
+    "name": "radar-fixture",
+    "version": "1.0.0",
+    "summary": "Synthetic test package",
+    "requires_python": ">=3.12",
+    "project_urls": { "Source": "https://github.com/example/radar-fixture" }
+  },
+  "releases": { "1.0.0": [] }
+}

@@ -1,0 +1,7 @@
+{
+  "cold": 0,
+  "warm": 0,
+  "baseline": 0,
+  "stress": 99,
+  "redis-unavailable": 0
+}

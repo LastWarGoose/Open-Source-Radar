@@ -1,0 +1,163 @@
+query Session {
+  me {
+    id
+    username
+    role
+  }
+}
+mutation Register($username: String!, $password: String!) {
+  register(username: $username, password: $password) {
+    account {
+      id
+      username
+      role
+    }
+    recoveryCode
+  }
+}
+mutation Login($username: String!, $password: String!) {
+  login(username: $username, password: $password) {
+    id
+    username
+    role
+  }
+}
+mutation Logout {
+  logout
+}
+mutation RecoverAccount($username: String!, $password: String!, $code: String!) {
+  recoverAccount(username: $username, password: $password, recoveryCode: $code)
+}
+query Collections($after: String) {
+  myCollections(first: 20, after: $after) {
+    nodes {
+      id
+      name
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+  }
+}
+query CollectionItems($id: ID!, $after: String) {
+  collection(id: $id) {
+    id
+    name
+    items(first: 20, after: $after) {
+      nodes {
+        package {
+          id
+          name
+        }
+      }
+      pageInfo {
+        endCursor
+        hasNextPage
+      }
+    }
+  }
+}
+query Follows($after: String) {
+  myFollows(first: 20, after: $after) {
+    nodes {
+      version
+      package {
+        id
+        name
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+  }
+}
+query Notifications($after: String) {
+  myNotifications(first: 20, after: $after) {
+    nodes {
+      id
+      message
+      readAt
+      package {
+        id
+        name
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+  }
+}
+mutation CreateCollection($name: String!) {
+  createCollection(name: $name) {
+    id
+    name
+  }
+}
+mutation DeleteCollection($id: ID!) {
+  deleteCollection(id: $id)
+}
+mutation AddToCollection($id: ID!, $package: ID!) {
+  addPackageToCollection(id: $id, packageId: $package) {
+    id
+    name
+  }
+}
+mutation RemoveFromCollection($id: ID!, $package: ID!) {
+  removePackageFromCollection(id: $id, packageId: $package) {
+    id
+    name
+  }
+}
+mutation FollowPackage($package: ID!) {
+  followPackage(packageId: $package)
+}
+mutation UnfollowPackage($package: ID!) {
+  unfollowPackage(packageId: $package)
+}
+mutation ReadNotification($id: ID!) {
+  markNotificationRead(id: $id)
+}
+fragment JobFields on ImportJob {
+  id
+  status
+  source
+  processed
+  errorCode
+  createdAt
+  completedAt
+  canResume
+}
+query AdminJobs($after: String) {
+  importJobs(first: 20, after: $after) {
+    nodes {
+      ...JobFields
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+  }
+}
+query AdminJob($id: UUID!) {
+  importJob(id: $id) {
+    ...JobFields
+  }
+}
+mutation StartImport($key: UUID!, $targets: [ImportTarget!]!) {
+  requestImport(requestKey: $key, targets: $targets) {
+    ...JobFields
+  }
+}
+mutation ResumeImport($id: UUID!) {
+  resumeImport(id: $id) {
+    ...JobFields
+  }
+}
+subscription ImportProgress($id: UUID!) {
+  importProgress(jobId: $id) {
+    ...JobFields
+  }
+}

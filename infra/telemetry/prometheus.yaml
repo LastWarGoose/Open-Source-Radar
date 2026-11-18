@@ -1,0 +1,15 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+rule_files: [/otel-lgtm/radar-alerts.yaml]
+scrape_configs:
+  - job_name: gateway
+    static_configs: [{ targets: ["gateway:9464"] }]
+  - job_name: sources
+    static_configs:
+      - targets: ["catalog:8000"]
+        labels: { source: pypi }
+      - targets: ["repositories:8000"]
+        labels: { source: github }
+      - targets: ["security:8000"]
+        labels: { source: osv }

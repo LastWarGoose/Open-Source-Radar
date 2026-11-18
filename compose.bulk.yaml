@@ -1,0 +1,10 @@
+# Explicit bulk profile: serial consumers, bounded rates, no credentials here.
+services:
+  catalog-importer:
+    environment:
+      RADAR_PYPI_REQUESTS_PER_HOUR: "6000"
+      RADAR_PYPI_MIN_INTERVAL: "0.5"
+  security-importer:
+    environment:
+      RADAR_OSV_REQUESTS_PER_HOUR: "6000"
+      RADAR_OSV_MIN_INTERVAL: "0.5"

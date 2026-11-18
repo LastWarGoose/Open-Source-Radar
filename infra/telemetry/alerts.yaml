@@ -1,0 +1,18 @@
+groups:
+  - name: radar
+    rules:
+      - alert: RadarScrapeUnavailable
+        expr: up == 0
+        for: 2m
+      - alert: RadarQueueDelayed
+        expr: radar_oldest_job_seconds > 3600
+        for: 5m
+      - alert: RadarSourceStale
+        expr: time() - radar_last_source_success_timestamp_seconds > 172800
+        for: 15m
+      - alert: RadarGraphQLErrors
+        expr: sum(rate(radar_graphql_errors_total[5m])) / sum(rate(radar_graphql_seconds_count[5m])) > 0.01
+        for: 5m
+      - alert: RadarCatalogSlow
+        expr: histogram_quantile(0.95, sum by(le) (rate(radar_graphql_seconds_bucket{operation="PublicCatalog"}[5m]))) > 0.5
+        for: 5m

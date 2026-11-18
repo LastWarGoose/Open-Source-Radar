@@ -1,0 +1,17 @@
+{
+  "checked_at": "2026-11-17T17:24:58.948490+00:00",
+  "request_key": "4e8f7a23-b37b-59f9-82f0-5e5abdafdd3b",
+  "campaign": {
+    "id": "ffc5ee06-16b6-47fe-829e-deec3f038b6e",
+    "status": "succeeded",
+    "target": 10000,
+    "succeeded": 10000,
+    "failed": 768,
+    "pending": 0,
+    "candidatesConsumed": 10768,
+    "candidatesTotal": 15000,
+    "manifestHash": "e4288a44f75318f16e91398da684c85a5525c49f3b543fbe51a83bd474d107e6",
+    "createdAt": "2026-11-17T15:10:45.940968+00:00",
+    "completedAt": "2026-11-17T17:24:49.983531+00:00"
+  }
+}

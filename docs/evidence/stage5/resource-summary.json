@@ -1,0 +1,126 @@
+{
+  "baseline": {
+    "open-source-radar-catalog-1": {
+      "max_cpu_percent": 83.85,
+      "max_memory_mib": 125.1,
+      "samples": 48
+    },
+    "open-source-radar-dispatcher-1": {
+      "max_cpu_percent": 7.23,
+      "max_memory_mib": 74.19,
+      "samples": 48
+    },
+    "open-source-radar-gateway-1": {
+      "max_cpu_percent": 25.49,
+      "max_memory_mib": 453.4,
+      "samples": 48
+    },
+    "open-source-radar-postgres-1": {
+      "max_cpu_percent": 22.55,
+      "max_memory_mib": 156.5,
+      "samples": 48
+    },
+    "open-source-radar-rabbitmq-1": {
+      "max_cpu_percent": 338.21,
+      "max_memory_mib": 229.8,
+      "samples": 48
+    },
+    "open-source-radar-redis-1": {
+      "max_cpu_percent": 4.55,
+      "max_memory_mib": 19.37,
+      "samples": 48
+    },
+    "open-source-radar-repositories-1": {
+      "max_cpu_percent": 44.79,
+      "max_memory_mib": 95.12,
+      "samples": 48
+    },
+    "open-source-radar-security-1": {
+      "max_cpu_percent": 33.55,
+      "max_memory_mib": 96.45,
+      "samples": 48
+    },
+    "open-source-radar-web-1": {
+      "max_cpu_percent": 82.53,
+      "max_memory_mib": 1509.376,
+      "samples": 48
+    },
+    "open-source-radar-worker-1": {
+      "max_cpu_percent": 76.06,
+      "max_memory_mib": 154.9,
+      "samples": 48
+    },
+    "open-source-radar-workspace-1": {
+      "max_cpu_percent": 31.98,
+      "max_memory_mib": 87.93,
+      "samples": 48
+    },
+    "k6-generator": {
+      "max_cpu_percent": 4.7,
+      "max_memory_mib": 40.73,
+      "samples": 48
+    }
+  },
+  "stress_repeat": {
+    "open-source-radar-catalog-1": {
+      "max_cpu_percent": 131.21,
+      "max_memory_mib": 153.0,
+      "samples": 44
+    },
+    "open-source-radar-dispatcher-1": {
+      "max_cpu_percent": 8.03,
+      "max_memory_mib": 69.36,
+      "samples": 44
+    },
+    "open-source-radar-gateway-1": {
+      "max_cpu_percent": 37.02,
+      "max_memory_mib": 401.3,
+      "samples": 44
+    },
+    "open-source-radar-postgres-1": {
+      "max_cpu_percent": 26.43,
+      "max_memory_mib": 167.5,
+      "samples": 44
+    },
+    "open-source-radar-rabbitmq-1": {
+      "max_cpu_percent": 256.24,
+      "max_memory_mib": 220.3,
+      "samples": 44
+    },
+    "open-source-radar-redis-1": {
+      "max_cpu_percent": 4.4,
+      "max_memory_mib": 11.3,
+      "samples": 44
+    },
+    "open-source-radar-repositories-1": {
+      "max_cpu_percent": 45.32,
+      "max_memory_mib": 94.15,
+      "samples": 44
+    },
+    "open-source-radar-security-1": {
+      "max_cpu_percent": 48.76,
+      "max_memory_mib": 101.6,
+      "samples": 44
+    },
+    "open-source-radar-web-1": {
+      "max_cpu_percent": 66.4,
+      "max_memory_mib": 1665.024,
+      "samples": 44
+    },
+    "open-source-radar-worker-1": {
+      "max_cpu_percent": 85.07,
+      "max_memory_mib": 158.0,
+      "samples": 44
+    },
+    "open-source-radar-workspace-1": {
+      "max_cpu_percent": 31.35,
+      "max_memory_mib": 80.66,
+      "samples": 44
+    },
+    "k6-generator": {
+      "max_cpu_percent": 8.08,
+      "max_memory_mib": 72.69,
+      "samples": 43
+    }
+  }
+}

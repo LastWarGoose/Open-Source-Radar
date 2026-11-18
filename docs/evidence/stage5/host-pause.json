@@ -1,0 +1,19 @@
+{
+    "kernel_power_events":  [
+                                {
+                                    "utc":  "2026-11-17T17:44:41.4931435Z",
+                                    "Id":  107,
+                                    "ProviderName":  "Microsoft-Windows-Kernel-Power"
+                                },
+                                {
+                                    "utc":  "2026-11-17T17:44:39.0733102Z",
+                                    "Id":  42,
+                                    "ProviderName":  "Microsoft-Windows-Kernel-Power"
+                                }
+                            ],
+    "resource_gap_start_utc":  "2026-11-17T17:44:30.182391+00:00",
+    "resource_gap_end_utc":  "2026-11-17T18:21:35.250582+00:00",
+    "resource_gap_seconds":  2225.068191,
+    "affected_run":  "load-final/stress.json",
+    "disposition":  "Retained as interrupted evidence; excluded from capacity conclusions; repeat in load-stress-repeat"
+}

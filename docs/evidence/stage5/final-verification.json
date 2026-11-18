@@ -1,0 +1,103 @@
+{
+  "captured_at": "2026-11-17T18:53:34.030893+00:00",
+  "web_http_status": 200,
+  "public_catalog": "PASS",
+  "temporary_ui_fixtures_absent": true,
+  "real_packages": 10002,
+  "osv_campaign_success": 10000,
+  "cohort_unchanged": true,
+  "playwright_last_run": {
+    "status": "passed",
+    "failedTests": []
+  },
+  "services": [
+    {
+      "service": "beat",
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "catalog",
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "catalog-importer",
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "dispatcher",
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "gateway",
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "postgres",
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "rabbitmq",
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "redis",
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "repositories",
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "repositories-importer",
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "security",
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "security-importer",
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "web",
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "worker",
+      "state": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "workspace",
+      "state": "running",
+      "health": "healthy"
+    }
+  ],
+  "documentation_links": "PASS",
+  "source_hashes_refreshed": 170,
+  "credential_scan_files_and_compose_logs": "PASS",
+  "default_source_budgets_restored": {
+    "pypi": [
+      120,
+      0.5
+    ],
+    "osv": [
+      300,
+      0.2
+    ]
+  }
+}

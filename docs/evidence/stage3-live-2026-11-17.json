@@ -1,0 +1,345 @@
+{
+  "checked_at": "2026-11-17T12:08:27.415938+00:00",
+  "targets": [
+    {
+      "name": "fastapi",
+      "version": null
+    },
+    {
+      "name": "requests",
+      "version": "2.31.0"
+    }
+  ],
+  "historical_version": "requests 2.31.0 is a demonstration, not a recommendation",
+  "runs": [
+    {
+      "job": {
+        "id": "20ba9205-9198-4ba1-92f9-08e460641d6a",
+        "status": "succeeded",
+        "processed": 2,
+        "errorCode": null
+      },
+      "enrichment": [
+        {
+          "repositoryImportJob": {
+            "status": "succeeded",
+            "errorCode": null,
+            "attempts": 1
+          },
+          "securityImportJob": {
+            "status": "succeeded",
+            "errorCode": null,
+            "attempts": 1
+          }
+        },
+        {
+          "repositoryImportJob": {
+            "status": "succeeded",
+            "errorCode": null,
+            "attempts": 1
+          },
+          "securityImportJob": {
+            "status": "succeeded",
+            "errorCode": null,
+            "attempts": 1
+          }
+        }
+      ]
+    },
+    {
+      "job": {
+        "id": "b6a3a346-1930-4994-a4b6-7961b51a9377",
+        "status": "succeeded",
+        "processed": 2,
+        "errorCode": null
+      },
+      "enrichment": [
+        {
+          "repositoryImportJob": {
+            "status": "succeeded",
+            "errorCode": null,
+            "attempts": 1
+          },
+          "securityImportJob": {
+            "status": "succeeded",
+            "errorCode": null,
+            "attempts": 1
+          }
+        },
+        {
+          "repositoryImportJob": {
+            "status": "succeeded",
+            "errorCode": null,
+            "attempts": 1
+          },
+          "securityImportJob": {
+            "status": "succeeded",
+            "errorCode": null,
+            "attempts": 1
+          }
+        }
+      ]
+    }
+  ],
+  "stable_identities": true,
+  "packages": [
+    {
+      "id": "pypi:fastapi",
+      "name": "fastapi",
+      "source": "PYPI",
+      "fetchedAt": "2026-11-17T12:08:14.326102+00:00",
+      "pypiFreshness": {
+        "status": "SUCCESS",
+        "checkedAt": "2026-11-17T12:08:15.150281+00:00",
+        "lastSuccessAt": "2026-11-17T12:08:15.150281+00:00"
+      },
+      "githubFreshness": {
+        "status": "SUCCESS",
+        "checkedAt": "2026-11-17T12:08:24.954241+00:00",
+        "lastSuccessAt": "2026-11-17T12:08:24.954241+00:00",
+        "errorCode": null
+      },
+      "repositories": {
+        "nodes": [
+          {
+            "status": "VERIFIED",
+            "repository": {
+              "id": "github:160919119",
+              "fullName": "fastapi/fastapi",
+              "source": "GITHUB",
+              "stars": 104848,
+              "fetchedAt": "2026-11-17T12:08:24.294924+00:00"
+            }
+          }
+        ]
+      },
+      "releases": {
+        "nodes": [
+          {
+            "id": "e88a1864-fcc2-5edb-8385-782c2a3a8aee",
+            "version": "3.0",
+            "source": "SYNTHETIC",
+            "scan": null
+          },
+          {
+            "id": "8c5a32ff-c426-5de8-8830-61434bd0faf6",
+            "version": "2.0",
+            "source": "SYNTHETIC",
+            "scan": {
+              "status": "STALE",
+              "source": "SYNTHETIC",
+              "checkedAt": "2026-11-17T00:00:00+00:00",
+              "lastSuccessAt": "2026-11-17T00:00:00+00:00",
+              "errorCode": null,
+              "findings": {
+                "nodes": []
+              }
+            }
+          },
+          {
+            "id": "c651cf79-ed8f-529a-b5ac-321dcffe6097",
+            "version": "2.0a1",
+            "source": "SYNTHETIC",
+            "scan": {
+              "status": "UNKNOWN",
+              "source": "SYNTHETIC",
+              "checkedAt": null,
+              "lastSuccessAt": null,
+              "errorCode": null,
+              "findings": {
+                "nodes": []
+              }
+            }
+          },
+          {
+            "id": "41e81c77-9891-5dc5-acfb-6bd1941e1521",
+            "version": "1.10",
+            "source": "SYNTHETIC",
+            "scan": {
+              "status": "FAILED",
+              "source": "SYNTHETIC",
+              "checkedAt": "2026-11-17T00:00:00+00:00",
+              "lastSuccessAt": null,
+              "errorCode": "FIXTURE_UNAVAILABLE",
+              "findings": {
+                "nodes": []
+              }
+            }
+          },
+          {
+            "id": "f14d9c28-0715-5ccf-b179-951564a73d1a",
+            "version": "1.9",
+            "source": "SYNTHETIC",
+            "scan": {
+              "status": "SUCCESS",
+              "source": "SYNTHETIC",
+              "checkedAt": "2026-11-17T00:00:00+00:00",
+              "lastSuccessAt": "2026-11-17T00:00:00+00:00",
+              "errorCode": null,
+              "findings": {
+                "nodes": []
+              }
+            }
+          },
+          {
+            "id": "2c133658-866d-5a47-8385-210eedf91405",
+            "version": "1.0",
+            "source": "SYNTHETIC",
+            "scan": {
+              "status": "SUCCESS",
+              "source": "SYNTHETIC",
+              "checkedAt": "2026-11-17T00:00:00+00:00",
+              "lastSuccessAt": "2026-11-17T00:00:00+00:00",
+              "errorCode": null,
+              "findings": {
+                "nodes": [
+                  {
+                    "id": "RADAR-DEMO-001",
+                    "summary": "Synthetic advisory, not a real vulnerability report",
+                    "source": "SYNTHETIC",
+                    "aliases": {
+                      "nodes": [
+                        {
+                          "name": "RADAR-ALIAS-001"
+                        },
+                        {
+                          "name": "RADAR-DEMO-001"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "25501cdb-9a12-5a59-8cc9-be452a808c0d",
+            "version": "1.0rc1",
+            "source": "SYNTHETIC",
+            "scan": null
+          },
+          {
+            "id": "00c670bc-d81c-5ddd-9515-fcb77e9d4658",
+            "version": "0.163.1",
+            "source": "PYPI",
+            "scan": {
+              "status": "SUCCESS",
+              "source": "OSV",
+              "checkedAt": "2026-11-17T12:08:24.300112+00:00",
+              "lastSuccessAt": "2026-11-17T12:08:24.300112+00:00",
+              "errorCode": null,
+              "findings": {
+                "nodes": []
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "pypi:requests",
+      "name": "requests",
+      "source": "PYPI",
+      "fetchedAt": "2026-11-17T12:08:15.349147+00:00",
+      "pypiFreshness": {
+        "status": "SUCCESS",
+        "checkedAt": "2026-11-17T12:08:15.978817+00:00",
+        "lastSuccessAt": "2026-11-17T12:08:15.978817+00:00"
+      },
+      "githubFreshness": {
+        "status": "SUCCESS",
+        "checkedAt": "2026-11-17T12:08:25.668804+00:00",
+        "lastSuccessAt": "2026-11-17T12:08:25.668804+00:00",
+        "errorCode": null
+      },
+      "repositories": {
+        "nodes": [
+          {
+            "status": "VERIFIED",
+            "repository": {
+              "id": "github:1362490",
+              "fullName": "psf/requests",
+              "source": "GITHUB",
+              "stars": 54715,
+              "fetchedAt": "2026-11-17T12:08:25.010200+00:00"
+            }
+          }
+        ]
+      },
+      "releases": {
+        "nodes": [
+          {
+            "id": "a62c5d8c-a5c6-5aad-91bc-f4b0c00964a1",
+            "version": "2.31.0",
+            "source": "PYPI",
+            "scan": {
+              "status": "SUCCESS",
+              "source": "OSV",
+              "checkedAt": "2026-11-17T12:08:24.884503+00:00",
+              "lastSuccessAt": "2026-11-17T12:08:24.884503+00:00",
+              "errorCode": null,
+              "findings": {
+                "nodes": [
+                  {
+                    "id": "GHSA-9hjg-9r4m-mvj7",
+                    "summary": "Requests vulnerable to .netrc credentials leak via malicious URLs",
+                    "source": "OSV",
+                    "aliases": {
+                      "nodes": [
+                        {
+                          "name": "CVE-2024-47081"
+                        },
+                        {
+                          "name": "GHSA-9hjg-9r4m-mvj7"
+                        },
+                        {
+                          "name": "PYSEC-2026-1872"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "id": "GHSA-9wx4-h78v-vm56",
+                    "summary": "Requests `Session` object does not verify requests after making first request with verify=False",
+                    "source": "OSV",
+                    "aliases": {
+                      "nodes": [
+                        {
+                          "name": "CVE-2024-35195"
+                        },
+                        {
+                          "name": "GHSA-9wx4-h78v-vm56"
+                        },
+                        {
+                          "name": "PYSEC-2026-1873"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "id": "GHSA-gc5v-m9x4-r6x2",
+                    "summary": "Requests is a HTTP library. Prior to version 2.33.0, the `requests.utils.extract_zipped_paths()` utility function uses a predictable filename when extracting files from zip archives into the system temporary directory. If the target file already exists, it is reused without validation. A local attacker with write access to the temp directory could pre-create a malicious file that would be loaded in place of the legitimate one. Standard usage of the Requests library is not affected by this vulnerability. Only applications that call `extract_zipped_paths()` directly are impacted. Starting in version 2.33.0, the library extracts files to a non-deterministic location. If developers are unable to upgrade, they can set `TMPDIR` in their environment to a directory with restricted write access.",
+                    "source": "OSV",
+                    "aliases": {
+                      "nodes": [
+                        {
+                          "name": "CVE-2026-25645"
+                        },
+                        {
+                          "name": "GHSA-gc5v-m9x4-r6x2"
+                        },
+                        {
+                          "name": "PYSEC-2026-2275"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
