@@ -35,6 +35,7 @@ from sqlalchemy import (
     literal_column,
     or_,
     select,
+    text,
     true,
     tuple_,
 )
@@ -392,6 +393,16 @@ async def context_getter() -> dict:
 
 @strawberry.type
 class DomainQuery:
+    @strawberry.field
+    async def catalog_license_revision(self) -> str | None:
+        def read() -> str:
+            with Session(engine()) as session:
+                return str(
+                    session.execute(text("SELECT revision FROM catalog_license_state")).scalar_one()
+                )
+
+        return await db_call(read)
+
     @strawberry.field
     async def package(self, info: Info, id: strawberry.ID) -> Package | None:
         row = await info.context["catalog"].packages.load(str(id))

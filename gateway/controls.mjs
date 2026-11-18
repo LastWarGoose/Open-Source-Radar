@@ -55,7 +55,7 @@ if (endpoint)
     .unref();
 
 const names = new Set(
-  "PublicCatalog PublicPackage ComparePackages Session Collections CollectionItems Follows Notifications AdminJobs AdminJob ImportProgress Login Register Logout RecoverAccount StartImport ResumeImport CreateCollection DeleteCollection AddToCollection RemoveFromCollection FollowPackage UnfollowPackage ReadNotification LoadCatalog LoadDetail LoadSearch LoadWorkspace".split(
+  "PublicCatalog CatalogLicenses PublicPackage PackageMetadata ComparePackages Session Collections CollectionItems Follows Notifications AdminJobs AdminJob ImportProgress Login Register Logout RecoverAccount StartImport ResumeImport CreateCollection DeleteCollection AddToCollection RemoveFromCollection FollowPackage UnfollowPackage ReadNotification LoadCatalog LoadDetail LoadSearch LoadWorkspace".split(
     " ",
   ),
 );

@@ -14,6 +14,7 @@ import httpx
 from websockets.sync.client import connect
 from websockets.typing import Origin, Subprotocol
 
+from scripts.cohort_evidence import read_cohort, save_cohort
 from scripts.windows_awake import prevent_idle_sleep
 
 PROJECT = "radar-stage7-check"
@@ -63,6 +64,10 @@ def main() -> None:
     identity = uuid4()
     destination = ROOT / ".runtime" / prefix.rstrip("-")
     destination.mkdir()
+    evidence = ROOT / "docs/evidence/stage5"
+    cohort = save_cohort(
+        read_cohort(evidence).read_bytes(), destination, evidence / "cohorts", pin=True
+    )
     with httpx.Client(headers={"Origin": ORIGIN}, timeout=15) as client:
         for i in range(1, 21):
             username = prefix + str(i)
@@ -128,7 +133,6 @@ def main() -> None:
         outcomes = {}
         for mode in modes:
             script = ROOT / "tests/load/stage5.js"
-            cohort = ROOT / "docs/evidence/stage5/cohort.json"
             print(f"{mode}: 20 accounts, active subscription. Results in {destination}", flush=True)
             container = prefix + mode
             run = subprocess.Popen(

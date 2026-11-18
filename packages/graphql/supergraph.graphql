@@ -338,6 +338,7 @@ type Query
   @join__type(graph: SECURITY)
   @join__type(graph: WORKSPACE)
 {
+  catalogLicenseRevision: String @join__field(graph: CATALOG)
   package(id: ID!): Package @join__field(graph: CATALOG)
   release(id: ID!): Release @join__field(graph: CATALOG)
   catalogLicenses(first: Int! = 100, after: String = null): StrConnection! @join__field(graph: CATALOG)

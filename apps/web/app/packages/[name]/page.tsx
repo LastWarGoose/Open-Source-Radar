@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   loadPackage,
+  loadPackageMetadata,
   loadNearestScan,
   loadNearestRelease,
   hasOsvResult,
@@ -27,7 +28,7 @@ type Props = { params: Promise<{ name: string }>; searchParams: Promise<Search> 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { name } = await params;
   if (!validName(name)) return { title: "Пакет не найден", robots: { index: false } };
-  const { data } = await loadPackage(name);
+  const { data } = await loadPackageMetadata(name);
   const item = data?.package;
   return {
     title: item?.source === "PYPI" ? item.name : "Пакет не найден",

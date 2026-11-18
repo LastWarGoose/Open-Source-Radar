@@ -148,6 +148,27 @@ def seed() -> None:
 
 def checks() -> None:
     owner("catalog")
+    license_query = "query LicenseState { catalogLicenseRevision catalogLicenses { nodes } }"
+    original = gql(license_query)["data"]
+    test_license = "LicenseRef-RadarStage4"
+    with Session(engine()) as session, session.begin():
+        row = session.get(PackageRow, IDS[0])
+        assert row and row.license_key == "MIT"
+        row.license_key = test_license
+        session.flush()
+        assert gql(license_query)["data"] == original, "Uncommitted license leaked"
+    try:
+        changed = gql(license_query)["data"]
+        assert test_license in changed["catalogLicenses"]["nodes"]
+        assert changed["catalogLicenseRevision"] != original["catalogLicenseRevision"]
+    finally:
+        with Session(engine()) as session, session.begin():
+            row = session.get(PackageRow, IDS[0])
+            assert row
+            row.license_key = "MIT"
+    restored = gql(license_query)["data"]
+    assert restored["catalogLicenses"] == original["catalogLicenses"]
+    assert restored["catalogLicenseRevision"] != changed["catalogLicenseRevision"]
     with Session(engine()) as session, session.begin():
         row = session.get(PackageRow, IDS[0])
         assert row and row.github_checked_at and row.github_stars == 30

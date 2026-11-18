@@ -5,7 +5,7 @@ import type {
   FreshnessFieldsFragment,
   ScanFieldsFragment,
   ScanSummaryFragment,
-  CatalogItemFragment,
+  OverviewFragment,
   RepositoryDetailsFragment,
 } from "./gql/graphql";
 
@@ -130,7 +130,7 @@ export function ProjectionNote({
   value,
 }: {
   value: Pick<
-    CatalogItemFragment["starProjection"],
+    OverviewFragment["starProjection"],
     "status" | "checkedAt" | "projectedAt" | "lagSeconds"
   >;
 }) {

@@ -66,6 +66,10 @@ test("catalog SSR, filters, global sort, cursor and browser history", async ({ p
   await page.goto("/?q=radar-stage4-&size=1");
   await expect(page.locator('[data-testid="catalog-package"]:visible')).toHaveCount(1);
   await expect(page.locator('[data-testid="catalog-package"]:visible')).toContainText(names[1]);
+  const firstRow = page.getByTestId("catalog-package").first();
+  const version = await firstRow.locator(".version-tag").innerText();
+  await expect(firstRow.getByText(version, { exact: true })).toHaveCount(1);
+  await expect(firstRow).not.toContainText(/Данные от|задержка|Python —/);
   await page.getByRole("link", { name: "Далее →", exact: true }).click();
   await expect(page).toHaveURL(/after=/);
   await expect(page.locator('[data-testid="catalog-package"]:visible')).toContainText(names[0]);

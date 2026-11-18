@@ -1,15 +1,15 @@
 "use client";
 
 import Form from "next/form";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import type { catalogState } from "./url-state";
 
 export function CatalogFilters({
   state,
-  licenses,
+  children,
 }: {
   state: ReturnType<typeof catalogState>;
-  licenses: string[];
+  children: ReactNode;
 }) {
   const [term, setTerm] = useState(state.q);
   const [sort, setSort] = useState<string>(state.sort);
@@ -32,13 +32,7 @@ export function CatalogFilters({
       </label>
       <label>
         Лицензия
-        <select name="license" defaultValue={state.license}>
-          <option value="">Все лицензии</option>
-          {state.license && !licenses.includes(state.license) && <option>{state.license}</option>}
-          {licenses.map((value) => (
-            <option key={value}>{value}</option>
-          ))}
-        </select>
+        {children}
       </label>
       <label>
         Версии

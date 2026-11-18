@@ -126,6 +126,7 @@ type ProbeJob {
 type Query {
   _entities(representations: [_Any!]!): [_Entity]!
   _service: _Service!
+  catalogLicenseRevision: String
   package(id: ID!): Package
   release(id: ID!): Release
   catalogLicenses(first: Int! = 100, after: String = null): StrConnection!

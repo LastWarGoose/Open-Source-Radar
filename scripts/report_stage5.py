@@ -9,6 +9,8 @@ from uuid import UUID, uuid5
 from radar_common.database import database_url
 from sqlalchemy import create_engine, text
 
+from scripts.cohort_evidence import save_cohort
+
 
 def read(owner: str, query: str, parameters: dict | None = None) -> list[dict]:
     database = create_engine(database_url(owner), hide_parameters=True)
@@ -194,14 +196,18 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("campaign")
     parser.add_argument("--output", default="/evidence")
+    parser.add_argument("--cohort-store", type=Path, default=Path("/evidence/cohorts"))
     args = parser.parse_args()
     result, cohort = report(args.campaign)
     output = Path(args.output)
     output.mkdir(parents=True, exist_ok=True)
-    for name, data in (("source-report", result), ("cohort", cohort)):
-        temporary = output / (name + ".tmp")
-        temporary.write_text(json.dumps(data, indent=2, default=str) + "\n", encoding="utf-8")
-        temporary.replace(output / (name + ".json"))
+    payload = save_cohort(
+        (json.dumps(cohort, indent=2, default=str) + "\n").encode(), output, args.cohort_store
+    )
+    result["cohort_sha256"] = payload.stem
+    temporary = output / "source-report.tmp"
+    temporary.write_text(json.dumps(result, indent=2, default=str) + "\n", encoding="utf-8")
+    temporary.replace(output / "source-report.json")
     print(
         json.dumps(
             {key: result[key] for key in ("cohort_unique_packages", "github", "osv")},

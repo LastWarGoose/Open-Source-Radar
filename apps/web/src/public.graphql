@@ -19,25 +19,16 @@ fragment CatalogItem on Package {
   summary
   license
   requiresPython
-  source
-  fetchedAt
   pypiFreshness {
-    ...FreshnessFields
+    errorCode
   }
   starProjection {
     stars
     status
-    checkedAt
-    projectedAt
-    lagSeconds
   }
   releases(first: 1, source: "PYPI") {
     nodes {
-      id
       version
-      fetchedAt
-      yanked
-      isPrerelease
     }
   }
 }
@@ -52,7 +43,22 @@ fragment RepositoryDetails on RepositoryLink {
   }
 }
 fragment Overview on Package {
-  ...CatalogItem
+  id
+  name
+  source
+  summary
+  license
+  requiresPython
+  pypiFreshness {
+    ...FreshnessFields
+  }
+  starProjection {
+    stars
+    status
+    checkedAt
+    projectedAt
+    lagSeconds
+  }
   githubFreshness {
     ...FreshnessFields
   }
@@ -127,19 +133,13 @@ query NearestPypiRelease($id: ID!, $version: String!, $dependencyAfter: String) 
 fragment ReleaseInspection on Release {
   id
   version
-  source
   yanked
-  isPrerelease
   fetchedAt
   dependencies(first: 20, after: $dependencyAfter) {
     nodes {
       id
       raw
       name
-      specifier
-      extras
-      marker
-      url
     }
     pageInfo {
       hasNextPage
@@ -157,6 +157,7 @@ query PublicCatalog(
   $filter: PackageFilter
   $sort: PackageSort!
 ) {
+  catalogLicenseRevision
   packages(first: $first, after: $after, search: $search, filter: $filter, sort: $sort) {
     nodes {
       ...CatalogItem
@@ -165,6 +166,13 @@ query PublicCatalog(
       hasNextPage
       endCursor
     }
+  }
+}
+query PackageMetadata($id: ID!) {
+  package(id: $id) {
+    name
+    summary
+    source
   }
 }
 query PublicPackage(

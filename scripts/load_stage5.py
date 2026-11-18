@@ -11,6 +11,7 @@ from pathlib import Path
 
 from dotenv import dotenv_values
 
+from scripts.cohort_evidence import read_cohort, save_cohort
 from scripts.windows_awake import prevent_idle_sleep
 from services.workspace.access import DEV_ACTORS, dev_token
 
@@ -28,8 +29,8 @@ def main() -> None:
     root = Path(__file__).resolve().parents[1]
     output = (root / args.output).resolve()
     output.mkdir(parents=True, exist_ok=True)
-    cohort = root / "docs/evidence/stage5/cohort.json"
-    raw_cohort = cohort.read_bytes()
+    evidence = root / "docs/evidence/stage5"
+    raw_cohort = read_cohort(evidence).read_bytes()
     cohort_size = len(json.loads(raw_cohort))
     if args.mode in ("baseline", "warm", "cold", "stress") and cohort_size < 10000:
         raise SystemExit("Final measurements require at least 10000 imported cohort packages")
@@ -39,12 +40,12 @@ def main() -> None:
     if not secret:
         raise SystemExit("Local development credential missing")
     raw_script = (root / "tests/load/stage5.js").read_bytes()
-    for filename, content in (("cohort.json", raw_cohort), ("stage5.js", raw_script)):
-        saved = output / filename
-        if saved.exists() and saved.read_bytes() != content:
-            raise SystemExit("Measurement input changed; choose a new --output directory")
-        if not saved.exists():
-            saved.write_bytes(content)
+    saved = output / "stage5.js"
+    if saved.exists() and saved.read_bytes() != raw_script:
+        raise SystemExit("Measurement script changed; choose a new --output directory")
+    cohort = save_cohort(raw_cohort, output, evidence / "cohorts", pin=True)
+    if not saved.exists():
+        saved.write_bytes(raw_script)
     environment = dict(os.environ)
     environment.update(
         WORKSPACE_A=dev_token(secret, DEV_ACTORS[0]),
@@ -66,7 +67,7 @@ def main() -> None:
         "--mount",
         f"type=bind,source={output},target=/results",
         "--mount",
-        f"type=bind,source={output},target=/data,readonly",
+        f"type=bind,source={cohort},target=/data/cohort.json,readonly",
         "-e",
         "WORKSPACE_A",
         "-e",

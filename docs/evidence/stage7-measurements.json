@@ -136,7 +136,7 @@
     "tests/load/stage5.js": "8f25517965f660fd096de6bae342051473705ca420962440befb3734bc68698b",
     "scripts/load_stage7.py": "9b0ccaaa48c7fa0cf8e8c67fe0e8abb4740f6a5ad9f720101a4bdbe41201c267",
     "packages/graphql/supergraph.graphql": "3b3184bfca66a88810cb480a20bbf056aec26c2b28b49abd689c149ac075c003",
-    "docs/evidence/stage5/cohort.json": "65bed731ad928d2ad475404635619cd473065fe967de8b93072f04ce7a0bfd0b"
+    "docs/evidence/stage5/cohorts/65bed731ad928d2ad475404635619cd473065fe967de8b93072f04ce7a0bfd0b.json": "65bed731ad928d2ad475404635619cd473065fe967de8b93072f04ce7a0bfd0b"
   },
   "login_gateway_histogram": {
     "scope": "warm plus baseline, 2 bursts of 20 logins",
