@@ -4,6 +4,7 @@ import { AccountNav } from "./account";
 import type {
   FreshnessFieldsFragment,
   ScanFieldsFragment,
+  ScanSummaryFragment,
   CatalogItemFragment,
   RepositoryDetailsFragment,
 } from "./gql/graphql";
@@ -143,66 +144,134 @@ export function ProjectionNote({
     </span>
   );
 }
+type SavedScan = ScanFieldsFragment | ScanSummaryFragment;
+
+export function PypiSnapshot({
+  version,
+  fetchedAt,
+  freshness,
+}: {
+  version?: string;
+  fetchedAt?: string;
+  freshness: FreshnessFieldsFragment;
+}) {
+  const stamp = fetchedAt ?? freshness.lastSuccessAt;
+  return (
+    <span className="freshness">
+      <span>{version ? `PyPI · ${version}` : "PyPI · нет загруженной версии"}</span>
+      {stamp && <time dateTime={stamp}>Данные от {date(stamp)}</time>}
+      {freshness.errorCode && <small className="attention">Последнее обновление не удалось</small>}
+    </span>
+  );
+}
+
 export function Scan({
   scan,
+  selected,
+  nearby = false,
   unavailable = false,
+  compact = false,
+  failed = false,
 }: {
-  scan?: ScanFieldsFragment | null;
+  scan?: SavedScan | null;
+  selected: string;
+  nearby?: boolean;
   unavailable?: boolean;
+  compact?: boolean;
+  failed?: boolean;
 }) {
   if (unavailable)
     return (
-      <p role="status" className="notice">
+      <span className="notice" role="status">
         OSV недоступен. Повторите позже.
-      </p>
+      </span>
     );
-  if (!scan || scan.status === "UNKNOWN")
-    return <p className="muted">Эта версия ещё не проверена.</p>;
+  if (!scan?.lastSuccessAt || scan.source !== "OSV")
+    return (
+      <span className="muted">
+        {failed || scan?.status === "FAILED"
+          ? "Проверка не завершена."
+          : "Эта версия ещё не проверена."}
+      </span>
+    );
+  const checkedVersion = scan.version ?? selected;
+  const hits = scan.findings.nodes;
+  const fixes = new Map(scan.fixes.nodes.map((fix) => [fix.advisoryId, fix.version]));
+  const historical = scan.fixes.nodes.filter((fix) => fix.historical);
+  const entries = (
+    <ul className="findings">
+      {hits.map((item) => (
+        <li key={item.id}>
+          <a
+            href={`https://osv.dev/vulnerability/${encodeURIComponent(item.id)}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {item.id}
+            <span aria-hidden="true"> ↗</span>
+          </a>
+          {fixes.has(item.id) && (
+            <strong className="fix-version">Исправлено в {fixes.get(item.id)}</strong>
+          )}
+          {!compact && "summary" in item && <p>{item.summary}</p>}
+          {!compact && "aliases" in item && (
+            <small className="muted">
+              {item.aliases.nodes
+                .filter((alias) => alias.name !== item.id)
+                .map((alias) => alias.name)
+                .join(" · ")}
+            </small>
+          )}
+        </li>
+      ))}
+    </ul>
+  );
   return (
-    <>
-      <Freshness
-        label="OSV"
-        value={{
-          status: scan.status,
-          checkedAt: scan.checkedAt,
-          lastSuccessAt: scan.lastSuccessAt,
-          errorCode: scan.errorCode,
-        }}
-      />
-      {scan.status !== "SUCCESS" && (
-        <p className="notice">
-          {scan.lastSuccessAt
-            ? "Показан последний сохранённый результат."
-            : "Проверка не завершена."}
-        </p>
+    <div className="scan-result">
+      {nearby && (
+        <small className="notice">
+          {failed
+            ? `Проверка версии ${selected} не завершена.`
+            : `Для версии ${selected} нет проверки.`}{" "}
+          Ближайшая проверенная — {checkedVersion}.
+        </small>
       )}
-      {scan.findings.nodes.length > 0 ? (
-        <ul className="findings">
-          {scan.findings.nodes.map((item) => (
-            <li key={item.id}>
-              <a
-                href={`https://osv.dev/vulnerability/${encodeURIComponent(item.id)}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {item.id} ↗
-              </a>
-              <p>{item.summary}</p>
-              <small className="muted">
-                {item.aliases.nodes
-                  .filter((alias) => alias.name !== item.id)
-                  .map((alias) => alias.name)
-                  .join(" · ")}
-              </small>
-            </li>
-          ))}
-        </ul>
+      {hits.length ? (
+        compact ? (
+          <details open={hits.length <= 3}>
+            <summary>
+              Найдено: {hits.length}
+              {scan.findings.pageInfo.hasNextPage ? "+" : ""}
+            </summary>
+            {entries}
+          </details>
+        ) : (
+          entries
+        )
       ) : (
-        scan.status === "SUCCESS" && <p>Совпадений не найдено. Это не гарантия безопасности.</p>
+        <span>Совпадений не найдено.</span>
       )}
-      {scan.findings.pageInfo.hasNextPage && (
-        <p className="notice">Показаны первые 100 записей OSV.</p>
+      {historical.map((fix) => (
+        <small key={fix.advisoryId} className="fix-version">
+          <a
+            href={`https://osv.dev/vulnerability/${encodeURIComponent(fix.advisoryId)}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {fix.advisoryId}
+          </a>{" "}
+          · Исправлено в {fix.version}
+        </small>
+      ))}
+      {scan.fixes.pageInfo.hasNextPage && <small>Показаны первые 100 исправлений.</small>}
+      <small className="muted">
+        OSV · {checkedVersion} ·{" "}
+        <time dateTime={scan.lastSuccessAt}>{date(scan.lastSuccessAt)}</time>
+      </small>
+      {scan.errorCode && <small className="attention">Последнее обновление OSV не удалось</small>}
+      {!compact && scan.findings.pageInfo.hasNextPage && (
+        <small>Показаны первые 100 записей OSV.</small>
       )}
-    </>
+    </div>
   );
 }

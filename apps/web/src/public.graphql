@@ -26,6 +26,7 @@ fragment CatalogItem on Package {
     nodes {
       id
       version
+      fetchedAt
       yanked
       isPrerelease
     }
@@ -56,12 +57,34 @@ fragment Overview on Package {
     }
   }
 }
-fragment ScanFields on VersionScan {
+fragment ScanSummary on VersionScan {
+  version
   status
   checkedAt
   lastSuccessAt
   errorCode
   source
+  fixes(first: 100) {
+    nodes {
+      advisoryId
+      version
+      historical
+    }
+    pageInfo {
+      hasNextPage
+    }
+  }
+  findings(first: 100) {
+    nodes {
+      id
+    }
+    pageInfo {
+      hasNextPage
+    }
+  }
+}
+fragment ScanFields on VersionScan {
+  ...ScanSummary
   findings(first: 100) {
     nodes {
       id
@@ -75,6 +98,20 @@ fragment ScanFields on VersionScan {
     }
     pageInfo {
       hasNextPage
+    }
+  }
+}
+query NearestOsvScan($id: ID!, $version: String!) {
+  package(id: $id) {
+    nearestOsvScan(version: $version) {
+      ...ScanFields
+    }
+  }
+}
+query NearestPypiRelease($id: ID!, $version: String!, $dependencyAfter: String) {
+  package(id: $id) {
+    nearestPypiRelease(version: $version) {
+      ...ReleaseInspection
     }
   }
 }
@@ -183,17 +220,9 @@ fragment CompareItem on Package {
     nodes {
       id
       version
+      fetchedAt
       scan {
-        status
-        lastSuccessAt
-        findings(first: 100) {
-          nodes {
-            id
-          }
-          pageInfo {
-            hasNextPage
-          }
-        }
+        ...ScanSummary
       }
     }
   }

@@ -1,12 +1,30 @@
 import type { ReactNode } from "react";
 import type { CompareItemFragment } from "../../src/gql/graphql";
-import { failedField } from "../../src/public-data";
-import { date, Freshness, ProjectionNote, RepositorySummary } from "../../src/public-ui";
+import { failedField, hasOsvResult, loadNearestScan } from "../../src/public-data";
+import { PypiSnapshot, Scan, ProjectionNote, RepositorySummary } from "../../src/public-ui";
 
 type Cell = string | { key: string; content: ReactNode };
 
-export function comparisonRows(items: (CompareItemFragment | null | undefined)[], error: unknown) {
+export async function comparisonRows(
+  items: (CompareItemFragment | null | undefined)[],
+  error: unknown,
+) {
   const aliases = ["a", "b", "c", "d"];
+  const fallback = new Map(
+    await Promise.all(
+      items.map(async (item, i) => {
+        const release = item?.current.nodes[0];
+        const nearby =
+          item?.source === "PYPI" &&
+          release &&
+          !hasOsvResult(release.scan) &&
+          !failedField(error, "scan", aliases[i])
+            ? await loadNearestScan(item.id, release.version)
+            : null;
+        return [aliases[i], nearby] as const;
+      }),
+    ),
+  );
   function row(
     label: string,
     format: (item: CompareItemFragment, alias: string) => Cell,
@@ -30,21 +48,29 @@ export function comparisonRows(items: (CompareItemFragment | null | undefined)[]
   }
   return [
     row("Описание пакета", (item) => item.summary || "Нет описания"),
-    row("Версия в каталоге", (item) => item.current.nodes[0]?.version ?? "Не загружена", true),
+    row(
+      "Версия PyPI",
+      (item) => {
+        const release = item.current.nodes[0];
+        return {
+          key: JSON.stringify([release?.version, Boolean(item.pypiFreshness.errorCode)]),
+          content: (
+            <PypiSnapshot
+              version={release?.version}
+              fetchedAt={release?.fetchedAt}
+              freshness={item.pypiFreshness}
+            />
+          ),
+        };
+      },
+      true,
+    ),
     row("Python", (item) => item.requiresPython || "Не указано"),
     row("Лицензия", (item) => item.license || "Не указана"),
     row("Звёзды GitHub", (item) => {
       const projection = item.starProjection;
       return {
-        key: JSON.stringify([
-          projection.stars,
-          projection.checkedAt && [
-            date(projection.checkedAt),
-            date(projection.projectedAt),
-            projection.lagSeconds,
-            projection.status,
-          ],
-        ]),
+        key: JSON.stringify([projection.stars, projection.status]),
         content: (
           <>
             {projection.stars?.toLocaleString("ru-RU") ?? "Не получены"}
@@ -80,45 +106,34 @@ export function comparisonRows(items: (CompareItemFragment | null | undefined)[]
         ),
       };
     }),
-    row("OSV · выбранная версия", (item, alias) => {
-      const scan = item.current.nodes[0]?.scan;
-      if (!scan && failedField(error, "scan", alias)) return "Недоступно";
-      let status = "Не проверено";
-      const findings =
-        scan?.status === "SUCCESS" ? scan.findings.nodes.map(({ id }) => id).sort() : [];
-      if (scan?.status === "SUCCESS") {
-        const count = findings.length;
-        status = count
-          ? `Найдено: ${count}${scan.findings.pageInfo.hasNextPage ? "+" : ""}`
-          : "Совпадений нет";
-      } else if (scan?.status === "STALE") status = "Результат устарел";
-      else if (scan?.status === "FAILED") status = "Ошибка проверки";
-      if (!findings.length && !scan?.lastSuccessAt) return status;
-      const checked = scan?.lastSuccessAt ? date(scan.lastSuccessAt) : "";
+    row("Уязвимости OSV", (item, alias) => {
+      const release = item.current.nodes[0];
+      if (!release) return "Нет версии для проверки";
+      const nearby = fallback.get(alias);
+      if (failedField(error, "scan", alias) || nearby?.unavailable) return "OSV недоступен";
+      const scan = nearby?.scan ?? release.scan;
+      const failed = release.scan?.status === "FAILED";
       return {
-        key: JSON.stringify([status, findings, checked]),
+        key: JSON.stringify([
+          hasOsvResult(scan),
+          failed,
+          Boolean(scan?.errorCode),
+          nearby?.scan?.version,
+          scan?.findings.nodes.map((n) => n.id) ?? [],
+          Boolean(scan?.findings.pageInfo.hasNextPage),
+          scan?.fixes.nodes.map((f) => [f.advisoryId, f.version, f.historical]) ?? [],
+          Boolean(scan?.fixes.pageInfo.hasNextPage),
+        ]),
         content: (
-          <>
-            {findings.length ? (
-              <details>
-                <summary>{status}</summary>
-                <ul>
-                  {findings.map((id) => (
-                    <li key={id}>{id}</li>
-                  ))}
-                </ul>
-              </details>
-            ) : (
-              status
-            )}
-            {checked && <small className="muted">{checked}</small>}
-          </>
+          <Scan
+            scan={scan}
+            selected={release.version}
+            nearby={Boolean(nearby?.scan)}
+            failed={failed}
+            compact
+          />
         ),
       };
     }),
-    row("Обновление PyPI", (item) => ({
-      key: JSON.stringify([item.pypiFreshness.status, date(item.pypiFreshness.lastSuccessAt)]),
-      content: <Freshness value={item.pypiFreshness} />,
-    })),
   ];
 }

@@ -2,7 +2,32 @@ import "server-only";
 import { cache } from "react";
 import { CombinedGraphQLErrors } from "@apollo/client/errors";
 import { getClient } from "./apollo-server";
-import { PublicPackageDocument } from "./gql/graphql";
+import {
+  NearestOsvScanDocument,
+  NearestPypiReleaseDocument,
+  PublicPackageDocument,
+} from "./gql/graphql";
+import type { ScanSummaryFragment } from "./gql/graphql";
+
+export function hasOsvResult(scan?: ScanSummaryFragment | null) {
+  return scan?.source === "OSV" && Boolean(scan.lastSuccessAt);
+}
+
+export const loadNearestScan = cache(async (id: string, version: string) => {
+  const result = await getClient().query({
+    query: NearestOsvScanDocument,
+    variables: { id, version },
+    errorPolicy: "all",
+  });
+  return { scan: result.data?.package?.nearestOsvScan, unavailable: Boolean(result.error) };
+});
+export const loadNearestRelease = cache(async (id: string, version: string) =>
+  getClient().query({
+    query: NearestPypiReleaseDocument,
+    variables: { id, version, dependencyAfter: null },
+    errorPolicy: "all",
+  }),
+);
 
 export const loadPackage = cache(
   async (name: string, version = "", releaseAfter = "", dependencyAfter = "") =>

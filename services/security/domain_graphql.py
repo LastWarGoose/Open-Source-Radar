@@ -3,6 +3,7 @@ from enum import Enum
 from uuid import UUID
 
 import strawberry
+from packaging.version import InvalidVersion, Version
 from radar_common.database import engine
 from radar_common.graphql import (
     Connection,
@@ -11,6 +12,7 @@ from radar_common.graphql import (
     db_call,
     decode_cursor,
     encode_cursor,
+    invalid,
     page_loader,
     page_size,
     scope_key,
@@ -22,6 +24,7 @@ from strawberry.dataloader import DataLoader
 from strawberry.types import Info
 
 from services.security.models import AliasRow, FindingRow, VersionScanRow, VulnerabilityRow
+from services.security.scan_results import FixKey, nearest_scans, scan_fixes
 
 
 @strawberry.enum
@@ -71,6 +74,13 @@ def view(row: VulnerabilityRow) -> Vulnerability:
 
 
 @strawberry.type
+class AdvisoryFix:
+    advisory_id: strawberry.ID
+    version: str
+    historical: bool
+
+
+@strawberry.type
 class VersionScan:
     id: strawberry.ID
     status: ScanStatus
@@ -78,6 +88,31 @@ class VersionScan:
     checked_at: datetime | None
     last_success_at: datetime | None
     error_code: str | None
+    version: str | None
+    package_name: strawberry.Private[str | None]
+
+    @strawberry.field
+    async def fixes(
+        self, info: Info, first: int = 20, after: str | None = None
+    ) -> Connection[AdvisoryFix]:
+        size = page_size(first)
+        scope = scope_key("fixes", str(self.id))
+        cursor = decode_cursor(after, scope, 2)
+        rows = []
+        if self.last_success_at and self.package_name and self.version and self.source == "OSV":
+            rows = await info.context["security"].fixes.load(
+                FixKey(UUID(str(self.id)), self.package_name, Version(self.version))
+            )
+        items = [
+            AdvisoryFix(advisory_id=strawberry.ID(advisory), version=fixed, historical=past)
+            for advisory, fixed, past in rows
+            if not cursor or (str(int(past)), advisory) > (cursor[0], cursor[1])
+        ]
+        return connection(
+            items[: size + 1],
+            size,
+            lambda f: encode_cursor(scope, str(int(f.historical)), str(f.advisory_id)),
+        )
 
     @strawberry.field
     async def findings(
@@ -92,6 +127,27 @@ class VersionScan:
         )
 
 
+def scan_view(row: VersionScanRow | None) -> VersionScan | None:
+    return (
+        VersionScan(
+            id=strawberry.ID(str(row.id)),
+            status=ScanStatus.STALE
+            if row.status == "SUCCESS"
+            and row.last_success_at
+            and row.last_success_at < datetime.now(UTC) - timedelta(days=1)
+            else ScanStatus(row.status),
+            source=row.source,
+            checked_at=row.checked_at,
+            last_success_at=row.last_success_at,
+            error_code=row.error_code,
+            version=row.version,
+            package_name=row.package_name,
+        )
+        if row
+        else None
+    )
+
+
 @strawberry.federation.type(keys=["id"], extend=True)
 class Release:
     id: strawberry.ID = strawberry.federation.field(external=True)
@@ -102,23 +158,26 @@ class Release:
 
     @strawberry.field
     async def scan(self, info: Info) -> VersionScan | None:
-        row = await info.context["security"].scans.load(str(self.id))
-        return (
-            VersionScan(
-                id=strawberry.ID(str(row.id)),
-                status=ScanStatus.STALE
-                if row.status == "SUCCESS"
-                and row.last_success_at
-                and row.last_success_at < datetime.now(UTC) - timedelta(days=1)
-                else ScanStatus(row.status),
-                source=row.source,
-                checked_at=row.checked_at,
-                last_success_at=row.last_success_at,
-                error_code=row.error_code,
-            )
-            if row
-            else None
-        )
+        return scan_view(await info.context["security"].scans.load(str(self.id)))
+
+
+@strawberry.federation.type(keys=["id"], extend=True)
+class Package:
+    id: strawberry.ID = strawberry.federation.field(external=True)
+
+    @classmethod
+    def resolve_reference(cls, id: strawberry.ID) -> "Package":
+        return cls(id=id)
+
+    @strawberry.field
+    async def nearest_osv_scan(self, info: Info, version: str) -> VersionScan | None:
+        if not self.id.startswith("pypi:") or len(version) > 200:
+            raise invalid("Invalid package or version")
+        try:
+            target = Version(version)
+        except InvalidVersion:
+            raise invalid("Invalid version") from None
+        return scan_view(await info.context["security"].nearest.load((self.id[5:], target)))
 
 
 class SecurityLoaders:
@@ -168,6 +227,8 @@ class SecurityLoaders:
             return statement
 
         self.scans = DataLoader(load_fn=scans, max_batch_size=100)
+        self.nearest = DataLoader(load_fn=nearest_scans, max_batch_size=100)
+        self.fixes = DataLoader(load_fn=scan_fixes, max_batch_size=100)
         self.vulnerabilities = DataLoader(load_fn=vulnerabilities, max_batch_size=100)
         self.findings = page_loader(VulnerabilityRow, findings, [VulnerabilityRow.id])
         self.aliases = page_loader(AliasRow, aliases, [AliasRow.alias])

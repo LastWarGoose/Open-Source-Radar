@@ -5,7 +5,7 @@ import { getClient } from "../src/apollo-server";
 import { PublicCatalogDocument } from "../src/gql/graphql";
 import { CompareToggle } from "../src/comparison";
 import { CatalogSection } from "../src/catalog-section";
-import { Freshness, ProjectionNote } from "../src/public-ui";
+import { PypiSnapshot, ProjectionNote } from "../src/public-ui";
 import { badInput } from "../src/public-data";
 import { catalogState, catalogURL, packageURL, type Search } from "../src/url-state";
 
@@ -171,7 +171,11 @@ export default async function Page({ searchParams }: { searchParams: Promise<Sea
                       <span>{item.license || "Лицензия не указана"}</span>
                       <span>Python {item.requiresPython || "—"}</span>
                     </div>
-                    <Freshness value={item.pypiFreshness} label="PyPI" />
+                    <PypiSnapshot
+                      version={item.releases.nodes[0]?.version}
+                      fetchedAt={item.releases.nodes[0]?.fetchedAt}
+                      freshness={item.pypiFreshness}
+                    />
                   </div>
                   <div className="package-actions">
                     <span className="star-count">

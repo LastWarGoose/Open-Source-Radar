@@ -88,6 +88,14 @@ def response(request: httpx.Request) -> httpx.Response:
             "id": identity,
             "aliases": [ALIAS if identity == ADVISORY else ADVISORY],
             "summary": "Synthetic advisory",
+            "affected": [
+                {
+                    "package": {"name": NAME, "ecosystem": "PyPI"},
+                    "ranges": [
+                        {"type": "ECOSYSTEM", "events": [{"introduced": "0"}, {"fixed": "1.2"}]}
+                    ],
+                }
+            ],
             "modified": STAMP.isoformat(),
         },
     )
@@ -272,6 +280,10 @@ def check_security() -> None:
             )
             == 1
         ), "Aliases must not inflate findings"
+        assert (
+            session.scalar(select(FindingRow.fixed_version).where(FindingRow.scan_id == scan.id))
+            == "1.2"
+        )
     # Failure retains findings; it must never become a successful empty scan.
     failed = make({**payload, "observed": (STAMP + timedelta(seconds=1)).isoformat()})
     with patch("services.security.importer.fetch", side_effect=SourceError("INVALID_JSON")):

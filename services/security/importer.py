@@ -32,14 +32,31 @@ def process(work: Work, http: SourceHTTP) -> None:
             )
             session.add(row)
         row.status, row.source, row.checked_at = "SUCCESS", "OSV", now
+        row.package_name, row.version = work.payload["name"], work.payload["version"]
         row.last_success_at, row.error_code = now, None
         session.flush()
         session.execute(delete(FindingRow).where(FindingRow.scan_id == row.id))
-        canonical_ids = {
-            save_advisory(session, a.id, a.aliases, a.summary or a.details[:1000], now)
-            for a in advisories
-        }
-        session.add_all([FindingRow(scan_id=row.id, vulnerability_id=key) for key in canonical_ids])
+        fixes: dict[str, set[str]] = {}
+        for advisory in advisories:
+            key = save_advisory(
+                session,
+                advisory.id,
+                advisory.aliases,
+                advisory.summary or advisory.details[:1000],
+                now,
+            )
+            versions = fixes.setdefault(key, set())
+            fixed = advisory.fix_for(work.payload["name"], work.payload["version"])
+            if fixed:
+                versions.add(fixed)
+        for key, versions in fixes.items():
+            session.add(
+                FindingRow(
+                    scan_id=row.id,
+                    vulnerability_id=key,
+                    fixed_version=next(iter(versions)) if len(versions) == 1 else None,
+                )
+            )
 
 
 def failed(session: Session, work: Work, code: str) -> None:
@@ -59,4 +76,5 @@ def failed(session: Session, work: Work, code: str) -> None:
         )
         session.add(row)
     row.status = "STALE" if row.last_success_at else "FAILED"
+    row.package_name, row.version = work.payload["name"], work.payload["version"]
     row.checked_at, row.error_code = datetime.now(UTC), code

@@ -88,6 +88,7 @@ type Package @key(fields: "id") {
   starProjection: StarProjection!
   pypiFreshness: SourceFreshness!
   releases(first: Int! = 20, after: String = null, source: String = null): ReleaseConnection!
+  nearestPypiRelease(version: String!): Release
   release(version: String!, source: String! = "PYPI"): Release
 }
 

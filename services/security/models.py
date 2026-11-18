@@ -29,6 +29,8 @@ class VersionScanRow(Base):
     __tablename__ = "version_scans"
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
     release_id: Mapped[str] = mapped_column(String(36), unique=True)
+    package_name: Mapped[str | None] = mapped_column(String(200), index=True)
+    version: Mapped[str | None] = mapped_column(String(200))
     status: Mapped[str] = mapped_column(String(16))
     source: Mapped[str] = mapped_column(String(32))
     checked_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
@@ -51,3 +53,4 @@ class FindingRow(Base):
     vulnerability_id: Mapped[str] = mapped_column(
         ForeignKey("vulnerabilities.id", ondelete="CASCADE"), primary_key=True
     )
+    fixed_version: Mapped[str | None] = mapped_column(String(200))

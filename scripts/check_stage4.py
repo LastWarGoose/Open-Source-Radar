@@ -76,6 +76,8 @@ def seed() -> None:
                         )
             if i == 0:
                 save_release(session, name, "99.0", STAMP, source="SYNTHETIC")
+            if i == 1:
+                save_release(session, name, "1.1", STAMP)
     owner("repositories")
     with Session(engine()) as session, session.begin():
         for i, stars in enumerate([30, 50, 30, 0, None]):
@@ -112,26 +114,33 @@ def seed() -> None:
         for i, status in enumerate(["SUCCESS", "SUCCESS", "FAILED", "UNKNOWN"]):
             scan = VersionScanRow(
                 release_id=str(release_id(NAMES[i], "21.0" if i == 0 else "1.0")),
+                package_name=NAMES[i],
+                version="21.0" if i == 0 else "1.0",
                 status=status,
                 source="OSV",
                 checked_at=STAMP if i != 3 else None,
-                last_success_at=STAMP if i < 2 else None,
+                last_success_at=(STAMP - timedelta(days=i)) if i < 2 else None,
                 error_code="TIMEOUT" if i == 2 else None,
             )
             session.add(scan)
             session.flush()
             if i == 1:
-                session.add(FindingRow(scan_id=scan.id, vulnerability_id=ADVISORY))
-        session.add(
-            VersionScanRow(
-                release_id=str(release_id(NAMES[0], "1.0")),
-                status="STALE",
-                source="OSV",
-                checked_at=STAMP,
-                last_success_at=STAMP - timedelta(days=1),
-                error_code="TIMEOUT",
-            )
+                session.add(
+                    FindingRow(scan_id=scan.id, vulnerability_id=ADVISORY, fixed_version="1.2")
+                )
+        older = VersionScanRow(
+            release_id=str(release_id(NAMES[0], "1.0")),
+            package_name=NAMES[0],
+            version="1.0",
+            status="STALE",
+            source="OSV",
+            checked_at=STAMP,
+            last_success_at=STAMP - timedelta(days=1),
+            error_code="TIMEOUT",
         )
+        session.add(older)
+        session.flush()
+        session.add(FindingRow(scan_id=older.id, vulnerability_id=ADVISORY, fixed_version="2.1"))
     owner("catalog")
     reconcile_catalog()
     print("PASS: temporary UI fixture set ready", flush=True)

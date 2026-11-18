@@ -66,19 +66,22 @@ test("package versions, requirements, OSV states, metadata and missing package",
   await expect(page.locator(".version-list")).not.toContainText("99.0");
   await expect(page.locator(".dependency-list li")).toHaveCount(20);
   await expect(page.locator(".dependency-list")).toContainText('python_version < "3.13"');
-  await expect(
-    page.getByText("Совпадений не найдено. Это не гарантия безопасности."),
-  ).toBeVisible();
+  await expect(page.getByText("Совпадений не найдено.")).toBeVisible();
+  await expect(page.locator(".scan-result")).toContainText("Исправлено в 2.1");
   await page.getByRole("link", { name: "Ещё зависимости →" }).click();
   await expect(page.locator(".dependency-list li")).toHaveCount(5);
   await expect(page).toHaveURL(/version=21.0/);
   await page.getByRole("link", { name: "Ещё версии →" }).click();
   await page.getByRole("link", { name: "1.0", exact: true }).click();
   await expect(page.getByRole("heading", { name: "Версия 1.0", exact: true })).toBeVisible();
-  await expect(page.getByText("Показан последний сохранённый результат.")).toBeVisible();
+  await expect(page.locator(".findings")).toContainText("Исправлено в 2.1");
+  await expect(page.getByText("Последнее обновление OSV не удалось")).toBeVisible();
+  await page.goto(`/packages/${names[0]}?version=2.0`);
+  await expect(page.locator(".scan-result")).toContainText("Ближайшая проверенная — 1.0");
+  await expect(page.locator(".findings")).toContainText("Исправлено в 2.1");
   await page.goto(`/packages/${names[1]}`);
   await expect(page.locator(".findings")).toContainText("TEST-RADAR-STAGE4-ALIAS");
-  await expect(page.getByText(/PyPI: Устарело/)).toBeVisible();
+  await expect(page.getByText("Последнее обновление не удалось")).toBeVisible();
   await page.goto(`/packages/${names[2]}`);
   await expect(page.getByText("Проверка не завершена.")).toBeVisible();
   await page.goto(`/packages/${names[3]}`);
@@ -86,7 +89,7 @@ test("package versions, requirements, OSV states, metadata and missing package",
   await page.goto(`/packages/${names[4]}`);
   await expect(page.getByRole("heading", { name: "Версии пока не загружены" })).toBeVisible();
   await page.goto(`/packages/${names[0]}?version=99.0`);
-  await expect(page.getByRole("heading", { name: "Версия не найдена в каталоге" })).toBeVisible();
+  await expect(page.getByText(/Для версии 99.0 нет данных PyPI.*21.0/)).toBeVisible();
   await page.goto("/packages/radar-stage4-hidden");
   await expect(page.getByRole("heading", { name: "Пакет или страница не найдены" })).toBeVisible();
 });
@@ -133,38 +136,42 @@ test("comparison cap, persistence, shared URL, removal and invalid input", async
   await page.getByRole("link", { name: "Сравнить →", exact: true }).click();
   await expect(page.locator("thead th")).toHaveCount(5);
   await expect(page.getByRole("table")).toContainText(`Source repository for ${names[0]}.`);
-  const toggle = page.getByRole("button", { name: "Только различия" });
+  const toggle = page.getByRole("checkbox", { name: "Скрыть строки с одинаковыми значениями" });
   await expect(page.getByRole("rowheader", { name: "Python", exact: true })).toBeVisible();
   await toggle.click();
-  await expect(toggle).toHaveAttribute("aria-pressed", "true");
+  await expect(toggle).toBeChecked();
   await expect(page.getByRole("rowheader", { name: "Python", exact: true })).toHaveCount(0);
   await expect(page.getByRole("rowheader", { name: "Лицензия" })).toBeVisible();
   await page.goBack();
-  await expect(toggle).toHaveAttribute("aria-pressed", "false");
+  await expect(toggle).not.toBeChecked();
   await toggle.click();
   // Exercise the manual sharing path even on runners without clipboard access.
   await page.evaluate(() => {
     Object.defineProperty(navigator, "clipboard", { value: undefined, configurable: true });
   });
-  await page.getByRole("button", { name: "Скопировать ссылку" }).click();
+  await page.getByRole("button", { name: "Скопировать ссылку на сравнение" }).click();
   const sharedURL = await page.getByRole("textbox", { name: "Ссылка на сравнение" }).inputValue();
   expect(sharedURL).toBe(page.url());
   const shared = await context.newPage();
   await shared.goto(sharedURL);
   await expect(shared.locator("thead th")).toHaveCount(5);
-  await expect(shared.getByRole("button", { name: "Только различия" })).toHaveAttribute(
-    "aria-pressed",
-    "true",
-  );
+  await expect(
+    shared.getByRole("checkbox", { name: "Скрыть строки с одинаковыми значениями" }),
+  ).toBeChecked();
   await expect(shared.getByRole("rowheader", { name: "Python", exact: true })).toHaveCount(0);
   await expect(shared.getByRole("table")).toContainText("Найдено: 1");
-  await shared.getByText("Найдено: 1", { exact: true }).click();
+  await expect(shared.getByRole("table")).toContainText(
+    "Для версии 1.1 нет проверки. Ближайшая проверенная — 1.0.",
+  );
   await expect(
-    shared.getByRole("cell").getByText("TEST-RADAR-STAGE4", { exact: true }),
+    shared
+      .getByRole("cell")
+      .filter({ hasText: "Найдено: 1" })
+      .getByText("Исправлено в 1.2", { exact: true }),
   ).toBeVisible();
   await page.getByRole("link", { name: `Удалить ${names[0]} из сравнения` }).click();
   await expect(page.locator("thead th")).toHaveCount(4);
-  await expect(toggle).toHaveAttribute("aria-pressed", "true");
+  await expect(toggle).toBeChecked();
   await page.goto("/compare?packages=" + names.join(","));
   await expect(page.getByRole("heading", { name: "Можно сравнить до 4 пакетов" })).toBeVisible();
   await page.goto("/compare?packages=radar-does-not-exist");

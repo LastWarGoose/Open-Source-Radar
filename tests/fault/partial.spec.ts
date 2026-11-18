@@ -32,13 +32,13 @@ test("public site preserves available data during an actual service outage", asy
     ).toBeVisible();
     const affected = page.getByRole("row").filter({
       has: page.getByRole("rowheader", {
-        name: service === "security" ? "OSV · выбранная версия" : "Репозитории",
+        name: service === "security" ? "Уязвимости OSV" : "Репозитории",
         exact: true,
       }),
     });
     await expect(
       affected.getByRole("cell", {
-        name: service === "security" ? "Недоступно" : "GitHub недоступен",
+        name: service === "security" ? "OSV недоступен" : "GitHub недоступен",
         exact: true,
       }),
     ).toHaveCount(2);

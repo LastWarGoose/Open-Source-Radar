@@ -101,9 +101,9 @@ function ShareComparison({ path }: { path: string }) {
           }
         }}
       >
-        Скопировать ссылку
+        Скопировать ссылку на сравнение
       </button>
-      <span role="status">
+      <span role="status" className="share-status">
         {copied ? "Ссылка скопирована" : manualURL ? "Скопируйте ссылку из поля" : ""}
       </span>
       {manualURL && (
@@ -133,19 +133,23 @@ export function ComparisonTable({
     <>
       <div className="comparison-tools">
         {names.length > 1 && (
-          <button
-            type="button"
-            className="secondary"
-            aria-pressed={differences}
-            onClick={() => window.history.pushState(null, "", compareURL(names, !differences))}
-          >
-            Только различия
-          </button>
+          <label className="comparison-filter">
+            <input
+              type="checkbox"
+              checked={differences}
+              aria-controls="package-comparison"
+              onChange={() => window.history.pushState(null, "", compareURL(names, !differences))}
+            />
+            Скрыть строки с одинаковыми значениями
+          </label>
         )}
+        <span role="status" className="muted">
+          Показано строк: {visible.length} из {rows.length}
+        </span>
         <ShareComparison key={path} path={path} />
       </div>
       <div className="table-scroll" tabIndex={0} role="region" aria-label="Таблица сравнения">
-        <table className="comparison-table">
+        <table className="comparison-table" id="package-comparison">
           <thead>
             <tr>
               <th scope="col">Параметр</th>

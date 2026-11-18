@@ -12,11 +12,27 @@ type AdvisoryAliasConnection {
   pageInfo: PageInfo!
 }
 
+type AdvisoryFix {
+  advisoryId: ID!
+  version: String!
+  historical: Boolean!
+}
+
+type AdvisoryFixConnection {
+  nodes: [AdvisoryFix!]!
+  pageInfo: PageInfo!
+}
+
 """Date with time (isoformat)"""
 scalar DateTime
 
 type Mutation {
   requestSecurityImport(requestKey: UUID!, releaseId: ID!, name: String!, version: String!, observedAt: DateTime!): SourceImportJob!
+}
+
+extend type Package @key(fields: "id") {
+  id: ID! @external
+  nearestOsvScan(version: String!): VersionScan
 }
 
 type PageInfo @shareable {
@@ -60,6 +76,8 @@ type VersionScan {
   checkedAt: DateTime
   lastSuccessAt: DateTime
   errorCode: String
+  version: String
+  fixes(first: Int! = 20, after: String = null): AdvisoryFixConnection!
   findings(first: Int! = 20, after: String = null): VulnerabilityConnection!
 }
 
@@ -78,7 +96,7 @@ type VulnerabilityConnection {
 
 scalar _Any
 
-union _Entity = Release | Vulnerability
+union _Entity = Package | Release | Vulnerability
 
 type _Service {
   sdl: String!

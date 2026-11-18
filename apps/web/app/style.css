@@ -429,8 +429,37 @@ label {
 .comparison-table summary {
   cursor: pointer;
 }
+.scan-result {
+  display: grid;
+  gap: 0.45rem;
+}
+.fix-version {
+  display: block;
+  font-weight: 600;
+}
 .comparison-tools [role="status"] {
   font-size: 14px;
+}
+.comparison-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 44px;
+  cursor: pointer;
+}
+.comparison-filter input[type="checkbox"] {
+  width: 1.15rem;
+  height: 1.15rem;
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+  accent-color: var(--accent);
+}
+.comparison-tools .secondary {
+  margin-inline-start: auto;
+}
+.comparison-tools .share-status:empty {
+  display: none;
 }
 .public-package-row {
   position: relative;

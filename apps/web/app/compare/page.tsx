@@ -74,7 +74,7 @@ export default async function ComparePage({ searchParams }: { searchParams: Prom
             Часть данных недоступна. Показаны доступные сведения.
           </p>
         )}
-        <ComparisonTable names={names} rows={comparisonRows(items, result.error)} />
+        <ComparisonTable names={names} rows={await comparisonRows(items, result.error)} />
         <p className="muted comparison-note">
           Звёзды — максимум среди подтверждённых репозиториев. Отсутствие совпадений OSV не
           гарантирует безопасность.

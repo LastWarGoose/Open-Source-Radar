@@ -44,6 +44,21 @@ type AdvisoryAliasConnection
   pageInfo: PageInfo!
 }
 
+type AdvisoryFix
+  @join__type(graph: SECURITY)
+{
+  advisoryId: ID!
+  version: String!
+  historical: Boolean!
+}
+
+type AdvisoryFixConnection
+  @join__type(graph: SECURITY)
+{
+  nodes: [AdvisoryFix!]!
+  pageInfo: PageInfo!
+}
+
 type Collection
   @join__type(graph: WORKSPACE)
 {
@@ -250,6 +265,7 @@ type NotificationConnection
 type Package
   @join__type(graph: CATALOG, key: "id")
   @join__type(graph: REPOSITORIES, key: "id", extension: true)
+  @join__type(graph: SECURITY, key: "id", extension: true)
   @join__type(graph: WORKSPACE, key: "id", resolvable: false)
 {
   id: ID!
@@ -265,9 +281,11 @@ type Package
   starProjection: StarProjection! @join__field(graph: CATALOG)
   pypiFreshness: SourceFreshness! @join__field(graph: CATALOG)
   releases(first: Int! = 20, after: String = null, source: String = null): ReleaseConnection! @join__field(graph: CATALOG)
+  nearestPypiRelease(version: String!): Release @join__field(graph: CATALOG)
   release(version: String!, source: String! = "PYPI"): Release @join__field(graph: CATALOG)
   githubFreshness: SourceFreshness @join__field(graph: REPOSITORIES)
   repositories(first: Int! = 20, after: String = null): RepositoryLinkConnection @join__field(graph: REPOSITORIES)
+  nearestOsvScan(version: String!): VersionScan @join__field(graph: SECURITY)
 }
 
 type PackageConnection
@@ -487,6 +505,8 @@ type VersionScan
   checkedAt: DateTime
   lastSuccessAt: DateTime
   errorCode: String
+  version: String
+  fixes(first: Int! = 20, after: String = null): AdvisoryFixConnection!
   findings(first: Int! = 20, after: String = null): VulnerabilityConnection!
 }
 

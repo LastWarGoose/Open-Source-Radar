@@ -1,10 +1,12 @@
 import re
+from collections import defaultdict
 from datetime import UTC, datetime, timedelta
 from enum import Enum
 from uuid import UUID
 
 import strawberry
 from graphql import GraphQLError
+from packaging.version import InvalidVersion, Version
 from radar_common.database import engine
 from radar_common.graphql import (
     Connection,
@@ -20,6 +22,7 @@ from radar_common.graphql import (
 )
 from radar_common.session import require_admin
 from radar_common.source_graphql import SourceFreshness, freshness_loader, freshness_view
+from radar_common.versions import nearest_version
 from sqlalchemy import (
     ARRAY,
     Select,
@@ -116,6 +119,19 @@ class Package:
             first,
             lambda item: encode_cursor(scope, str(item.rank), str(item.id)),
         )
+
+    @strawberry.field
+    async def nearest_pypi_release(self, info: Info, version: str) -> "Release | None":
+        if len(version) > 200:
+            raise invalid("Invalid version")
+        try:
+            key = (str(self.id), Version(version))
+        except InvalidVersion:
+            raise invalid("Invalid version") from None
+        loaders = info.context["catalog"]
+        identity = await loaders.nearest_pypi.load(key)
+        row = await loaders.release_by_id.load(str(identity)) if identity else None
+        return release_view(row) if row else None
 
     @strawberry.field
     async def release(self, info: Info, version: str, source: str = "PYPI") -> "Release | None":
@@ -342,6 +358,22 @@ class CatalogLoaders:
 
             return await db_call(read)
 
+        async def nearest(keys: list[tuple[str, Version]]) -> list[UUID | None]:
+            def read() -> list[UUID | None]:
+                grouped: dict[str, dict[Version, UUID]] = defaultdict(dict)
+                with Session(engine()) as session:
+                    for name, version, identity in session.execute(
+                        select(ReleaseRow.package_id, ReleaseRow.version, ReleaseRow.id).where(
+                            ReleaseRow.package_id.in_({pkg for pkg, _ in keys}),
+                            ReleaseRow.source == "PYPI",
+                        )
+                    ):
+                        grouped[name][Version(version)] = identity
+                return [nearest_version(grouped[pkg], target) for pkg, target in keys]
+
+            return await db_call(read)
+
+        self.nearest_pypi = DataLoader(load_fn=nearest, max_batch_size=100)
         self.packages = DataLoader(load_fn=packages, max_batch_size=100)
         self.release_by_id = DataLoader(load_fn=releases, max_batch_size=100)
         self.releases = page_loader(

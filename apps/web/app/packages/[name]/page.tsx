@@ -1,10 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { loadPackage, failedField, badInput } from "../../../src/public-data";
+import {
+  loadPackage,
+  loadNearestScan,
+  loadNearestRelease,
+  hasOsvResult,
+  failedField,
+  badInput,
+} from "../../../src/public-data";
 import {
   Panel,
   Freshness,
+  PypiSnapshot,
   ProjectionNote,
   RepositorySummary,
   Scan,
@@ -53,10 +61,20 @@ export default async function PackagePage({ params, searchParams }: Props) {
     );
   if (!data?.package || data.package.source !== "PYPI") notFound();
   const item = data.package;
-  const release = version ? item.selected : item.latest?.nodes[0];
+  const nearby =
+    version && !item.selected && !badInput(error) && !failedField(error, "selected")
+      ? await loadNearestRelease(item.id, version)
+      : null;
+  const release = version
+    ? (item.selected ?? nearby?.data?.package?.nearestPypiRelease)
+    : item.latest?.nodes[0];
   const repositoryDown =
     failedField(error, "repositories") || failedField(error, "githubFreshness");
-  const scanDown = failedField(error, "scan");
+  const scanDown = failedField(error, "scan") || failedField(nearby?.error, "scan");
+  const fallback =
+    release && !hasOsvResult(release.scan) && !scanDown
+      ? await loadNearestScan(item.id, release.version)
+      : null;
   return (
     <>
       <div className="breadcrumbs">
@@ -88,7 +106,11 @@ export default async function PackagePage({ params, searchParams }: Props) {
           </div>
         </div>
         <div className="source-line">
-          <Freshness label="PyPI" value={item.pypiFreshness} />
+          <PypiSnapshot
+            version={release?.version}
+            fetchedAt={release?.fetchedAt}
+            freshness={item.pypiFreshness}
+          />
           <a
             href={`https://pypi.org/project/${encodeURIComponent(name)}/`}
             target="_blank"
@@ -163,6 +185,12 @@ export default async function PackagePage({ params, searchParams }: Props) {
       </div>
       {release ? (
         <>
+          {nearby && (
+            <p className="notice">
+              Для версии {version} нет данных PyPI. Показана ближайшая загруженная версия{" "}
+              {release.version}.
+            </p>
+          )}
           <div className="release-heading">
             <h2>Версия {release.version}</h2>
             <span className="muted">PyPI · {date(release.fetchedAt)}</span>
@@ -207,13 +235,25 @@ export default async function PackagePage({ params, searchParams }: Props) {
               </div>
             </Panel>
             <Panel title="Уязвимости OSV" id="osv-title">
-              <Scan scan={release.scan} unavailable={scanDown} />
+              <Scan
+                scan={fallback?.scan ?? release.scan}
+                selected={release.version}
+                nearby={Boolean(fallback?.scan)}
+                failed={release.scan?.status === "FAILED"}
+                unavailable={scanDown || fallback?.unavailable}
+              />
             </Panel>
           </div>
         </>
       ) : (
         <section className="catalog empty-state">
-          <h2>{version ? "Версия не найдена в каталоге" : "Версии пока не загружены"}</h2>
+          <h2>
+            {nearby?.error
+              ? "Данные PyPI недоступны"
+              : version
+                ? "Версия не найдена в каталоге"
+                : "Версии пока не загружены"}
+          </h2>
           {version && <Link href={detailURL()}>Последняя загруженная версия →</Link>}
         </section>
       )}
