@@ -13,7 +13,7 @@ def main() -> None:
         compose("run", "--rm", "checks", ".venv/bin/python", "-m", "scripts.check_stage5")
     finally:
         if restore:
-            compose("start", "--wait", *restore)
+            compose("up", "-d", "--no-deps", "--no-recreate", "--wait", *restore)
     print("PASS: offline campaign checks; previous consumer configuration restored", flush=True)
 
 

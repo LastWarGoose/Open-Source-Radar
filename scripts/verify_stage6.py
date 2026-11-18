@@ -55,7 +55,7 @@ def main() -> None:
             check("scripts.fixtures_stage6", "cleanup")
         finally:
             if active:
-                compose("start", "--wait", *active)
+                compose("up", "-d", "--no-deps", "--no-recreate", "--wait", *active)
     print("PASS: stage 6 API/browser checks, fixtures removed, consumers restored")
 
 

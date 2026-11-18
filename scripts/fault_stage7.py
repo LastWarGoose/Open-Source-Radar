@@ -133,13 +133,13 @@ def main() -> None:
         assert result["errors"] and result["data"]["package"]["releases"]["nodes"][0]["version"]
         print("PASS independent release fields with Security stopped", flush=True)
     finally:
-        command("start", "--wait", "security")
+        command("up", "-d", "--no-deps", "--no-recreate", "--wait", "security")
     try:
         command("stop", "rabbitmq")
         identity = enqueue()
         assert scalar(f"SELECT published_at IS NULL FROM outbox WHERE job_id='{identity}'") == "t"
     finally:
-        command("start", "--wait", "rabbitmq")
+        command("up", "-d", "--no-deps", "--no-recreate", "--wait", "rabbitmq")
     until(lambda: receipts(identity) == "1")
     print("PASS recovery of job queued during broker outage", flush=True)
     command("stop", "worker")
@@ -152,7 +152,7 @@ def main() -> None:
             )
         )
         command("restart", "rabbitmq")
-        command("start", "--wait", "rabbitmq")
+        command("up", "-d", "--no-deps", "--no-recreate", "--wait", "rabbitmq")
     finally:
         command("start", "worker")
     until(lambda: receipts(queued) == "1")
