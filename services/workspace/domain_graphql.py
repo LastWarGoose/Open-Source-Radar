@@ -23,6 +23,7 @@ from strawberry.types import Info
 
 from services.workspace.access import actor_for_token
 from services.workspace.accounts import principal
+from services.workspace.auth_graphql import account_view
 from services.workspace.models import CollectionItemRow, CollectionRow, NotificationRow
 
 
@@ -118,11 +119,13 @@ class WorkspaceLoaders:
 
 
 async def context_getter(request: Request) -> dict:
-    account = await db_call(principal, request.cookies.get(COOKIE, ""))
+    token = request.cookies.get(COOKIE)
+    account = await db_call(principal, token) if token else None
     return {
+        "account": account_view(account) if account else None,
         "workspace": WorkspaceLoaders(
             request.headers.get("x-workspace-token", ""), account.actor_id if account else None
-        )
+        ),
     }
 
 

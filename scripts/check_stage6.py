@@ -4,10 +4,13 @@ import json
 import os
 import secrets
 import time
+from concurrent.futures import ThreadPoolExecutor
 from datetime import UTC, datetime, timedelta
+from unittest.mock import patch
 from uuid import UUID, uuid4
 
 import httpx
+from graphql import GraphQLError
 from radar_common.database import engine
 from radar_common.import_queue import Work
 from sqlalchemy import delete, select, update
@@ -17,6 +20,7 @@ from websockets.typing import Origin, Subprotocol
 
 from scripts.check_stage3 import owner
 from services.catalog.domain_models import ImportJobRow
+from services.workspace import accounts
 from services.workspace.accounts import digest
 from services.workspace.models import (
     AccountRow,
@@ -34,6 +38,8 @@ REGISTER = """mutation Register($u:String!,$p:String!) {
  register(username:$u,password:$p) { account { id role } recoveryCode }
 }"""
 LOGIN = """mutation Login($u:String!,$p:String!) { login(username:$u,password:$p) { id role } }"""
+RECOVER = """mutation Recover($u:String!,$p:String!,$c:String!) {
+ recoverAccount(username:$u,password:$p,recoveryCode:$c) }"""
 
 
 def call(
@@ -66,6 +72,58 @@ def cleanup(names: list[str]) -> None:
             session.execute(delete(model).where(column.in_(ids)))
         keys = [digest(kind + name) for name in names for kind in ("login:", "recovery:")]
         session.execute(delete(AuthAttemptRow).where(AuthAttemptRow.key.in_(keys)))
+
+
+def check_concurrent_budget() -> None:
+    key = "check-budget:" + uuid4().hex
+
+    def reserve() -> bool:
+        try:
+            accounts.throttle((key, 3))
+        except GraphQLError as exc:
+            assert exc.extensions and exc.extensions.get("code") == "RATE_LIMITED"
+            return False
+        return True
+
+    try:
+        with ThreadPoolExecutor(max_workers=4) as pool:
+            requests = [pool.submit(reserve) for _ in range(8)]
+            assert sum(request.result() for request in requests) == 3
+        with Session(engine()) as session, session.begin():
+            session.execute(
+                update(AuthAttemptRow)
+                .where(AuthAttemptRow.key == digest(key))
+                .values(reset_at=datetime.now(UTC) - timedelta(seconds=1))
+            )
+        assert reserve()
+    finally:
+        with Session(engine()) as session, session.begin():
+            session.execute(delete(AuthAttemptRow).where(AuthAttemptRow.key == digest(key)))
+
+
+def check_recovery_during_login(
+    client: httpx.Client, username: str, password: str, reg: dict
+) -> None:
+    verify = accounts.PASSWORD.verify
+    replacement = secrets.token_urlsafe(24)
+
+    def verify_and_recover(candidate: str, stored: str) -> bool:
+        valid = verify(candidate, stored)
+        assert valid
+        call(client, RECOVER, {"u": username, "p": replacement, "c": reg["recoveryCode"]})
+        return valid
+
+    with patch.object(accounts.PASSWORD, "verify", side_effect=verify_and_recover):
+        try:
+            accounts.login(username, password)
+        except GraphQLError as exc:
+            assert exc.extensions and exc.extensions.get("code") == "UNAUTHENTICATED"
+        else:
+            raise AssertionError("A superseded password issued a session")
+    assert (
+        call(client, LOGIN, {"u": username, "p": replacement})["login"]["id"]
+        == reg["account"]["id"]
+    )
 
 
 def main() -> None:
@@ -212,16 +270,14 @@ def main() -> None:
                 )
             expired = json.loads(ws.recv(timeout=10))
             assert expired["type"] == "error" or expired.get("payload", {}).get("errors"), expired
-        recovery_query = """mutation R($u:String!,$p:String!,$c:String!) {
-            recoverAccount(username:$u,password:$p,recoveryCode:$c) }"""
         newpassword = secrets.token_urlsafe(24)
-        newcode = call(
-            anon, recovery_query, {"u": names[0], "p": newpassword, "c": ra["recoveryCode"]}
-        )["recoverAccount"]
+        newcode = call(anon, RECOVER, {"u": names[0], "p": newpassword, "c": ra["recoveryCode"]})[
+            "recoverAccount"
+        ]
         assert newcode != ra["recoveryCode"] and call(a, "query { me { id } }")["me"] is None
         call(
             anon,
-            recovery_query,
+            RECOVER,
             {"u": names[0], "p": password, "c": ra["recoveryCode"]},
             error=True,
         )
@@ -235,9 +291,12 @@ def main() -> None:
                 .values(expires_at=datetime.now(UTC) - timedelta(seconds=1))
             )
         call(a, "query { myCollections { nodes { id } } }", error=True)
+        check_concurrent_budget()
+        check_recovery_during_login(anon, names[1], password, rb)
         print(
             "PASS: registration, private CRUD, CSRF, user/admin, durable notifications, "
-            "import idempotency, subscription reconnect/revocation, recovery rotation and expiry"
+            "import idempotency, subscription reconnect/revocation, recovery rotation and expiry, "
+            "concurrent attempt budget and password replacement during login"
         )
     finally:
         owner("catalog")

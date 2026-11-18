@@ -1,12 +1,16 @@
 import os
+from concurrent.futures import ThreadPoolExecutor
 
 import strawberry
-from radar_common.graphql import db_call
+from radar_common.graphql import db_call, db_call_on
 from radar_common.session import COOKIE, require_origin
 from strawberry.types import Info
 
 from services.workspace import accounts
 from services.workspace.models import AccountRow
+
+# Password work must not occupy the threads used by session reads and collections.
+password_pool = ThreadPoolExecutor(max_workers=4, thread_name_prefix="workspace-auth")
 
 
 @strawberry.type
@@ -51,8 +55,7 @@ def mutation_origin(info: Info) -> None:
 class AuthQuery:
     @strawberry.field
     async def me(self, info: Info) -> Account | None:
-        row = await db_call(accounts.principal, info.context["request"].cookies.get(COOKIE, ""))
-        return account_view(row) if row else None
+        return info.context["account"]
 
 
 @strawberry.type
@@ -60,14 +63,16 @@ class AuthMutation:
     @strawberry.mutation
     async def register(self, info: Info, username: str, password: str) -> Registration:
         mutation_origin(info)
-        row, token, recovery = await db_call(accounts.register, username, password)
+        row, token, recovery = await db_call_on(
+            password_pool, accounts.register, username, password
+        )
         cookie(info, token)
         return Registration(account=account_view(row), recovery_code=recovery)
 
     @strawberry.mutation
     async def login(self, info: Info, username: str, password: str) -> Account:
         mutation_origin(info)
-        row, token = await db_call(accounts.login, username, password)
+        row, token = await db_call_on(password_pool, accounts.login, username, password)
         cookie(info, token)
         return account_view(row)
 
@@ -83,6 +88,6 @@ class AuthMutation:
         self, info: Info, username: str, recovery_code: str, password: str
     ) -> str:
         mutation_origin(info)
-        code = await db_call(accounts.recover, username, recovery_code, password)
+        code = await db_call_on(password_pool, accounts.recover, username, recovery_code, password)
         cookie(info, "")
         return code

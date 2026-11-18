@@ -18,6 +18,7 @@ from services.workspace.models import AccountRow, ActorRow, AuthAttemptRow, Sess
 
 PASSWORD = PasswordHash.recommended()
 DUMMY = PASSWORD.hash(secrets.token_urlsafe(32))
+AUTH_BUDGET = ("authentication:global", 300)
 SESSION_SECONDS = 60 * 60 * 24 * 7
 
 
@@ -42,23 +43,27 @@ def password_value(value: str) -> str:
     return value
 
 
-def throttle(key: str, limit: int = 10) -> None:
+def throttle(*budgets: tuple[str, int]) -> None:
     now = datetime.now(UTC)
     with Session(engine()) as session, session.begin():
         session.execute(delete(AuthAttemptRow).where(AuthAttemptRow.reset_at < now))
-        session.execute(
-            insert(AuthAttemptRow)
-            .values(key=digest(key), attempts=0, reset_at=now + timedelta(minutes=15))
-            .on_conflict_do_nothing()
-        )
-        row = session.scalar(
-            select(AuthAttemptRow).where(AuthAttemptRow.key == digest(key)).with_for_update()
-        )
-        assert row
-        blocked = row.attempts >= limit
-        row.attempts += 1
-    if blocked:
-        raise fail("Слишком много попыток. Повторите через 15 минут", "RATE_LIMITED")
+        for key, limit in budgets:
+            used = session.scalar(
+                insert(AuthAttemptRow)
+                .values(key=digest(key), attempts=1, reset_at=now + timedelta(minutes=15))
+                .on_conflict_do_update(
+                    index_elements=[AuthAttemptRow.key],
+                    set_={"attempts": AuthAttemptRow.attempts + 1},
+                    where=AuthAttemptRow.attempts < limit,
+                )
+                .returning(AuthAttemptRow.attempts)
+            )
+            if used is None:
+                break
+        else:
+            return
+    # Commit any earlier debit even when a later budget is exhausted.
+    raise fail("Слишком много попыток. Повторите через 15 минут", "RATE_LIMITED")
 
 
 def principal(token: str) -> AccountRow | None:
@@ -90,7 +95,7 @@ def issue(session: Session, actor: UUID) -> str:
 def register(username: str, password: str) -> tuple[AccountRow, str, str]:
     username = username_value(username)
     password_value(password)
-    throttle("register:global", 50)
+    throttle(("register:global", 50))
     hashed = PASSWORD.hash(password)
     recovery = secrets.token_urlsafe(32)
     with Session(engine(), expire_on_commit=False) as session, session.begin():
@@ -119,14 +124,27 @@ def login(username: str, password: str) -> tuple[AccountRow, str]:
     username = username_value(username)
     if len(password) > 128:
         raise fail("Неверный логин или пароль", "UNAUTHENTICATED")
-    throttle("login:" + username)
-    throttle("authentication:global", 300)
+    throttle(("login:" + username, 10), AUTH_BUDGET)
+    with Session(engine()) as session:
+        credentials = session.execute(
+            select(AccountRow.actor_id, AccountRow.password_hash).where(
+                AccountRow.username == username
+            )
+        ).one_or_none()
+    valid = PASSWORD.verify(password, credentials.password_hash if credentials else DUMMY)
+    if not valid or credentials is None:
+        raise fail("Неверный логин или пароль", "UNAUTHENTICATED")
     with Session(engine(), expire_on_commit=False) as session, session.begin():
+        # Recovery can replace the hash while Argon2 is running. Serialize only session issuance.
         row = session.scalar(
-            select(AccountRow).where(AccountRow.username == username).with_for_update()
+            select(AccountRow)
+            .where(
+                AccountRow.actor_id == credentials.actor_id,
+                AccountRow.password_hash == credentials.password_hash,
+            )
+            .with_for_update()
         )
-        valid = PASSWORD.verify(password, row.password_hash if row else DUMMY)
-        if not valid or row is None:
+        if row is None:
             raise fail("Неверный логин или пароль", "UNAUTHENTICATED")
         return row, issue(session, row.actor_id)
 
@@ -134,8 +152,7 @@ def login(username: str, password: str) -> tuple[AccountRow, str]:
 def recover(username: str, code: str, password: str) -> str:
     username = username_value(username)
     password_value(password)
-    throttle("recovery:" + username)
-    throttle("authentication:global", 300)
+    throttle(("recovery:" + username, 10), AUTH_BUDGET)
     if len(code) > 128:
         raise fail("Неверный логин или код восстановления", "UNAUTHENTICATED")
     hashed = PASSWORD.hash(password)

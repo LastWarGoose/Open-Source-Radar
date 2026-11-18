@@ -7,7 +7,10 @@ import hashlib
 import json
 import logging
 from collections.abc import Callable, Sequence
+from concurrent.futures import ThreadPoolExecutor
+from contextvars import copy_context
 from dataclasses import dataclass
+from functools import partial
 from typing import Generic, ParamSpec, TypeVar
 
 import strawberry
@@ -43,8 +46,15 @@ def invalid(message: str) -> GraphQLError:
 
 
 async def db_call[**P, R](fn: Callable[P, R], *args: P.args, **kwargs: P.kwargs) -> R:
+    return await db_call_on(None, fn, *args, **kwargs)
+
+
+async def db_call_on[**P, R](
+    pool: ThreadPoolExecutor | None, fn: Callable[P, R], /, *args: P.args, **kwargs: P.kwargs
+) -> R:
     try:
-        return await asyncio.to_thread(fn, *args, **kwargs)
+        call = partial(fn, *args, **kwargs)
+        return await asyncio.get_running_loop().run_in_executor(pool, copy_context().run, call)
     except SQLAlchemyError as error:
         logging.getLogger("radar.database").error(
             "storage_unavailable", extra={"error_type": type(error).__name__}
