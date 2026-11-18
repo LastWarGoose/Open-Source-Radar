@@ -30,11 +30,15 @@ def seed_catalog() -> None:
     db = create_engine(database_url("catalog"), hide_parameters=True)
     try:
         with Session(db) as session, session.begin():
+            summaries = {
+                BULK_NAMES[0]: "Observatory example with optional matrix support",
+                BULK_NAMES[-1]: "Observatory matrix tools for observatory matrix data",
+            }
             for name in ["fastapi", "strawberry-graphql", "shared-lib", *BULK_NAMES]:
                 save_package(
                     session,
                     name,
-                    "Synthetic API fixture for stage 2",
+                    summaries.get(name, "Synthetic API fixture for stage 2"),
                     STAMP,
                     source="SYNTHETIC",
                     license="MIT",

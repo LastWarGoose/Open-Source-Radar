@@ -15,18 +15,55 @@ test("catalog links reach search after the landing page streams", async ({ page 
   await page.getByRole("link", { name: "Открыть каталог" }).click();
   await expect(page).toHaveURL(/#catalog$/);
   await expect(search).toBeInViewport();
+  const sort = page.getByRole("combobox", { name: "Сортировка", exact: true });
+  await expect(sort).toHaveValue("STARS_DESC");
+  const relevance = sort.locator('option[value="RELEVANCE"]');
+  await expect(relevance).toBeDisabled();
   await search.fill("fastapi");
+  await expect(relevance).toBeEnabled();
+  await sort.selectOption("RELEVANCE");
   await search.press("Enter");
   await expect(page).toHaveURL(/q=fastapi/);
   await expect(search).toBeInViewport();
-  await expect(page.getByRole("heading", { name: "Каталог библиотек Python" })).toHaveCount(0);
+  await page.mouse.move(160, 400);
+  await page.mouse.wheel(0, -2500);
+  await expect(page.locator(".masthead-word")).toBeInViewport();
+});
+
+test("RADAR letters grow independently and header dividers meet the hero grid", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const letter = page.locator(".masthead-letter").nth(2);
+  const neighbor = page.locator(".masthead-letter").nth(1);
+  const width = () => letter.evaluate((node) => node.getBoundingClientRect().width);
+  await expect(letter).toBeVisible();
+  await page.evaluate(() => document.fonts.ready.then(() => undefined));
+  const initial = await width();
+  await letter.locator("..").hover();
+  await expect.poll(width).toBeGreaterThan(initial * 1.05);
+  await expect(neighbor).toHaveCSS("transform", "none");
+  await page.locator(".site-header .brand").hover();
+  await expect(letter).toHaveCSS("transform", "none");
+  for (const width of [1441, 920, 639, 360]) {
+    await page.setViewportSize({ width, height: 800 });
+    const aligned = await page.evaluate(() => {
+      const sectors = [...document.querySelectorAll(".intro-sectors > span")]
+        .filter((node) => node.getClientRects().length)
+        .map((node) => node.getBoundingClientRect().left);
+      return [...document.querySelectorAll(".site-header nav a")].every((node) =>
+        sectors.some((x) => Math.abs(x - node.getBoundingClientRect().left) < 1),
+      );
+    });
+    expect(aligned).toBe(true);
+  }
 });
 
 test("catalog SSR, filters, global sort, cursor and browser history", async ({ page, request }) => {
   const html = await (await request.get("/?q=radar-stage4-")).text();
   expect(html).toContain(names[0]);
   expect(html).toContain('rel="canonical"');
-  await page.goto("/?q=radar-stage4-&size=1&sort=STARS_DESC");
+  await page.goto("/?q=radar-stage4-&size=1");
   await expect(page.locator('[data-testid="catalog-package"]:visible')).toHaveCount(1);
   await expect(page.locator('[data-testid="catalog-package"]:visible')).toContainText(names[1]);
   await page.getByRole("link", { name: "Далее →", exact: true }).click();
@@ -37,7 +74,7 @@ test("catalog SSR, filters, global sort, cursor and browser history", async ({ p
   await expect(page.locator('[data-testid="catalog-package"]:visible')).toContainText(names[0]);
   await page.goBack();
   await expect(page.locator('[data-testid="catalog-package"]:visible')).toContainText(names[1]);
-  await page.getByLabel("Лицензия", { exact: true }).fill("MIT");
+  await page.getByRole("combobox", { name: "Лицензия", exact: true }).selectOption("MIT");
   await page.getByRole("button", { name: "Найти", exact: true }).click();
   await expect(page).toHaveURL(/license=MIT/);
   await expect(page).not.toHaveURL(/after=/);
@@ -208,6 +245,8 @@ test("responsive layout, keyboard focus and browser console", async ({ page }, t
   await page.keyboard.press("Enter");
   await expect(page).toHaveURL(/#content$/);
   await expect(page.locator("#content")).toBeFocused();
+  await page.keyboard.press("Tab");
+  await expect(page.getByRole("link", { name: "Перейти к поиску" })).toBeFocused();
   await page.keyboard.press("Tab");
   await expect(page.getByRole("searchbox", { name: "Поиск", exact: true })).toBeFocused();
   await page.keyboard.press("Control+A");

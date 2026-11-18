@@ -25,6 +25,7 @@ from radar_common.source_graphql import SourceFreshness, freshness_loader, fresh
 from radar_common.versions import nearest_version
 from sqlalchemy import (
     ARRAY,
+    Integer,
     Select,
     String,
     and_,
@@ -401,6 +402,26 @@ class DomainQuery:
         return await Release.resolve_reference(id, info)
 
     @strawberry.field
+    async def catalog_licenses(self, first: int = 100, after: str | None = None) -> Connection[str]:
+        size = page_size(first)
+        scope = scope_key("catalogLicenses", "PYPI")
+        cursor = decode_cursor(after, scope)
+        column = PackageRow.license_key
+        statement = select(column).where(PackageRow.source == "PYPI", column.is_not(None))
+        if cursor:
+            statement = statement.where(column > cursor[0])
+
+        def read() -> list[str]:
+            with Session(engine()) as session:
+                return [
+                    v
+                    for v in session.scalars(statement.distinct().order_by(column).limit(size + 1))
+                    if v is not None
+                ]
+
+        return connection(await db_call(read), size, lambda key: encode_cursor(scope, key))
+
+    @strawberry.field
     async def packages(
         self,
         first: int = 20,
@@ -416,13 +437,19 @@ class DomainQuery:
         source = source_filter(filter.source if filter else None)
         if len(term) > 200 or (license is not None and len(license) > 200):
             raise invalid("Search or filter too long")
-        scope = scope_key("packages", term, license, has_releases, sort.value, source)
+        if sort == PackageSort.RELEVANCE and not term:
+            sort = PackageSort.STARS_DESC
+        # Old relevance cursors represent alphabetical ties and cannot resume the new ranking.
+        order_key = "RELEVANCE_V2" if sort == PackageSort.RELEVANCE else sort.value
+        scope = scope_key("packages", term, license, has_releases, order_key, source)
         cursor = decode_cursor(after, scope, 2)
         statement = select(PackageRow)
         if source is not None:
             statement = statement.where(PackageRow.source == source)
         if license is not None:
-            statement = statement.where(PackageRow.license == license)
+            statement = statement.where(
+                or_(PackageRow.license_key == license, PackageRow.license == license)
+            )
         if has_releases is not None:
             exists = select(ReleaseRow.id).where(ReleaseRow.package_id == PackageRow.id).exists()
             if source:
@@ -439,22 +466,25 @@ class DomainQuery:
             vector = func.to_tsvector(
                 literal_column("'simple'"), PackageRow.name + " " + PackageRow.summary
             )
-            statement = statement.where(
-                or_(
-                    PackageRow.name.ilike("%" + escaped + "%", escape="\\"),
-                    vector.op("@@")(func.websearch_to_tsquery(literal_column("'simple'"), term)),
-                )
-            )
+            query = func.websearch_to_tsquery(literal_column("'simple'"), term)
+            in_name = PackageRow.name.ilike("%" + escaped + "%", escape="\\")
+            statement = statement.where(or_(in_name, vector.op("@@")(query)))
         if sort == PackageSort.RELEVANCE and term:
-            rank = case(
+            tier = case(
                 (PackageRow.name == name_term, 3),
                 (PackageRow.name.like(escaped + "%", escape="\\"), 2),
                 (PackageRow.name.like("%" + escaped + "%", escape="\\"), 1),
                 else_=0,
             )
+            # Quantize the bounded scores so the key round-trips exactly in a cursor.
+            text_score = func.ts_rank_cd(vector, query, 32)
+            name_score = case((in_name, func.similarity(PackageRow.name, name_term)), else_=0)
+            rank = tier * 1_000_000 + cast(
+                func.floor(100_000 * text_score + 10_000 * name_score), Integer
+            )
             ranked = statement.add_columns(rank).order_by(rank.desc(), PackageRow.id)
             if cursor:
-                if cursor[0] not in {"0", "1", "2", "3"}:
+                if not re.fullmatch(r"[0-9]{1,7}", cursor[0]):
                     raise invalid("Invalid relevance cursor")
                 value = int(cursor[0])
                 ranked = ranked.where(
@@ -475,7 +505,7 @@ class DomainQuery:
                 first,
                 lambda item: encode_cursor(scope, positions[item.id], str(item.id)),
             )
-        if sort in (PackageSort.NAME_ASC, PackageSort.RELEVANCE):
+        if sort == PackageSort.NAME_ASC:
             statement = statement.order_by(PackageRow.name, PackageRow.id)
             if cursor:
                 statement = statement.where(
@@ -521,7 +551,7 @@ class DomainQuery:
             lambda item: encode_cursor(
                 scope,
                 item.name
-                if sort in (PackageSort.NAME_ASC, PackageSort.RELEVANCE)
+                if sort == PackageSort.NAME_ASC
                 else str(
                     item.star_projection.stars if item.star_projection.stars is not None else -1
                 )

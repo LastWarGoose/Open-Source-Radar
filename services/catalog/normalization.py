@@ -1,9 +1,33 @@
 from dataclasses import dataclass
 from uuid import NAMESPACE_URL, UUID, uuid5
 
+from packaging.licenses import InvalidLicenseExpression, canonicalize_license_expression
 from packaging.requirements import Requirement
 from packaging.utils import canonicalize_name, canonicalize_version
 from packaging.version import Version
+
+
+def license_key(value: str | None) -> str | None:
+    if not value or not value.strip():
+        return None
+    name = " ".join(value.split())
+    aliases = {
+        "mit license": "MIT",
+        "the mit license": "MIT",
+        "apache 2.0": "Apache-2.0",
+        "apache license 2.0": "Apache-2.0",
+        "apache license, version 2.0": "Apache-2.0",
+        "bsd license": "BSD",
+        "bsd": "BSD",
+        "proprietary": "LicenseRef-Proprietary",
+    }
+    if alias := aliases.get(name.casefold()):
+        return alias
+    try:
+        expression = canonicalize_license_expression(name)
+        return expression if len(expression) <= 200 else None
+    except InvalidLicenseExpression:
+        return None
 
 
 def normalized_name(value: str) -> str:

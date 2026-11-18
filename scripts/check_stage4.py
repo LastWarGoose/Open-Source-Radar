@@ -58,7 +58,7 @@ def seed() -> None:
                 MARKER,
                 STAMP,
                 source="SYNTHETIC" if i == 5 else "PYPI",
-                license="MIT" if i % 2 == 0 else "Apache-2.0",
+                license="MIT License" if i == 0 else "MIT" if i % 2 == 0 else "Apache-2.0",
             )
             record_state(session, identity, STAMP)
             if i == 1:

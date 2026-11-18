@@ -6,6 +6,7 @@ from packaging.version import Version
 from radar_common.graphql import decode_cursor, encode_cursor, page_size, scope_key
 
 from services.catalog.normalization import (
+    license_key,
     normalized_name,
     normalized_version,
     parse_requirement,
@@ -39,6 +40,13 @@ def test_versions_and_requirements() -> None:
         parse_requirement("foo >>> 1")
     with pytest.raises(ValueError):
         normalized_version("not-a-version")
+
+
+def test_license_filter_keys_preserve_declared_choices() -> None:
+    assert license_key("MIT License") == license_key("mit") == "MIT"
+    assert license_key("mit OR Apache-2.0") == "MIT OR Apache-2.0"
+    assert license_key("BSD License") == "BSD"
+    assert license_key("See the repository for licensing details") is None
 
 
 def test_cursor_scope_limits_and_malformed_input() -> None:

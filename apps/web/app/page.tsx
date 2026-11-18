@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import Form from "next/form";
 import Link from "next/link";
 import { getClient } from "../src/apollo-server";
 import { PublicCatalogDocument } from "../src/gql/graphql";
 import { CompareToggle } from "../src/comparison";
+import { CatalogFilters } from "../src/catalog-filters";
 import { CatalogSection } from "../src/catalog-section";
 import { PypiSnapshot, ProjectionNote } from "../src/public-ui";
-import { badInput } from "../src/public-data";
+import { badInput, loadCatalogLicenses } from "../src/public-data";
 import { catalogState, catalogURL, packageURL, type Search } from "../src/url-state";
 
 export const dynamic = "force-dynamic";
@@ -38,90 +38,49 @@ export default async function Page({ searchParams }: { searchParams: Promise<Sea
       value: state.releases,
     },
   ].filter((filter) => filter.value);
-  const landing = !["q", "license", "releases", "sort", "after", "back", "size"].some(
-    (key) => params[key] !== undefined,
-  );
-  const { data, error } = await getClient().query({
-    query: PublicCatalogDocument,
-    variables: {
-      first: state.size,
-      after: state.after || null,
-      search: state.q || null,
-      sort: state.sort,
-      filter: {
-        source: "PYPI",
-        license: state.license || null,
-        hasReleases: state.releases ? state.releases === "yes" : null,
+  const [{ data, error }, licenses] = await Promise.all([
+    getClient().query({
+      query: PublicCatalogDocument,
+      variables: {
+        first: state.size,
+        after: state.after || null,
+        search: state.q || null,
+        sort: state.sort,
+        filter: {
+          source: "PYPI",
+          license: state.license || null,
+          hasReleases: state.releases ? state.releases === "yes" : null,
+        },
       },
-    },
-    errorPolicy: "all",
-  });
+      errorPolicy: "all",
+    }),
+    loadCatalogLicenses(),
+  ]);
   return (
     <>
-      {landing && (
-        <section className="catalog-intro" aria-labelledby="intro-title">
-          <div className="intro-sectors" aria-hidden="true">
-            {Array.from({ length: 8 }, (_, column) => (
-              <span key={column} />
-            ))}
-          </div>
-          <p className="intro-sources">
-            <span>Источники</span>
-            PyPI, GitHub, OSV
-          </p>
-          <h1 id="intro-title">
-            Каталог библиотек <span>Python</span>
-          </h1>
-          <a className="intro-jump" href="#catalog">
-            Перейти к поиску <span aria-hidden="true">↓</span>
-          </a>
-        </section>
-      )}
-      <CatalogSection key={landing ? "landing" : "results"}>
+      <section className="catalog-intro" aria-labelledby="intro-title">
+        <div className="intro-sectors" aria-hidden="true">
+          {Array.from({ length: 8 }, (_, column) => (
+            <span key={column} />
+          ))}
+        </div>
+        <p className="intro-sources">
+          <span>Источники</span>
+          PyPI, GitHub, OSV
+        </p>
+        <h1 id="intro-title">
+          Каталог библиотек <span>Python</span>
+        </h1>
+        <a className="intro-jump" href="#catalog">
+          Перейти к поиску <span aria-hidden="true">↓</span>
+        </a>
+      </section>
+      <CatalogSection resultsURL={resultsURL}>
         <div className="section-heading">
-          {landing ? <h2 id="catalog-title">Пакеты</h2> : <h1 id="catalog-title">Каталог</h1>}
+          <h2 id="catalog-title">Пакеты</h2>
           <span className="count">PyPI</span>
         </div>
-        <Form className="filters" action="/" key={catalogURL(state)} role="search">
-          <label className="search-field">
-            Поиск
-            <input
-              name="q"
-              type="search"
-              defaultValue={state.q}
-              maxLength={200}
-              placeholder="Название или описание"
-            />
-          </label>
-          <label>
-            Лицензия
-            <input
-              name="license"
-              defaultValue={state.license}
-              maxLength={200}
-              placeholder="Например, MIT"
-            />
-          </label>
-          <label htmlFor="release-filter">
-            Версии
-            <select id="release-filter" name="releases" defaultValue={state.releases}>
-              <option value="">Все</option>
-              <option value="yes">Есть в каталоге</option>
-              <option value="no">Не загружены</option>
-            </select>
-          </label>
-          <label htmlFor="sort-filter">
-            Сортировка
-            <select id="sort-filter" name="sort" defaultValue={state.sort}>
-              <option value="RELEVANCE">Релевантность</option>
-              <option value="NAME_ASC">Название</option>
-              <option value="UPDATED_DESC">Обновление</option>
-              <option value="STARS_DESC">Звёзды GitHub</option>
-            </select>
-          </label>
-          <input type="hidden" name="size" value={state.size} />
-          <button type="submit">Найти</button>
-        </Form>
+        <CatalogFilters key={resultsURL} state={state} licenses={licenses} />
         {activeFilters.length > 0 && (
           <nav className="filter-summary" aria-label="Активные фильтры">
             {activeFilters.map(({ key, label }) => (

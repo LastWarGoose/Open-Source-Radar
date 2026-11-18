@@ -25,6 +25,7 @@ class PackageRow(Base):
     display_name: Mapped[str] = mapped_column(String(200))
     summary: Mapped[str] = mapped_column(Text)
     license: Mapped[str | None] = mapped_column(String(200))
+    license_key: Mapped[str | None] = mapped_column(String(200))
     requires_python: Mapped[str | None] = mapped_column(String(200))
     source: Mapped[str] = mapped_column(String(32))
     source_id: Mapped[str] = mapped_column(String(200))

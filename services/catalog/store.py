@@ -8,6 +8,7 @@ from sqlalchemy.orm import Session
 
 from services.catalog.domain_models import DependencyRow, PackageRow, ReleaseRow
 from services.catalog.normalization import (
+    license_key,
     normalized_name,
     normalized_version,
     package_id,
@@ -36,6 +37,7 @@ def save_package(
         fetched_at=fetched_at,
         updated_at=fetched_at,
         license=license,
+        license_key=license_key(license),
     )
     statement = insert(PackageRow).values(**values)
     session.execute(

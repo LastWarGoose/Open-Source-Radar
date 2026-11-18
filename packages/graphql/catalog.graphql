@@ -128,6 +128,7 @@ type Query {
   _service: _Service!
   package(id: ID!): Package
   release(id: ID!): Release
+  catalogLicenses(first: Int! = 100, after: String = null): StrConnection!
   packages(first: Int! = 20, after: String = null, search: String = null, filter: PackageFilter = null, sort: PackageSort! = NAME_ASC): PackageConnection!
   importJobs(first: Int! = 20, after: String = null): ImportJobConnection!
   importCampaign(id: UUID!): ImportCampaign
@@ -174,6 +175,11 @@ type StarProjection {
   projectedAt: DateTime
   status: String!
   lagSeconds: Int
+}
+
+type StrConnection {
+  nodes: [String!]!
+  pageInfo: PageInfo!
 }
 
 type Subscription {

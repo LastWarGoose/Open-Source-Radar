@@ -18,7 +18,9 @@ export function Shell({ children }: { children: React.ReactNode }) {
       <div className="masthead" aria-hidden="true">
         <span className="masthead-word">
           {["R", "A", "D", "A", "R"].map((letter, index) => (
-            <span key={index}>{letter}</span>
+            <span key={index}>
+              <span className="masthead-letter">{letter}</span>
+            </span>
           ))}
         </span>
       </div>

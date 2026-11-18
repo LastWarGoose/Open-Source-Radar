@@ -182,6 +182,18 @@ def pagination() -> None:
     assert result["errors"][0]["extensions"]["code"] == "BAD_USER_INPUT"
     fts = gql('query Search { packages(search:"Synthetic API") { nodes { source } } }')
     assert fts["data"]["packages"]["nodes"]
+    ranked = """query SearchDescriptions($sort:PackageSort!,$after:String) {
+      packages(first:1,sort:$sort,after:$after,search:"observatory matrix",
+               filter:{source:"SYNTHETIC"}) {
+        nodes { name } pageInfo {endCursor}
+      }
+    }"""
+    alphabetical = gql(ranked, {"sort": "NAME_ASC"})["data"]["packages"]
+    relevant = gql(ranked, {"sort": "RELEVANCE"})["data"]["packages"]
+    following = gql(ranked, {"sort": "RELEVANCE", "after": relevant["pageInfo"]["endCursor"]})
+    assert alphabetical["nodes"][0]["name"] == BULK_NAMES[0]
+    assert relevant["nodes"][0]["name"] == BULK_NAMES[-1]
+    assert following["data"]["packages"]["nodes"] == alphabetical["nodes"]
     print(
         "PASS: cursor traversal/ties/filters/search/empty/malformed/mismatched/oversize", flush=True
     )

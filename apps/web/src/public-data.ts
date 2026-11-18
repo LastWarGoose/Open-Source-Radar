@@ -3,11 +3,35 @@ import { cache } from "react";
 import { CombinedGraphQLErrors } from "@apollo/client/errors";
 import { getClient } from "./apollo-server";
 import {
+  CatalogLicensesDocument,
   NearestOsvScanDocument,
   NearestPypiReleaseDocument,
   PublicPackageDocument,
 } from "./gql/graphql";
-import type { ScanSummaryFragment } from "./gql/graphql";
+import type { CatalogLicensesQuery, ScanSummaryFragment } from "./gql/graphql";
+
+async function loadLicensePage(
+  after: string | null,
+): Promise<CatalogLicensesQuery["catalogLicenses"] | undefined> {
+  const result = await getClient().query({
+    query: CatalogLicensesDocument,
+    variables: { after },
+    errorPolicy: "all",
+  });
+  return result.data?.catalogLicenses;
+}
+
+export async function loadCatalogLicenses() {
+  const licenses: string[] = [];
+  let after: string | null = null;
+  do {
+    const page = await loadLicensePage(after);
+    if (!page) break;
+    licenses.push(...page.nodes);
+    after = page.pageInfo.hasNextPage ? (page.pageInfo.endCursor ?? null) : null;
+  } while (after);
+  return licenses;
+}
 
 export function hasOsvResult(scan?: ScanSummaryFragment | null) {
   return scan?.source === "OSV" && Boolean(scan.lastSuccessAt);

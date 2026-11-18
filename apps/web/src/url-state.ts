@@ -12,14 +12,16 @@ export const compareURL = (names: string[], differences = false) =>
 export function catalogState(search: Search) {
   const sorts: PackageSort[] = ["RELEVANCE", "NAME_ASC", "UPDATED_DESC", "STARS_DESC"];
   // Previous catalog links omitted NAME_ASC when encoding their cursor.
-  const fallback: PackageSort = one(search.after) || search.back ? "NAME_ASC" : "RELEVANCE";
-  const sort = sorts.find((value) => value === one(search.sort)) ?? fallback;
+  const fallback: PackageSort = one(search.after) || search.back ? "NAME_ASC" : "STARS_DESC";
+  const q = one(search.q).trim().slice(0, 200);
+  const requested = sorts.find((value) => value === one(search.sort)) ?? fallback;
+  const sort = requested === "RELEVANCE" && !q ? "STARS_DESC" : requested;
   const size = [1, 12, 24, 48].includes(Number(one(search.size))) ? Number(one(search.size)) : 12;
   const trail = (Array.isArray(search.back) ? search.back : search.back ? [search.back] : [])
     .filter((value) => value.length <= 2048)
     .slice(-20);
   return {
-    q: one(search.q).slice(0, 200),
+    q,
     license: one(search.license).slice(0, 200),
     releases: ["yes", "no"].includes(one(search.releases)) ? one(search.releases) : "",
     sort,
@@ -37,11 +39,11 @@ export function catalogURL(
   if (state.q) p.set("q", state.q);
   if (state.license) p.set("license", state.license);
   if (state.releases) p.set("releases", state.releases);
-  if (state.sort !== "RELEVANCE" || after || trail.length) p.set("sort", state.sort);
+  if (state.sort !== "STARS_DESC" || after || trail.length) p.set("sort", state.sort);
   if (state.size !== 12) p.set("size", String(state.size));
   if (after) p.set("after", after);
   for (const previous of trail.slice(-20)) if (previous) p.append("back", previous);
-  return p.size ? "/?" + p.toString() : "/#catalog";
+  return p.size ? "/?" + p.toString() + "#catalog" : "/#catalog";
 }
 export function packageURL(name: string, values: Record<string, string | undefined> = {}) {
   const params = new URLSearchParams();
@@ -52,7 +54,7 @@ export function packageURL(name: string, values: Record<string, string | undefin
 export function catalogReturn(value: Search[string]) {
   const path = one(value);
   if (!path.startsWith("/?")) return "/#catalog";
-  const params = new URLSearchParams(path.slice(2));
+  const params = new URLSearchParams(path.slice(2).split("#", 1)[0]);
   const search: Search = Object.fromEntries(params);
   if (params.has("back")) search.back = params.getAll("back");
   const state = catalogState(search);

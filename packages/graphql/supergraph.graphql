@@ -340,6 +340,7 @@ type Query
 {
   package(id: ID!): Package @join__field(graph: CATALOG)
   release(id: ID!): Release @join__field(graph: CATALOG)
+  catalogLicenses(first: Int! = 100, after: String = null): StrConnection! @join__field(graph: CATALOG)
   packages(first: Int! = 20, after: String = null, search: String = null, filter: PackageFilter = null, sort: PackageSort! = NAME_ASC): PackageConnection! @join__field(graph: CATALOG)
   importJobs(first: Int! = 20, after: String = null): ImportJobConnection! @join__field(graph: CATALOG)
   importCampaign(id: UUID!): ImportCampaign @join__field(graph: CATALOG)
@@ -482,6 +483,13 @@ type StarProjection
   projectedAt: DateTime
   status: String!
   lagSeconds: Int
+}
+
+type StrConnection
+  @join__type(graph: CATALOG)
+{
+  nodes: [String!]!
+  pageInfo: PageInfo!
 }
 
 type Subscription
