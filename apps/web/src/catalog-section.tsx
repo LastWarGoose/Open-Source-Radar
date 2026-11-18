@@ -12,7 +12,10 @@ export function CatalogSection({
   const section = useRef<HTMLElement>(null);
   useLayoutEffect(() => {
     // The fragment can arrive before Next streams the catalog into the page.
-    if (window.location.hash === "#catalog" || (!window.location.hash && window.location.search))
+    const { hash, search } = window.location;
+    // A shared query without a fragment can render before hydration. Respect an
+    // existing scroll position if the reader has already moved to a result.
+    if (hash === "#catalog" || (!hash && search && window.scrollY === 0))
       section.current?.scrollIntoView({ behavior: "instant" });
   }, [resultsURL]);
   return (
