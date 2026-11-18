@@ -20,7 +20,7 @@ dependencies = [
 ]
 
 [dependency-groups]
-dev = ["pytest==9.2.0", "ruff==0.17.5", "httpx==0.28.1", "mypy==2.4.1"]
+dev = ["pytest==9.2.0", "ruff==0.17.5", "httpx2==2.16.2", "mypy==2.4.1"]
 
 [tool.uv.sources]
 radar-common = { workspace = true }
