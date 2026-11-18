@@ -4,9 +4,11 @@ import argparse
 import concurrent.futures
 import os
 import time
+from pathlib import Path
 from uuid import UUID, uuid4
 
 import httpx
+from alembic.script import ScriptDirectory
 from radar_common.database import SERVICES, database_url, engine
 from redis import Redis
 from sqlalchemy import create_engine, func, select, text
@@ -68,9 +70,11 @@ def check_databases() -> None:
         url = database_url(owner)
         own_engine = create_engine(url, connect_args={"connect_timeout": 3})
         with own_engine.connect() as connection:
-            assert connection.scalar(text("SELECT version_num FROM alembic_version")) == owner + (
-                "_0003" if owner == "workspace" else "_0004" if owner == "security" else "_0005"
-            )
+            directory = Path(__file__).resolve().parents[1] / "services" / owner / "migrations"
+            head = ScriptDirectory(str(directory)).get_current_head()
+            assert (
+                head and connection.scalar(text("SELECT version_num FROM alembic_version")) == head
+            ), f"{owner} database must be at migration {head}"
             for target in (*SERVICES, "postgres"):
                 allowed = connection.scalar(
                     text("SELECT has_database_privilege(current_user, :target, 'CONNECT')"),
