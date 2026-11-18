@@ -1,13 +1,13 @@
 query WorkspaceGraph {
-  myCollections {
+  myCollections(first: 1) {
     nodes {
       id
-      items {
+      items(first: 2) {
         nodes {
           package {
             id
             name
-            repositories {
+            repositories(first: 2) {
               nodes {
                 status
                 repository {
@@ -17,13 +17,13 @@ query WorkspaceGraph {
                 }
               }
             }
-            releases(first: 20) {
+            releases(first: 8) {
               nodes {
                 id
                 version
                 isPrerelease
                 yanked
-                dependencies {
+                dependencies(first: 2) {
                   nodes {
                     raw
                     extras
@@ -37,10 +37,10 @@ query WorkspaceGraph {
                   status
                   source
                   checkedAt
-                  findings {
+                  findings(first: 2) {
                     nodes {
                       id
-                      aliases {
+                      aliases(first: 2) {
                         nodes {
                           name
                         }
@@ -55,7 +55,7 @@ query WorkspaceGraph {
       }
     }
   }
-  myNotifications {
+  myNotifications(first: 1) {
     nodes {
       message
       package {
