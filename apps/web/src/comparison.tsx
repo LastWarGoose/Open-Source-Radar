@@ -45,17 +45,19 @@ function save(names: string[]) {
   window.dispatchEvent(new Event("radar-compare"));
 }
 function useSelection() {
-  return read(useSyncExternalStore(subscribe, snapshot, () => "[]"));
+  const value = useSyncExternalStore<string | null>(subscribe, snapshot, () => null);
+  return { names: value === null ? [] : read(value), ready: value !== null };
 }
 
 export function CompareToggle({ name }: { name: string }) {
-  const names = useSelection();
+  const { names, ready } = useSelection();
   const selected = names.includes(name);
   const [message, setMessage] = useState("");
   return (
     <div className="compare-control">
       <button
         className="secondary compact"
+        disabled={!ready}
         aria-pressed={selected}
         aria-label={`Сравнить ${name}`}
         onClick={() => {
@@ -78,7 +80,7 @@ export function CompareToggle({ name }: { name: string }) {
   );
 }
 export function CompareNav() {
-  const names = useSelection();
+  const { names } = useSelection();
   return <Link href={compareURL(names)}>Сравнение{names.length ? ` (${names.length})` : ""}</Link>;
 }
 function ShareComparison({ path }: { path: string }) {
@@ -190,7 +192,7 @@ export function ComparisonTable({
   );
 }
 export function CompareDock() {
-  const names = useSelection();
+  const { names } = useSelection();
   if (!names.length) return null;
   return (
     <aside className="compare-dock" aria-label="Выбрано для сравнения">

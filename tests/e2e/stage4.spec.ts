@@ -162,8 +162,11 @@ test("comparison cap, persistence, shared URL, removal and invalid input", async
   context,
 }) => {
   await page.goto("/?q=radar-stage4-");
-  for (const name of names.slice(0, 4))
-    await page.getByRole("button", { name: `Сравнить ${name}`, exact: true }).click();
+  for (const name of names.slice(0, 4)) {
+    const button = page.getByRole("button", { name: `Сравнить ${name}`, exact: true });
+    await button.click();
+    await expect(button).toHaveAttribute("aria-pressed", "true");
+  }
   await page.getByRole("button", { name: `Сравнить ${names[4]}`, exact: true }).click();
   await expect(page.getByRole("alert").filter({ hasText: "Не более 4 пакетов" })).toBeVisible();
   await page.reload();
