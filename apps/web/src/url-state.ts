@@ -5,8 +5,10 @@ export const one = (value: string | string[] | undefined) =>
   typeof value === "string" ? value : "";
 export const validName = (value: string) =>
   /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value) && value.length <= 200;
-export const compareURL = (names: string[]) =>
-  "/compare" + (names.length ? "?packages=" + names.join(",") : "");
+export const compareURL = (names: string[], differences = false) =>
+  "/compare" +
+  (names.length ? "?packages=" + names.join(",") : "") +
+  (differences && names.length > 1 ? "&differences=1" : "");
 export function catalogState(search: Search) {
   const sorts: PackageSort[] = ["RELEVANCE", "NAME_ASC", "UPDATED_DESC", "STARS_DESC"];
   // Previous catalog links omitted NAME_ASC when encoding their cursor.
@@ -38,11 +40,21 @@ export function catalogURL(
   if (state.sort !== "RELEVANCE" || after || trail.length) p.set("sort", state.sort);
   if (state.size !== 12) p.set("size", String(state.size));
   if (after) p.set("after", after);
-  for (const previous of trail.slice(-20)) p.append("back", previous);
+  for (const previous of trail.slice(-20)) if (previous) p.append("back", previous);
   return p.size ? "/?" + p.toString() : "/#catalog";
 }
 export function packageURL(name: string, values: Record<string, string | undefined> = {}) {
   const params = new URLSearchParams();
   for (const [key, value] of Object.entries(values)) if (value) params.set(key, value);
   return "/packages/" + encodeURIComponent(name) + (params.size ? "?" + params : "");
+}
+
+export function catalogReturn(value: Search[string]) {
+  const path = one(value);
+  if (!path.startsWith("/?")) return "/#catalog";
+  const params = new URLSearchParams(path.slice(2));
+  const search: Search = Object.fromEntries(params);
+  if (params.has("back")) search.back = params.getAll("back");
+  const state = catalogState(search);
+  return catalogURL(state, state.after, state.trail);
 }

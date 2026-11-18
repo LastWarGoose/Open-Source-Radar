@@ -91,6 +91,32 @@ test("package versions, requirements, OSV states, metadata and missing package",
   await expect(page.getByRole("heading", { name: "Пакет или страница не найдены" })).toBeVisible();
 });
 
+test("return to a filtered page from a package version and remove a single filter", async ({
+  page,
+}) => {
+  await page.goto("/?q=radar-stage4-&license=MIT&releases=yes&size=1&sort=NAME_ASC");
+  await page.getByRole("link", { name: "Далее →", exact: true }).click();
+  const result = page.getByTestId("catalog-package");
+  await expect(result).toContainText(names[2]);
+  const pageURL = page.url();
+  await result.getByRole("link", { name: names[2], exact: true }).click();
+  await page.getByRole("link", { name: "1.0", exact: true }).click();
+  await expect(page).toHaveURL(/version=1\.0/);
+  await page.reload();
+  await page.getByRole("link", { name: "К результатам поиска" }).click();
+  await expect(page).toHaveURL(pageURL);
+  await expect(result).toContainText(names[2]);
+  const filters = page.getByRole("navigation", { name: "Активные фильтры" });
+  await filters.getByRole("link", { name: "Убрать фильтр «Лицензия · MIT»" }).click();
+  await expect(page).not.toHaveURL(/license=|after=/);
+  await expect(page.getByLabel("Поиск", { exact: true })).toHaveValue("radar-stage4-");
+  await expect(page.getByRole("combobox", { name: "Версии", exact: true })).toHaveValue("yes");
+  await expect(page.getByRole("combobox", { name: "Сортировка", exact: true })).toHaveValue(
+    "NAME_ASC",
+  );
+  await expect(result).toHaveCount(1);
+});
+
 test("comparison cap, persistence, shared URL, removal and invalid input", async ({
   page,
   context,
@@ -107,12 +133,38 @@ test("comparison cap, persistence, shared URL, removal and invalid input", async
   await page.getByRole("link", { name: "Сравнить →", exact: true }).click();
   await expect(page.locator("thead th")).toHaveCount(5);
   await expect(page.getByRole("table")).toContainText(`Source repository for ${names[0]}.`);
+  const toggle = page.getByRole("button", { name: "Только различия" });
+  await expect(page.getByRole("rowheader", { name: "Python", exact: true })).toBeVisible();
+  await toggle.click();
+  await expect(toggle).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByRole("rowheader", { name: "Python", exact: true })).toHaveCount(0);
+  await expect(page.getByRole("rowheader", { name: "Лицензия" })).toBeVisible();
+  await page.goBack();
+  await expect(toggle).toHaveAttribute("aria-pressed", "false");
+  await toggle.click();
+  // Exercise the manual sharing path even on runners without clipboard access.
+  await page.evaluate(() => {
+    Object.defineProperty(navigator, "clipboard", { value: undefined, configurable: true });
+  });
+  await page.getByRole("button", { name: "Скопировать ссылку" }).click();
+  const sharedURL = await page.getByRole("textbox", { name: "Ссылка на сравнение" }).inputValue();
+  expect(sharedURL).toBe(page.url());
   const shared = await context.newPage();
-  await shared.goto(page.url());
+  await shared.goto(sharedURL);
   await expect(shared.locator("thead th")).toHaveCount(5);
+  await expect(shared.getByRole("button", { name: "Только различия" })).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+  await expect(shared.getByRole("rowheader", { name: "Python", exact: true })).toHaveCount(0);
   await expect(shared.getByRole("table")).toContainText("Найдено: 1");
+  await shared.getByText("Найдено: 1", { exact: true }).click();
+  await expect(
+    shared.getByRole("cell").getByText("TEST-RADAR-STAGE4", { exact: true }),
+  ).toBeVisible();
   await page.getByRole("link", { name: `Удалить ${names[0]} из сравнения` }).click();
   await expect(page.locator("thead th")).toHaveCount(4);
+  await expect(toggle).toHaveAttribute("aria-pressed", "true");
   await page.goto("/compare?packages=" + names.join(","));
   await expect(page.getByRole("heading", { name: "Можно сравнить до 4 пакетов" })).toBeVisible();
   await page.goto("/compare?packages=radar-does-not-exist");

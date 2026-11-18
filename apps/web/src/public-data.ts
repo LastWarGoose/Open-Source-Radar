@@ -18,8 +18,13 @@ export const loadPackage = cache(
       errorPolicy: "all",
     }),
 );
-export function failedField(error: unknown, field: string) {
-  return CombinedGraphQLErrors.is(error) && error.errors.some((item) => item.path?.includes(field));
+export function failedField(error: unknown, field: string, alias?: string) {
+  return (
+    CombinedGraphQLErrors.is(error) &&
+    error.errors.some(
+      ({ path }) => path?.includes(field) && (alias === undefined || path[0] === alias),
+    )
+  );
 }
 export function badInput(error: unknown) {
   return (

@@ -27,6 +27,17 @@ export async function generateMetadata({
 export default async function Page({ searchParams }: { searchParams: Promise<Search> }) {
   const params = await searchParams;
   const state = catalogState(params);
+  const resultsURL = catalogURL(state, state.after, state.trail);
+  const clearFiltersURL = catalogURL({ ...state, q: "", license: "", releases: "" });
+  const activeFilters = [
+    { key: "q", label: `Поиск · ${state.q}`, value: state.q },
+    { key: "license", label: `Лицензия · ${state.license}`, value: state.license },
+    {
+      key: "releases",
+      label: state.releases === "yes" ? "Есть версии" : "Без версий",
+      value: state.releases,
+    },
+  ].filter((filter) => filter.value);
   const landing = !["q", "license", "releases", "sort", "after", "back", "size"].some(
     (key) => params[key] !== undefined,
   );
@@ -111,11 +122,20 @@ export default async function Page({ searchParams }: { searchParams: Promise<Sea
           <input type="hidden" name="size" value={state.size} />
           <button type="submit">Найти</button>
         </Form>
-        {(state.q || state.license || state.releases) && (
-          <div className="filter-summary">
-            <span className="muted">{state.q ? `«${state.q}»` : "Фильтры применены"}</span>
-            <Link href="/#catalog">Сбросить</Link>
-          </div>
+        {activeFilters.length > 0 && (
+          <nav className="filter-summary" aria-label="Активные фильтры">
+            {activeFilters.map(({ key, label }) => (
+              <Link
+                className="button secondary"
+                key={key}
+                href={catalogURL({ ...state, [key]: "" })}
+                aria-label={`Убрать фильтр «${label}»`}
+              >
+                {label} <span aria-hidden="true">×</span>
+              </Link>
+            ))}
+            {activeFilters.length > 1 && <Link href={clearFiltersURL}>Сбросить все</Link>}
+          </nav>
         )}
         {!data?.packages ? (
           <div className="empty-state" role="alert">
@@ -125,7 +145,6 @@ export default async function Page({ searchParams }: { searchParams: Promise<Sea
         ) : !data.packages.nodes.length ? (
           <div className="empty-state">
             <h2>Пакеты не найдены</h2>
-            <Link href="/#catalog">Сбросить фильтры →</Link>
           </div>
         ) : (
           <>
@@ -135,7 +154,13 @@ export default async function Page({ searchParams }: { searchParams: Promise<Sea
                   <div className="package-main">
                     <div className="package-name">
                       <h2>
-                        <Link href={packageURL(item.name)}>{item.name}</Link>
+                        <Link
+                          href={packageURL(item.name, {
+                            from: resultsURL === "/#catalog" ? undefined : resultsURL,
+                          })}
+                        >
+                          {item.name}
+                        </Link>
                       </h2>
                       <span className="version-tag">
                         {item.releases.nodes[0]?.version ?? "Нет версий"}

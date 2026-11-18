@@ -415,9 +415,22 @@ label {
   align-items: center;
   gap: 10px 18px;
 }
-.filter-summary {
-  justify-content: space-between;
+.filter-summary,
+.comparison-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
   padding-bottom: 20px;
+}
+.filter-summary .button {
+  gap: 10px;
+}
+.comparison-table summary {
+  cursor: pointer;
+}
+.comparison-tools [role="status"] {
+  font-size: 14px;
 }
 .public-package-row {
   position: relative;

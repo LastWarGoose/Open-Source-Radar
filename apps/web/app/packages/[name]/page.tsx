@@ -12,7 +12,7 @@ import {
 } from "../../../src/public-ui";
 import { CompareToggle } from "../../../src/comparison";
 import { PackagePersonal } from "../../../src/account";
-import { one, packageURL, validName, type Search } from "../../../src/url-state";
+import { catalogReturn, one, packageURL, validName, type Search } from "../../../src/url-state";
 
 export const dynamic = "force-dynamic";
 type Props = { params: Promise<{ name: string }>; searchParams: Promise<Search> };
@@ -31,6 +31,12 @@ export default async function PackagePage({ params, searchParams }: Props) {
   const { name } = await params;
   if (!validName(name)) notFound();
   const query = await searchParams;
+  const backToCatalog = catalogReturn(query.from);
+  const detailURL = (values: Record<string, string | undefined> = {}) =>
+    packageURL(name, {
+      ...values,
+      from: backToCatalog === "/#catalog" ? undefined : backToCatalog,
+    });
   const version = one(query.version).slice(0, 200);
   const releaseAfter = one(query.releases).slice(0, 2048);
   const dependencyAfter = one(query.dependencies).slice(0, 2048);
@@ -40,7 +46,8 @@ export default async function PackagePage({ params, searchParams }: Props) {
       <>
         <section className="catalog empty-state" role="alert">
           <h1>{badInput(error) ? "Некорректная версия или страница" : "Данные недоступны"}</h1>
-          <Link href={packageURL(name)}>Открыть пакет заново →</Link>
+          <Link href={detailURL()}>Открыть пакет заново →</Link>
+          {backToCatalog !== "/#catalog" && <Link href={backToCatalog}>К результатам поиска</Link>}
         </section>
       </>
     );
@@ -53,7 +60,9 @@ export default async function PackagePage({ params, searchParams }: Props) {
   return (
     <>
       <div className="breadcrumbs">
-        <Link href="/#catalog">Каталог</Link>
+        <Link href={backToCatalog}>
+          {backToCatalog === "/#catalog" ? "Каталог" : "К результатам поиска"}
+        </Link>
         <span aria-hidden="true">/</span>
         <span>{item.name}</span>
       </div>
@@ -128,7 +137,7 @@ export default async function PackagePage({ params, searchParams }: Props) {
                 className={row.id === release?.id ? "version-link selected" : "version-link"}
                 aria-current={row.id === release?.id ? "true" : undefined}
                 key={row.id}
-                href={packageURL(name, { version: row.version })}
+                href={detailURL({ version: row.version })}
               >
                 {row.version}
                 {row.isPrerelease && <small> prerelease</small>}
@@ -138,10 +147,10 @@ export default async function PackagePage({ params, searchParams }: Props) {
           </div>
           {!item.versions.nodes.length && <p className="muted">Версии не загружены.</p>}
           <div className="pagination">
-            {releaseAfter && <Link href={packageURL(name, { version })}>В начало</Link>}
+            {releaseAfter && <Link href={detailURL({ version })}>В начало</Link>}
             {item.versions.pageInfo.hasNextPage && (
               <Link
-                href={packageURL(name, {
+                href={detailURL({
                   version,
                   releases: item.versions.pageInfo.endCursor ?? "",
                 })}
@@ -182,12 +191,12 @@ export default async function PackagePage({ params, searchParams }: Props) {
               )}
               <div className="pagination">
                 {dependencyAfter && (
-                  <Link href={packageURL(name, { version: release.version })}>В начало</Link>
+                  <Link href={detailURL({ version: release.version })}>В начало</Link>
                 )}
                 {release.dependencies.pageInfo.hasNextPage && (
                   <Link
                     className="button secondary"
-                    href={packageURL(name, {
+                    href={detailURL({
                       version: release.version,
                       dependencies: release.dependencies.pageInfo.endCursor ?? "",
                     })}
@@ -205,7 +214,7 @@ export default async function PackagePage({ params, searchParams }: Props) {
       ) : (
         <section className="catalog empty-state">
           <h2>{version ? "Версия не найдена в каталоге" : "Версии пока не загружены"}</h2>
-          {version && <Link href={packageURL(name)}>Последняя загруженная версия →</Link>}
+          {version && <Link href={detailURL()}>Последняя загруженная версия →</Link>}
         </section>
       )}
     </>

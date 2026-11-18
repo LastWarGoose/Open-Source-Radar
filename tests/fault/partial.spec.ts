@@ -30,5 +30,17 @@ test("public site preserves available data during an actual service outage", asy
     await expect(
       page.getByText("Часть данных недоступна. Показаны доступные сведения."),
     ).toBeVisible();
+    const affected = page.getByRole("row").filter({
+      has: page.getByRole("rowheader", {
+        name: service === "security" ? "OSV · выбранная версия" : "Репозитории",
+        exact: true,
+      }),
+    });
+    await expect(
+      affected.getByRole("cell", {
+        name: service === "security" ? "Недоступно" : "GitHub недоступен",
+        exact: true,
+      }),
+    ).toHaveCount(2);
   }
 });
