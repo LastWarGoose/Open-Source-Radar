@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useState, useSyncExternalStore, type ReactNode } from "react";
 import { validName, compareURL, packageURL } from "./url-state";
+import { useToast } from "./feedback";
 
 const key = "radar-comparison";
 let memory = "[]";
@@ -50,6 +51,7 @@ function useSelection() {
 }
 
 export function CompareToggle({ name }: { name: string }) {
+  const notify = useToast();
   const { names, ready } = useSelection();
   const selected = names.includes(name);
   const [message, setMessage] = useState("");
@@ -66,6 +68,9 @@ export function CompareToggle({ name }: { name: string }) {
             return;
           }
           save(selected ? names.filter((value) => value !== name) : [...names, name]);
+          notify(
+            `Библиотека ${name} ${selected ? "удалена из сравнения" : "добавлена в сравнение"}`,
+          );
           setMessage("");
         }}
       >
@@ -189,32 +194,5 @@ export function ComparisonTable({
         </table>
       </div>
     </>
-  );
-}
-export function CompareDock() {
-  const { names } = useSelection();
-  if (!names.length) return null;
-  return (
-    <aside className="compare-dock" aria-label="Выбрано для сравнения">
-      <span>{names.length} / 4</span>
-      <div className="compare-chips">
-        {names.map((name) => (
-          <button
-            key={name}
-            className="secondary compact"
-            aria-label={`Убрать ${name}`}
-            onClick={() => save(names.filter((value) => value !== name))}
-          >
-            {name} ×
-          </button>
-        ))}
-      </div>
-      <Link className="button" href={compareURL(names)}>
-        Сравнить →
-      </Link>
-      <button className="secondary compact" onClick={() => save([])}>
-        Очистить
-      </button>
-    </aside>
   );
 }

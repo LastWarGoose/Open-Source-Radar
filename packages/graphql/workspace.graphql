@@ -87,6 +87,7 @@ type Query {
   myCollections(first: Int! = 20, after: String = null): CollectionConnection!
   myNotifications(first: Int! = 20, after: String = null): NotificationConnection!
   me: Account
+  myFollowedPackageIds(packageIds: [ID!]!): [String!]!
   followedPackageBatch(afterId: String! = "", first: Int! = 2): [String!]!
   myFollows(first: Int! = 20, after: String = null): FollowConnection!
 }

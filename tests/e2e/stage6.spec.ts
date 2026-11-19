@@ -23,17 +23,54 @@ test("registration, collections, follow, logout and recovery", async ({
   expect(session?.sameSite).toBe("Strict");
   expect(await page.evaluate(() => document.cookie.includes("radar_session"))).toBe(false);
   await page.getByRole("link", { name: "Код сохранён" }).click();
-  await page.getByLabel("Название подборки").fill("Мои библиотеки");
-  await page.getByRole("button", { name: "Создать подборку", exact: true }).click();
-  await expect(page.getByRole("heading", { name: "Мои библиотеки", exact: true })).toBeVisible();
-  await page.goto(`/packages/${run}-package`);
+  await expect(page.getByLabel("Название подборки")).toHaveCount(0);
+  const createCollection = page.getByRole("button", { name: "Создать подборку", exact: true });
+  await createCollection.click();
+  const dialog = page.getByRole("dialog");
+  await expect(dialog.getByLabel("Название подборки")).toBeFocused();
+  await page.keyboard.press("Escape");
+  await expect(dialog).toHaveCount(0);
+  await createCollection.click();
+  await dialog.getByLabel("Название подборки").fill("Мои библиотеки");
+  await dialog.getByRole("button", { name: "Создать", exact: true }).click();
+  const collection = page.getByRole("button", { name: "Мои библиотеки", exact: true });
+  await expect(collection).toHaveAttribute("aria-expanded", "true");
+  await collection.click();
+  await expect(collection).toHaveAttribute("aria-expanded", "false");
+  await collection.click();
+  await expect(page.getByRole("button", { name: /Удалить подборку/ })).toHaveCount(0);
+  await page.getByRole("button", { name: "Действия", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Удалить подборку Мои библиотеки" })).toBeVisible();
+  await page.getByRole("heading", { name: "Подборки", exact: true }).click();
+  await expect(collection).toHaveAttribute("aria-expanded", "false");
+  await collection.focus();
+  await page.keyboard.press("Enter");
+  await expect(collection).toHaveAttribute("aria-expanded", "true");
+  await page.keyboard.press("Escape");
+  await expect(collection).toHaveAttribute("aria-expanded", "false");
+  await expect(collection).toBeFocused();
+  await createCollection.click();
+  await dialog.getByLabel("Название подборки").fill("Временная");
+  await dialog.getByRole("button", { name: "Создать", exact: true }).click();
+  await page.getByRole("button", { name: "Действия", exact: true }).click();
+  await page.getByRole("button", { name: "Удалить подборку Временная", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Временная", exact: true })).toHaveCount(0);
+  await expect(collection).toBeVisible();
+  await page.goto(`/?q=${run}-package#catalog`);
+  const actions = page.getByRole("group", { name: `Действия с ${run}-package` });
+  await actions.getByRole("button", { name: "В подборку", exact: true }).click();
   await page
     .getByRole("combobox", { name: "Подборка", exact: true })
     .selectOption({ label: "Мои библиотеки" });
   await page.getByRole("button", { name: "Сохранить", exact: true }).click();
-  await expect(page.getByRole("status")).toContainText("Добавлено в подборку");
-  await page.getByRole("button", { name: "Отслеживать", exact: true }).click();
-  await expect(page.getByRole("status")).toContainText("Отслеживается");
+  await expect(page.locator(".toast")).toContainText("добавлен в подборку");
+  await actions.getByRole("button", { name: "Отслеживать", exact: true }).click();
+  await expect(actions.getByRole("button", { name: "Отслеживается", exact: true })).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+  await page.goto(`/packages/${run}-package`);
+  await expect(actions.getByRole("button", { name: "Отслеживается", exact: true })).toBeVisible();
   await page.goto("/account");
   await page.getByRole("button", { name: "Мои библиотеки", exact: true }).click();
   await expect(page.getByRole("link", { name: `${run}-package`, exact: true })).toBeVisible();
@@ -66,7 +103,8 @@ test("registration, collections, follow, logout and recovery", async ({
   await page.getByLabel("Логин", { exact: true }).fill(run + "b");
   await page.getByLabel("Пароль", { exact: true }).fill(password);
   await page.getByRole("button", { name: "Войти", exact: true }).click();
-  await expect(page.getByText("Подборок пока нет.")).toBeVisible();
+  await expect(page.getByRole("button", { name: "Создать подборку", exact: true })).toBeVisible();
+  await expect(collection).toHaveCount(0);
   await expect(page.getByText("Мои библиотеки", { exact: true })).toHaveCount(0);
   await page.getByRole("button", { name: "Выйти", exact: true }).click();
   await page.getByRole("button", { name: "Забыли пароль?" }).click();

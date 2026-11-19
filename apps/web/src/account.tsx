@@ -2,16 +2,10 @@
 
 import { useApolloClient, useMutation, useQuery } from "@apollo/client/react";
 import Link from "next/link";
-import { useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import * as D from "./gql/graphql";
-
-export function useSession() {
-  return useQuery(D.SessionDocument, {
-    ssr: false,
-    fetchPolicy: "network-only",
-    pollInterval: 15000,
-  });
-}
+import { useSession } from "./session";
+import { Modal } from "./modal";
 export function AccountNav() {
   const { data } = useSession();
   return (
@@ -28,7 +22,7 @@ export function ErrorNotice({ error }: { error?: { message: string } }) {
     </p>
   ) : null;
 }
-function Pager({
+export function Pager({
   next,
   after,
   change,
@@ -245,68 +239,166 @@ export function AccountPage({ section }: { section: string }) {
   );
 }
 function Collections() {
+  const [creating, setCreating] = useState(false);
   const [name, setName] = useState("");
   const [after, setAfter] = useState<string>();
-  const [selected, setSelected] = useState("");
+  const [selected, setSelected] = useState<{ id: string; name: string } | null>(null);
+  const activeRow = useRef<HTMLLIElement>(null);
   const collections = useQuery(D.CollectionsDocument, {
     variables: { after },
     fetchPolicy: "network-only",
   });
   const [create, created] = useMutation(D.CreateCollectionDocument);
   const [remove, removed] = useMutation(D.DeleteCollectionDocument);
+  useEffect(() => {
+    if (!selected) return;
+    function outside(e: Event) {
+      if (e.target instanceof Node && activeRow.current && !activeRow.current.contains(e.target))
+        setSelected(null);
+    }
+    function escape(e: KeyboardEvent) {
+      if (e.key !== "Escape") return;
+      activeRow.current?.querySelector<HTMLButtonElement>(".collection-toggle")?.focus();
+      setSelected(null);
+    }
+    document.addEventListener("pointerdown", outside);
+    document.addEventListener("focusin", outside);
+    document.addEventListener("keydown", escape);
+    return () => {
+      document.removeEventListener("pointerdown", outside);
+      document.removeEventListener("focusin", outside);
+      document.removeEventListener("keydown", escape);
+    };
+  }, [selected]);
+
+  const rows = collections.data?.myCollections.nodes ?? [];
+  // A new collection can sort beyond the first cursor page.
+  const visible =
+    selected && !rows.some((row) => row.id === selected.id) ? [...rows, selected] : rows;
   return (
     <>
-      <form
-        className="personal-actions"
-        onSubmit={async (e) => {
-          e.preventDefault();
-          try {
-            const result = await create({ variables: { name } });
-            setName("");
-            setAfter(undefined);
-            setSelected(result.data?.createCollection.id ?? "");
-            await collections.refetch({ after: undefined });
-          } catch {
-            /* shown */
-          }
+      <button
+        onClick={() => {
+          setSelected(null);
+          setName("");
+          created.reset();
+          setCreating(true);
         }}
       >
-        <label>
-          Название подборки
-          <input value={name} onChange={(e) => setName(e.target.value)} maxLength={200} required />
-        </label>
-        <button disabled={created.loading}>Создать подборку</button>
-      </form>
-      <ErrorNotice error={collections.error ?? created.error ?? removed.error} />
-      <ul className="personal-list">
-        {collections.data?.myCollections.nodes.map((row) => (
-          <li key={row.id}>
-            <button onClick={() => setSelected(row.id)} aria-pressed={selected === row.id}>
-              {row.name}
-            </button>
-            <button
-              className="secondary"
-              aria-label={`Удалить подборку ${row.name}`}
-              disabled={removed.loading}
-              onClick={async () => {
-                try {
-                  await remove({ variables: { id: row.id } });
-                  setSelected("");
-                  await collections.refetch();
-                } catch {
-                  /* shown */
-                }
-              }}
-            >
-              Удалить
-            </button>
-          </li>
-        ))}
-      </ul>
-      {collections.data?.myCollections.nodes.length === 0 && <p>Подборок пока нет.</p>}
-      <Pager after={after} next={collections.data?.myCollections.pageInfo} change={setAfter} />
-      {selected && <CollectionContents key={selected} id={selected} />}
+        Создать подборку
+      </button>
+      {creating && (
+        <Modal title="Новая подборка" onDismiss={() => setCreating(false)}>
+          <form
+            onSubmit={async (e) => {
+              e.preventDefault();
+              try {
+                const result = await create({ variables: { name: name.trim() } });
+                setCreating(false);
+                setAfter(undefined);
+                setSelected(result.data?.createCollection ?? null);
+                await collections.refetch({ after: undefined });
+              } catch {
+                /* shown in the form or list */
+              }
+            }}
+          >
+            <label>
+              Название подборки
+              <input
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                maxLength={200}
+                required
+              />
+            </label>
+            <div className="dialog-actions">
+              <button disabled={created.loading || !name.trim()}>Создать</button>
+              <button type="button" className="secondary" onClick={() => setCreating(false)}>
+                Отмена
+              </button>
+            </div>
+            <ErrorNotice error={created.error} />
+          </form>
+        </Modal>
+      )}
+      <ErrorNotice error={collections.error ?? removed.error} />
+      {visible.length > 0 && (
+        <ul className="collection-list">
+          {visible.map((row) => {
+            const open = selected?.id === row.id;
+            return (
+              <li key={row.id} ref={open ? activeRow : undefined}>
+                <button
+                  className="collection-toggle secondary"
+                  aria-expanded={open}
+                  aria-controls={open ? `collection-${row.id}` : undefined}
+                  onClick={() => setSelected((current) => (current?.id === row.id ? null : row))}
+                >
+                  {row.name}
+                  <span aria-hidden="true">{open ? "−" : "+"}</span>
+                </button>
+                {open && (
+                  <div className="collection-body" id={`collection-${row.id}`}>
+                    <CollectionContents id={row.id} />
+                    <CollectionDelete
+                      name={row.name}
+                      busy={removed.loading}
+                      onDelete={async () => {
+                        try {
+                          await remove({ variables: { id: row.id } });
+                          setSelected(null);
+                          await collections.refetch();
+                        } catch {
+                          /* shown above */
+                        }
+                      }}
+                    />
+                  </div>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      )}
+      <Pager
+        after={after}
+        next={collections.data?.myCollections.pageInfo}
+        change={(v) => {
+          setSelected(null);
+          setAfter(v);
+        }}
+      />
     </>
+  );
+}
+
+function CollectionDelete({
+  name,
+  busy,
+  onDelete,
+}: {
+  name: string;
+  busy: boolean;
+  onDelete: () => void;
+}) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="collection-menu">
+      <button className="secondary compact" aria-expanded={open} onClick={() => setOpen(!open)}>
+        Действия
+      </button>
+      {open && (
+        <button
+          className="compact delete-action"
+          aria-label={`Удалить подборку ${name}`}
+          disabled={busy}
+          onClick={onDelete}
+        >
+          Удалить
+        </button>
+      )}
+    </div>
   );
 }
 function CollectionContents({ id }: { id: string }) {
@@ -318,7 +410,6 @@ function CollectionContents({ id }: { id: string }) {
   const [remove, state] = useMutation(D.RemoveFromCollectionDocument);
   return (
     <div>
-      <h3>{query.data?.collection?.name}</h3>
       <ErrorNotice error={query.error ?? state.error} />
       <ul className="personal-list">
         {query.data?.collection?.items.nodes.map((row, index) => (
@@ -347,7 +438,7 @@ function CollectionContents({ id }: { id: string }) {
           </li>
         ))}
       </ul>
-      {query.data?.collection?.items.nodes.length === 0 && <p>Добавьте пакет из его карточки.</p>}
+      {query.data?.collection?.items.nodes.length === 0 && <p>В подборке пока нет пакетов.</p>}
       <Pager after={after} next={query.data?.collection?.items.pageInfo} change={setAfter} />
     </div>
   );
@@ -434,72 +525,5 @@ function Notifications() {
       {query.data?.myNotifications.nodes.length === 0 && <p>Новых уведомлений нет.</p>}
       <Pager after={after} next={query.data?.myNotifications.pageInfo} change={setAfter} />
     </>
-  );
-}
-export function PackagePersonal({ id }: { id: string }) {
-  const session = useSession();
-  const [after, setAfter] = useState<string>();
-  const query = useQuery(D.CollectionsDocument, {
-    variables: { after },
-    skip: !session.data?.me,
-    ssr: false,
-    fetchPolicy: "network-only",
-  });
-  const [selected, setSelected] = useState("");
-  const [message, setMessage] = useState("");
-  const [add, added] = useMutation(D.AddToCollectionDocument);
-  const [follow, followed] = useMutation(D.FollowPackageDocument);
-  if (!session.data?.me) return <Link href="/account">Войти, чтобы сохранить</Link>;
-  return (
-    <div className="package-personal">
-      <div className="personal-actions">
-        <button
-          disabled={followed.loading}
-          onClick={async () => {
-            try {
-              await follow({ variables: { package: id } });
-              setMessage("Отслеживается");
-            } catch {
-              /* shown */
-            }
-          }}
-        >
-          Отслеживать
-        </button>
-        {query.data?.myCollections.nodes.length ? (
-          <>
-            <label>
-              Подборка
-              <select value={selected} onChange={(e) => setSelected(e.target.value)}>
-                <option value="">Выберите подборку</option>
-                {query.data.myCollections.nodes.map((row) => (
-                  <option key={row.id} value={row.id}>
-                    {row.name}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <button
-              disabled={!selected || added.loading}
-              onClick={async () => {
-                try {
-                  await add({ variables: { id: selected, package: id } });
-                  setMessage("Добавлено в подборку");
-                } catch {
-                  /* shown */
-                }
-              }}
-            >
-              Сохранить
-            </button>
-            <Pager after={after} next={query.data.myCollections.pageInfo} change={setAfter} />
-          </>
-        ) : (
-          <Link href="/account">Создать подборку →</Link>
-        )}
-      </div>
-      <p role="status">{message}</p>
-      <ErrorNotice error={query.error ?? added.error ?? followed.error} />
-    </div>
   );
 }

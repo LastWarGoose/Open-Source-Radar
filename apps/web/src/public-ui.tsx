@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { CompareDock, CompareNav } from "./comparison";
+import { CompareNav } from "./comparison";
+import { HomeAnchor } from "./site-navigation";
 import { AccountNav } from "./account";
 import type {
   FreshnessFieldsFragment,
@@ -15,7 +15,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
       <a href="#content" className="skip-link">
         К содержимому
       </a>
-      <div className="masthead" aria-hidden="true">
+      <div id="radar" className="masthead" aria-hidden="true">
         <span className="masthead-word">
           {["R", "A", "D", "A", "R"].map((letter, index) => (
             <span key={index}>
@@ -26,11 +26,11 @@ export function Shell({ children }: { children: React.ReactNode }) {
       </div>
       <header className="site-header">
         <nav aria-label="Основная навигация">
-          <Link href="/" className="brand" aria-label="Open Source Radar — на главную">
+          <HomeAnchor id="radar" className="brand" aria-label="Open Source Radar — на главную">
             <span className="registration-mark" aria-hidden="true" />
             <span>Open Source Radar</span>
-          </Link>
-          <Link href="/#catalog">Каталог</Link>
+          </HomeAnchor>
+          <HomeAnchor id="catalog">Каталог</HomeAnchor>
           <CompareNav />
           <AccountNav />
         </nav>
@@ -38,7 +38,6 @@ export function Shell({ children }: { children: React.ReactNode }) {
       <main id="content" tabIndex={-1}>
         {children}
       </main>
-      <CompareDock />
     </div>
   );
 }

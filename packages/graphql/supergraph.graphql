@@ -359,6 +359,7 @@ type Query
   myCollections(first: Int! = 20, after: String = null): CollectionConnection! @join__field(graph: WORKSPACE)
   myNotifications(first: Int! = 20, after: String = null): NotificationConnection! @join__field(graph: WORKSPACE)
   me: Account @join__field(graph: WORKSPACE)
+  myFollowedPackageIds(packageIds: [ID!]!): [String!]! @join__field(graph: WORKSPACE)
   followedPackageBatch(afterId: String! = "", first: Int! = 2): [String!]! @join__field(graph: WORKSPACE)
   myFollows(first: Int! = 20, after: String = null): FollowConnection! @join__field(graph: WORKSPACE)
 }

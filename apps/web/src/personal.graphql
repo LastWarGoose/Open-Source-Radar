@@ -73,6 +73,9 @@ query Follows($after: String) {
     }
   }
 }
+query VisibleFollows($ids: [ID!]!) {
+  myFollowedPackageIds(packageIds: $ids)
+}
 query Notifications($after: String) {
   myNotifications(first: 20, after: $after) {
     nodes {

@@ -19,8 +19,7 @@ import {
   Scan,
   date,
 } from "../../../src/public-ui";
-import { CompareToggle } from "../../../src/comparison";
-import { PackagePersonal } from "../../../src/account";
+import { PackageActions, PackageActionsProvider } from "../../../src/package-actions";
 import { catalogReturn, one, packageURL, validName, type Search } from "../../../src/url-state";
 
 export const dynamic = "force-dynamic";
@@ -88,10 +87,11 @@ export default async function PackagePage({ params, searchParams }: Props) {
       <section className="catalog package-heading" aria-labelledby="package-title">
         <div className="section-heading">
           <h1 id="package-title">{item.name}</h1>
-          <CompareToggle name={item.name} />
+          <PackageActionsProvider ids={[item.id]}>
+            <PackageActions name={item.name} id={item.id} />
+          </PackageActionsProvider>
         </div>
         <p>{item.summary || "Описание отсутствует"}</p>
-        <PackagePersonal id={item.id} />
         <div className="facts">
           <div>
             <span>Python</span>

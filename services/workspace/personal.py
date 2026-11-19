@@ -81,6 +81,27 @@ class Follow:
 @strawberry.type
 class PersonalQuery:
     @strawberry.field
+    async def my_followed_package_ids(
+        self, info: Info, package_ids: list[strawberry.ID]
+    ) -> list[str]:
+        actor = info.context["workspace"].owner()
+        page_size(len(package_ids))
+        if any(len(identity) > 220 for identity in package_ids):
+            raise fail("Неверный пакет")
+
+        def read() -> list[str]:
+            with Session(engine()) as session:
+                return list(
+                    session.scalars(
+                        select(FollowRow.package_id)
+                        .where(FollowRow.owner_id == actor, FollowRow.package_id.in_(package_ids))
+                        .order_by(FollowRow.package_id)
+                    )
+                )
+
+        return await db_call(read)
+
+    @strawberry.field
     async def followed_package_batch(
         self, info: Info, after_id: str = "", first: int = 2
     ) -> list[str]:

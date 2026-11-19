@@ -181,6 +181,12 @@ def main() -> None:
                 error=True,
             )
         call(a, 'mutation { followPackage(packageId:"pypi:fastapi") }')
+        visible = "query Visible($ids:[ID!]!) { myFollowedPackageIds(packageIds:$ids) }"
+        ids = {"ids": ["pypi:fastapi"]}
+        assert call(a, visible, ids)["myFollowedPackageIds"] == ids["ids"]
+        assert call(b, visible, ids)["myFollowedPackageIds"] == []
+        call(anon, visible, ids, error=True)
+        call(a, visible, {"ids": ["pypi:fastapi"] * 101}, error=True)
         owner("workspace")
         from services.workspace.personal import record_update
 

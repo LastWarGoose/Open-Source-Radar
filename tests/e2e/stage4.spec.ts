@@ -28,6 +28,16 @@ test("catalog links reach search after the landing page streams", async ({ page 
   await page.mouse.move(160, 400);
   await page.mouse.wheel(0, -2500);
   await expect(page.locator(".masthead-word")).toBeInViewport();
+  await page.getByRole("link", { name: "Каталог", exact: true }).click();
+  await expect(search).toBeInViewport();
+  const brand = page.getByRole("link", { name: "Open Source Radar — на главную" });
+  await brand.click();
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
+  await expect(search).toHaveValue("fastapi");
+  await page.goto("/compare");
+  await brand.click();
+  await expect(page.locator(".masthead-word")).toBeInViewport();
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
 });
 
 test("RADAR letters grow independently and header dividers meet the hero grid", async ({
@@ -170,14 +180,16 @@ test("comparison cap, persistence, shared URL, removal and invalid input", async
     const button = page.getByRole("button", { name: `Сравнить ${name}`, exact: true });
     await button.click();
     await expect(button).toHaveAttribute("aria-pressed", "true");
+    await expect(page.locator(".toast")).toHaveText(`Библиотека ${name} добавлена в сравнение`);
   }
+  await expect(page.locator(".toast")).toHaveCount(0, { timeout: 7000 });
   await page.getByRole("button", { name: `Сравнить ${names[4]}`, exact: true }).click();
   await expect(page.getByRole("alert").filter({ hasText: "Не более 4 пакетов" })).toBeVisible();
   await page.reload();
   await expect(
     page.getByRole("button", { name: `Сравнить ${names[0]}`, exact: true }),
   ).toHaveAttribute("aria-pressed", "true");
-  await page.getByRole("link", { name: "Сравнить →", exact: true }).click();
+  await page.getByRole("link", { name: "Сравнение (4)", exact: true }).click();
   await expect(page.locator("thead th")).toHaveCount(5);
   await expect(page.getByRole("table")).toContainText(`Source repository for ${names[0]}.`);
   const toggle = page.getByRole("checkbox", { name: "Скрыть строки с одинаковыми значениями" });

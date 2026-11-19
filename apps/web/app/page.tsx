@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { getClient } from "../src/apollo-server";
 import { PublicCatalogDocument } from "../src/gql/graphql";
-import { CompareToggle } from "../src/comparison";
+import { PackageActions, PackageActionsProvider } from "../src/package-actions";
 import { CatalogFilters } from "../src/catalog-filters";
 import { CatalogSection } from "../src/catalog-section";
 import { badInput, loadCatalogLicenses } from "../src/public-data";
@@ -166,54 +166,56 @@ async function CatalogResults({
     </div>
   ) : (
     <>
-      <div className="public-package-list">
-        {data.packages.nodes.map((item) => (
-          <article className="public-package-row" key={item.id} data-testid="catalog-package">
-            <div className="package-main">
-              <div className="package-name">
-                <h2>
-                  <Link
-                    href={packageURL(item.name, {
-                      from: resultsURL === "/#catalog" ? undefined : resultsURL,
-                    })}
-                  >
-                    {item.name}
-                  </Link>
-                </h2>
-                <span className="version-tag">
-                  {item.releases.nodes[0]?.version ?? "Нет версий"}
-                </span>
-              </div>
-              {item.summary && <p className="package-summary">{item.summary}</p>}
-              {(item.license || item.requiresPython) && (
-                <div className="package-meta">
-                  {item.license && <span>{item.license}</span>}
-                  {item.requiresPython && <span>Python {item.requiresPython}</span>}
+      <PackageActionsProvider ids={data.packages.nodes.map((item) => item.id)}>
+        <div className="public-package-list">
+          {data.packages.nodes.map((item) => (
+            <article className="public-package-row" key={item.id} data-testid="catalog-package">
+              <div className="package-main">
+                <div className="package-name">
+                  <h2>
+                    <Link
+                      href={packageURL(item.name, {
+                        from: resultsURL === "/#catalog" ? undefined : resultsURL,
+                      })}
+                    >
+                      {item.name}
+                    </Link>
+                  </h2>
+                  <span className="version-tag">
+                    {item.releases.nodes[0]?.version ?? "Нет версий"}
+                  </span>
                 </div>
-              )}
-              {item.pypiFreshness.errorCode && (
-                <small className="attention">Не удалось обновить данные PyPI</small>
-              )}
-            </div>
-            <div className="package-actions">
-              <span
-                className="star-count"
-                title={
-                  item.starProjection.stars == null
-                    ? "Число звёзд GitHub неизвестно"
-                    : "Звёзды GitHub"
-                }
-              >
-                ★ {item.starProjection.stars?.toLocaleString("ru-RU") ?? "—"}
-              </span>
-              <CompareToggle name={item.name} />
-              {item.starProjection.status === "FAILED" && (
-                <small className="attention">Не удалось обновить звёзды GitHub</small>
-              )}
-            </div>
-          </article>
-        ))}
-      </div>
+                {item.summary && <p className="package-summary">{item.summary}</p>}
+                {(item.license || item.requiresPython) && (
+                  <div className="package-meta">
+                    {item.license && <span>{item.license}</span>}
+                    {item.requiresPython && <span>Python {item.requiresPython}</span>}
+                  </div>
+                )}
+                {item.pypiFreshness.errorCode && (
+                  <small className="attention">Не удалось обновить данные PyPI</small>
+                )}
+              </div>
+              <div className="package-actions">
+                <span
+                  className="star-count"
+                  title={
+                    item.starProjection.stars == null
+                      ? "Число звёзд GitHub неизвестно"
+                      : "Звёзды GitHub"
+                  }
+                >
+                  ★ {item.starProjection.stars?.toLocaleString("ru-RU") ?? "—"}
+                </span>
+                <PackageActions name={item.name} id={item.id} />
+                {item.starProjection.status === "FAILED" && (
+                  <small className="attention">Не удалось обновить звёзды GitHub</small>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+      </PackageActionsProvider>
       <nav className="pagination" aria-label="Страницы каталога">
         <span className="muted">На странице: {data.packages.nodes.length}</span>
         {state.after && (
