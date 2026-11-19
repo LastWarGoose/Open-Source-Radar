@@ -106,6 +106,7 @@ test("catalog SSR, filters, global sort, cursor and browser history", async ({ p
 test("package versions, requirements, OSV states, metadata and missing package", async ({
   page,
 }) => {
+  const detail = page.getByRole("main");
   await page.goto(`/packages/${names[0]}`);
   await expect(page).toHaveTitle(new RegExp(names[0]));
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
@@ -113,34 +114,34 @@ test("package versions, requirements, OSV states, metadata and missing package",
     `http://localhost:3000/packages/${names[0]}`,
   );
   await expect(page.getByRole("heading", { name: "Версия 21.0", exact: true })).toBeVisible();
-  await expect(page.locator(".repo-summary")).toContainText(`Source repository for ${names[0]}.`);
-  await expect(page.locator(".version-list")).not.toContainText("99.0");
-  await expect(page.locator(".dependency-list li")).toHaveCount(20);
-  await expect(page.locator(".dependency-list")).toContainText('python_version < "3.13"');
-  await expect(page.getByText("Совпадений не найдено.")).toBeVisible();
-  await expect(page.locator(".scan-result")).toContainText("Исправлено в 2.1");
+  await expect(detail.locator(".repo-summary")).toContainText(`Source repository for ${names[0]}.`);
+  await expect(detail.locator(".version-list")).not.toContainText("99.0");
+  await expect(detail.locator(".dependency-list li")).toHaveCount(20);
+  await expect(detail.locator(".dependency-list")).toContainText('python_version < "3.13"');
+  await expect(detail.getByText("Совпадений не найдено.")).toBeVisible();
+  await expect(detail.locator(".scan-result")).toContainText("Исправлено в 2.1");
   await page.getByRole("link", { name: "Ещё зависимости →" }).click();
-  await expect(page.locator(".dependency-list li")).toHaveCount(5);
+  await expect(detail.locator(".dependency-list li")).toHaveCount(5);
   await expect(page).toHaveURL(/version=21.0/);
   await page.getByRole("link", { name: "Ещё версии →" }).click();
   await page.getByRole("link", { name: "1.0", exact: true }).click();
   await expect(page.getByRole("heading", { name: "Версия 1.0", exact: true })).toBeVisible();
-  await expect(page.locator(".findings")).toContainText("Исправлено в 2.1");
-  await expect(page.getByText("Последнее обновление OSV не удалось")).toBeVisible();
+  await expect(detail.locator(".findings")).toContainText("Исправлено в 2.1");
+  await expect(detail.getByText("Последнее обновление OSV не удалось")).toBeVisible();
   await page.goto(`/packages/${names[0]}?version=2.0`);
-  await expect(page.locator(".scan-result")).toContainText("Ближайшая проверенная — 1.0");
-  await expect(page.locator(".findings")).toContainText("Исправлено в 2.1");
+  await expect(detail.locator(".scan-result")).toContainText("Ближайшая проверенная — 1.0");
+  await expect(detail.locator(".findings")).toContainText("Исправлено в 2.1");
   await page.goto(`/packages/${names[1]}`);
-  await expect(page.locator(".findings")).toContainText("TEST-RADAR-STAGE4-ALIAS");
-  await expect(page.getByText("Последнее обновление не удалось")).toBeVisible();
+  await expect(detail.locator(".findings")).toContainText("TEST-RADAR-STAGE4-ALIAS");
+  await expect(detail.getByText("Последнее обновление не удалось")).toBeVisible();
   await page.goto(`/packages/${names[2]}`);
-  await expect(page.getByText("Проверка не завершена.")).toBeVisible();
+  await expect(detail.getByText("Проверка не завершена.")).toBeVisible();
   await page.goto(`/packages/${names[3]}`);
-  await expect(page.getByText("Эта версия ещё не проверена.")).toBeVisible();
+  await expect(detail.getByText("Эта версия ещё не проверена.")).toBeVisible();
   await page.goto(`/packages/${names[4]}`);
   await expect(page.getByRole("heading", { name: "Версии пока не загружены" })).toBeVisible();
   await page.goto(`/packages/${names[0]}?version=99.0`);
-  await expect(page.getByText(/Для версии 99.0 нет данных PyPI.*21.0/)).toBeVisible();
+  await expect(detail.getByText(/Для версии 99.0 нет данных PyPI.*21.0/)).toBeVisible();
   await page.goto("/packages/radar-stage4-hidden");
   await expect(page.getByRole("heading", { name: "Пакет или страница не найдены" })).toBeVisible();
 });

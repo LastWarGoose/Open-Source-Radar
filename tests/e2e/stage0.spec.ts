@@ -28,7 +28,7 @@ test("SSR, Apollo mutation, federated subscription and reconnect", async ({
 
   // Unsubscribe, mutate while offline from events, then restore with a fresh query.
   await page.getByRole("button", { name: "Пауза", exact: true }).click();
-  await expect(page.getByRole("status")).toHaveText("Пауза");
+  await expect(page.locator("summary").getByRole("status")).toHaveText("Пауза");
   await page.getByRole("button", { name: "Обновить", exact: true }).click();
   await expect(page.getByTestId("query-revision")).toHaveText(String(initial + 2));
   await expect(page.getByTestId("event-revision")).toHaveText(String(initial + 1));
