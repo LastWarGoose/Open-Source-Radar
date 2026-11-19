@@ -245,7 +245,10 @@ test("responsive layout, keyboard focus and browser console", async ({ page }, t
       ["compare", "/compare?packages=" + names.slice(0, 4).join(",")],
     ]) {
       await page.goto(url);
-      await expect(page.locator("h1")).toBeVisible();
+      // The stream can contain a hidden React fragment while the page is appearing.
+      const heading = page.getByRole("heading", { level: 1 });
+      await expect(heading).toHaveCount(1);
+      await expect(heading).toBeVisible();
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
         true,
       );
