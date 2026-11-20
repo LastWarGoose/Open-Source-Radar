@@ -11,25 +11,27 @@ test("public site preserves available data during an actual service outage", asy
     await page.goto("/compare?packages=radar-stage4-alpha,radar-stage4-beta");
     await expect(page.getByRole("heading", { name: "Сравнение недоступно" })).toBeVisible();
   } else {
+    const main = page.getByRole("main");
     await page.goto("/packages/radar-stage4-alpha");
     await expect(
       page.getByRole("heading", { name: "radar-stage4-alpha", exact: true }),
     ).toBeVisible();
     await expect(page.getByRole("heading", { name: "Версия 21.0" })).toBeVisible();
     await expect(
-      page.getByText(
+      main.getByText(
         service === "security"
           ? "OSV недоступен. Повторите позже."
           : "GitHub недоступен. Метаданные пакета доступны.",
       ),
     ).toBeVisible();
-    await expect(page.locator(".dependency-list li")).toHaveCount(20);
+    await expect(main.locator(".dependency-list li")).toHaveCount(20);
     await page.screenshot({ path: testInfo.outputPath("partial.png"), fullPage: true });
     await page.goto("/compare?packages=radar-stage4-alpha,radar-stage4-beta");
     await expect(page.getByRole("table")).toContainText("21.0");
-    await expect(
-      page.getByText("Часть данных недоступна. Показаны доступные сведения."),
-    ).toBeVisible();
+    const notice = main.getByRole("status").filter({
+      hasText: "Часть данных недоступна. Показаны доступные сведения.",
+    });
+    await expect(notice).toBeVisible();
     const affected = page.getByRole("row").filter({
       has: page.getByRole("rowheader", {
         name: service === "security" ? "Уязвимости OSV" : "Репозитории",
