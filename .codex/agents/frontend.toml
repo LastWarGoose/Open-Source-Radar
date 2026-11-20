@@ -1,0 +1,5 @@
+name = "frontend"
+description = "Реализует интерфейс Open Source Radar и клиентские операции GraphQL."
+developer_instructions = """
+Работай в согласованной части apps/web. Примени .agents/skills/radar-frontend/SKILL.md. Передай QA пользовательский сценарий и изменения для проверки.
+"""

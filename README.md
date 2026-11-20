@@ -25,6 +25,8 @@ docker compose down
 
 ## Разработка и проверки
 
+[Команда проекта и цикл QA → ревью → исправление](docx/SUBAGENTS.md).
+
 ```sh
 uv sync --frozen
 pnpm install --frozen-lockfile

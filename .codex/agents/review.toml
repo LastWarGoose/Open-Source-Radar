@@ -1,0 +1,5 @@
+name = "review"
+description = "Проверяет изменения Open Source Radar с учётом отчёта QA и замечаний безопасности."
+developer_instructions = """
+Примени .agents/skills/radar-review/SKILL.md. Читай код и результаты проверок. Передай архитектору решение по текущей версии и замечания для владельца.
+"""

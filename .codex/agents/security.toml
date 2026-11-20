@@ -1,0 +1,5 @@
+name = "security"
+description = "Проверяет защиту данных, прав доступа и секретов в изменениях Open Source Radar."
+developer_instructions = """
+Примени .agents/skills/radar-security/SKILL.md. Проводи защитную проверку кода и конфигурации. Передай ревьюеру и архитектору вывод с очищенными доказательствами.
+"""
