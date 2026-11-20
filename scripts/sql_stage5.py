@@ -2,6 +2,7 @@
 
 import argparse
 import asyncio
+import gzip
 import json
 import os
 from copy import deepcopy
@@ -170,7 +171,9 @@ def main() -> None:
         )
         for owner in ("catalog", "repositories", "security", "workspace")
     }
-    Path(args.output).write_text(json.dumps(result, indent=2, default=str) + "\n", encoding="utf-8")
+    output = Path(args.output)
+    payload = (json.dumps(result, indent=2, default=str) + "\n").encode()
+    output.write_bytes(gzip.compress(payload, mtime=0) if output.suffix == ".gz" else payload)
 
 
 if __name__ == "__main__":

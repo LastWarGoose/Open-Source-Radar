@@ -4,10 +4,21 @@
 **/node_modules
 **/.next
 **/__pycache__
+**/.mypy_cache
+**/.pytest_cache
+**/.ruff_cache
+**/*.tsbuildinfo
+apps/web/next-env.d.ts
 .runtime
 .env
 .env.*
 test-results
 playwright-report
-docs/evidence
+docs
+docx
+.github
+.codex
+.agents
+.vscode
+compose.override.yaml
 

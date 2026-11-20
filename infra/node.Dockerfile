@@ -7,7 +7,7 @@ COPY gateway/package.json ./gateway/package.json
 COPY apps/web/package.json ./apps/web/package.json
 RUN --mount=type=cache,id=radar-pnpm,target=/root/.local/share/pnpm/store pnpm install --frozen-lockfile
 COPY gateway ./gateway
-COPY packages ./packages
+COPY packages/graphql ./packages/graphql
 COPY apps/web ./apps/web
 COPY tests ./tests
 COPY codegen.ts playwright.config.ts playwright.partial.config.ts eslint.config.mjs .prettierrc.json .prettierignore ./

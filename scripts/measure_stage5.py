@@ -149,7 +149,7 @@ def main() -> None:
     try:
         compose("stop", *CONSUMERS)
         checks("scripts.report_stage5", args.campaign)
-        checks("scripts.sql_stage5")
+        checks("scripts.sql_stage5", "--output", "/evidence/sql.json.gz")
         checks("scripts.enqueue_stage5")
         compose("restart", "catalog", "repositories", "security", "workspace", "gateway")
         compose(
